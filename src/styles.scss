@@ -1,0 +1,17 @@
+/* You can add global styles to this file, and also import other style files */
+@use "./tailwind.css";
+@use "./assets/layout/layout.scss";
+@use "primeicons/primeicons.css";
+@use "./assets/demo/demo.scss";
+
+.p-togglebutton-label,
+.p-togglebutton-icon {
+  font-size: 13px !important;
+}
+
+.bg-tier-sky {
+  background-image: url("/images/bg-tier-sky.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
