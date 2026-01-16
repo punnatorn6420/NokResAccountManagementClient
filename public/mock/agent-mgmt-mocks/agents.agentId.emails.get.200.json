@@ -2,26 +2,22 @@
   "status": "success",
   "data": [
     {
-      "id": 501,
-      "agentId": 101,
-      "email": "ops@bangkoktravel.co.th",
-      "name": "Operations",
-      "role": "OPS",
+      "id": 1,
+      "profileId": 101,
+      "email": "ops@siamtravel.co.th",
       "isPrimary": true,
-      "isActive": true,
-      "createdAt": "2026-01-10T09:20:00Z",
-      "updatedAt": "2026-01-15T04:21:00Z"
+      "active": true,
+      "createdAt": "2024-05-20T10:00:00Z",
+      "modifiedAt": "2024-05-21T08:00:00Z"
     },
     {
-      "id": 502,
-      "agentId": 101,
-      "email": "finance@bangkoktravel.co.th",
-      "name": "Finance",
-      "role": "FIN",
+      "id": 2,
+      "profileId": 101,
+      "email": "finance@siamtravel.co.th",
       "isPrimary": false,
-      "isActive": true,
-      "createdAt": "2026-01-11T02:00:00Z",
-      "updatedAt": "2026-01-14T08:00:00Z"
+      "active": true,
+      "createdAt": "2024-05-22T08:15:00Z",
+      "modifiedAt": "2024-05-22T08:15:00Z"
     }
   ]
 }

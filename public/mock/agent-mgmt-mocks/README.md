@@ -8,9 +8,8 @@ They follow the wrapper pattern:
 
 ## Folder
 - `mock/agent-management/` (this zip root)
+- `requests/` contains example request payloads aligned with the request schemas.
 
 ## Notes
-- Some component schemas are referenced via `$ref` to external JSON files not included in the snippet.
-  Therefore, object fields inside `AgentProfileResponse`, `ContactEmailResponse`, `ResAccountResponse`,
-  `CredentialResponse`, and `ResetPasswordLogResponse` are reasonable placeholders for UI development.
-  When you provide the exact referenced schema files, we can update these mocks to match 100% field-by-field.
+- Mock response payloads now align to `public/mock/schemas/responses` (field names and shapes).
+  If additional schema references are introduced, update the mocks accordingly.

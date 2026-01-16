@@ -3,13 +3,17 @@
   "data": [
     {
       "id": 701,
-      "agentId": 101,
-      "system": "RES",
-      "accountCode": "RES-BKK001",
-      "accountType": "BOOKING",
-      "status": "ACTIVE",
-      "createdAt": "2026-01-10T09:30:00Z",
-      "updatedAt": "2026-01-15T04:25:00Z"
+      "profileId": 101,
+      "isPrimary": true,
+      "userName": "nokair_staff01",
+      "environment": "PROD",
+      "dateGenerated": "2024-05-20T10:00:00Z",
+      "latestResetPasswordAI": "2024-06-01T09:00:00Z",
+      "isWorking": true,
+      "note": "Main booking account",
+      "active": true,
+      "createdAt": "2024-05-20T10:00:00Z",
+      "modifiedAt": "2024-06-01T09:00:00Z"
     }
   ]
 }

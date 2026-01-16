@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject, debounceTime, distinctUntilChanged, takeUntil } from 'rxjs';
-import { AgentService, IAgentListItem } from '../../service/agent.service';
+import { AgentService } from '../../service/agent.service';
+import { AgentProfileResponse } from '../../types/agent/agent.type';
 
 @Component({
   selector: 'app-agents-management',
@@ -13,7 +14,7 @@ export class AgentsManagementComponent implements OnInit, OnDestroy {
   private keyword$ = new Subject<string>();
 
   // table state
-  agents: IAgentListItem[] = [];
+  agents: AgentProfileResponse[] = [];
   loading = false;
   errorMessage = '';
 
@@ -98,11 +99,11 @@ export class AgentsManagementComponent implements OnInit, OnDestroy {
     this.loadAgents();
   }
 
-  viewAgent(row: IAgentListItem): void {
+  viewAgent(row: AgentProfileResponse): void {
     this.router.navigate(['/agents', row.id]);
   }
 
-  editAgent(row: IAgentListItem): void {
+  editAgent(row: AgentProfileResponse): void {
     this.router.navigate(['/agents', row.id, 'edit']);
   }
 }

@@ -2,14 +2,28 @@
   "status": "success",
   "data": [
     {
-      "id": 901,
-      "agentId": 101,
-      "apiKeyName": "BKK001 Primary Key",
-      "clientId": "bkk001_client",
-      "maskedSecret": "****-****-****-9a3f",
-      "status": "ACTIVE",
-      "createdAt": "2026-01-10T09:45:00Z",
-      "updatedAt": "2026-01-15T04:30:00Z"
+      "id": 1,
+      "name": "Mobile App Key",
+      "clientId": "client_abc123",
+      "profileId": 101,
+      "clientSecret": "********",
+      "environment": "PROD",
+      "dateGenerated": "2024-05-20T10:00:00Z",
+      "active": true,
+      "createdAt": "2024-05-20T10:00:00Z",
+      "modifiedAt": "2024-05-21T08:00:00Z"
+    },
+    {
+      "id": 2,
+      "name": "Partner Portal Key",
+      "clientId": "client_xyz789",
+      "profileId": 101,
+      "clientSecret": "********",
+      "environment": "UAT",
+      "dateGenerated": "2024-06-05T11:30:00Z",
+      "active": false,
+      "createdAt": "2024-06-05T11:30:00Z",
+      "modifiedAt": "2024-06-06T12:00:00Z"
     }
   ]
 }

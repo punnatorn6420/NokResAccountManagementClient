@@ -1,11 +1,3 @@
 {
-  "code": "INVALID_REQUEST",
-  "userMessage": "Validation failed",
-  "errors": [
-    {
-      "field": "emailId",
-      "message": "emailId must be an integer"
-    }
-  ],
-  "traceId": "9d5a2581edb1875766b84c51a47e99df"
+  "message": "Invalid request parameters."
 }
