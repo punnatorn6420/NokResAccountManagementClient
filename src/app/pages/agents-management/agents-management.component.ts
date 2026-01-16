@@ -2,19 +2,21 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject, debounceTime, distinctUntilChanged, takeUntil } from 'rxjs';
 import { AgentService } from '../../service/agent.service';
-import { AgentProfileResponse } from '../../types/agent/agent.type';
+import { IAgentProfileResponse } from '../../types/agent/agent.type';
+import { PaginatorState } from 'primeng/paginator';
 
 @Component({
   selector: 'app-agents-management',
   templateUrl: './agents-management.component.html',
   styleUrls: ['./agents-management.component.scss'],
+  standalone: false,
 })
 export class AgentsManagementComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
   private keyword$ = new Subject<string>();
 
   // table state
-  agents: AgentProfileResponse[] = [];
+  agents: IAgentProfileResponse[] = [];
   loading = false;
   errorMessage = '';
 
@@ -88,8 +90,7 @@ export class AgentsManagementComponent implements OnInit, OnDestroy {
     this.loadAgents();
   }
 
-  onPageChange(event: { first: number; rows: number }): void {
-    // Prime paginator: first is zero-based index
+  onPageChange(event: PaginatorState): void {
     const first = event.first ?? 0;
     const rows = event.rows ?? this.pageSize;
 
@@ -99,11 +100,11 @@ export class AgentsManagementComponent implements OnInit, OnDestroy {
     this.loadAgents();
   }
 
-  viewAgent(row: AgentProfileResponse): void {
+  viewAgent(row: IAgentProfileResponse): void {
     this.router.navigate(['/agents', row.id]);
   }
 
-  editAgent(row: AgentProfileResponse): void {
+  editAgent(row: IAgentProfileResponse): void {
     this.router.navigate(['/agents', row.id, 'edit']);
   }
 }

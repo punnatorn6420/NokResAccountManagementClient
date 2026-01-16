@@ -7,9 +7,10 @@ import { ConfirmationService } from 'primeng/api';
 import { CoreModule } from '../../shared/core/core.module';
 import { SkeletonLoadingModule } from '../../shared/skeleton-loading/skeleton-loading.module';
 import { agentsManagementRoutes } from './agents-management.routes';
+import { AgentsManagementComponent } from './agents-management.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [AgentsManagementComponent],
   imports: [
     CommonModule,
     FormsModule,

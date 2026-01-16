@@ -4,8 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { HttpService } from './http.service';
 import { IUserInfo } from '../types/auth.model';
-import { IApiResponse } from '../types/common/api-response.type';
-import { IResponse } from './agent.service';
+import { IApiResponse } from '../types/common/response.type';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -59,8 +58,8 @@ export class AuthService {
   //   );
   // }
 
-  getUserProfile(): Observable<IResponse<IUserInfo>> {
-    return this.http.get<IResponse<IUserInfo>>(
+  getUserProfile(): Observable<IApiResponse<IUserInfo>> {
+    return this.http.get<IApiResponse<IUserInfo>>(
       'mock/user/get-user-profile.json'
     );
   }

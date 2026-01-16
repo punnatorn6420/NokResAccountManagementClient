@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { AgentProfileResponse, ApiSuccess } from '../types/agent/agent.type';
+import { IAgentProfileResponse } from '../types/agent/agent.type';
+import { IApiResponse } from '../types/common/response.type';
 
 @Injectable({ providedIn: 'root' })
 export class AgentService {
@@ -13,9 +14,9 @@ export class AgentService {
     pageNumber: number;
     pageSize: number;
     ascending: boolean;
-  }): Observable<ApiSuccess<AgentProfileResponse[]>> {
+  }): Observable<IApiResponse<IAgentProfileResponse[]>> {
     if (environment.useMock) {
-      return this.http.get<ApiSuccess<AgentProfileResponse[]>>(
+      return this.http.get<IApiResponse<IAgentProfileResponse[]>>(
         'mock/agent-mgmt-mocks/agents.get.200.success.json'
       );
     }
@@ -24,12 +25,11 @@ export class AgentService {
       .set('pageNumber', params.pageNumber)
       .set('pageSize', params.pageSize)
       .set('ascending', params.ascending);
-
     if (params.keyword?.trim()) {
       httpParams = httpParams.set('keyword', params.keyword.trim());
     }
 
-    return this.http.get<ApiSuccess<AgentProfileResponse[]>>(
+    return this.http.get<IApiResponse<IAgentProfileResponse[]>>(
       `${environment.endpoint}agent-mgmt/v1/agents`,
       { params: httpParams }
     );
