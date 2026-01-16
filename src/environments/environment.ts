@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  useMock: true,
   environment: 'UAT',
   endpoint: 'http://10.94.23.31:9015/',
   portal_client: 'https://uat-portal.nokair.com/',

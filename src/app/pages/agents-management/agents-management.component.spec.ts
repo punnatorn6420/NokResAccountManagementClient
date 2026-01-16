@@ -1,17 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AgentManagementComponent } from './agents-management.component';
+import { AgentsManagementComponent } from './agents-management.component';
 
-describe('AgentManagementComponent', () => {
-  let component: AgentManagementComponent;
-  let fixture: ComponentFixture<AgentManagementComponent>;
-
+describe('AgentsManagementComponent', () => {
+  let component: AgentsManagementComponent;
+  let fixture: ComponentFixture<AgentsManagementComponent>;
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [AgentManagementComponent],
+      declarations: [AgentsManagementComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(AgentManagementComponent);
+    fixture = TestBed.createComponent(AgentsManagementComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

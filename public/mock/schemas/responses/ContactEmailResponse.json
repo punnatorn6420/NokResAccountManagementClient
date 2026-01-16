@@ -1,0 +1,39 @@
+{
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "integer",
+        "example": "1"
+      },
+      "profileId": {
+        "type": "integer",
+        "example": "123"
+      },
+      "email": {
+        "type": "string",
+        "format": "email",
+        "example": "123@gmail.com"
+      },
+      "isPrimary": {
+        "type": "boolean",
+        "example": true
+      },
+      "active": {
+        "type": "boolean",
+        "example": true
+      },
+      "createdAt": {
+        "type": "string",
+        "format": "date-time",
+        "example": "2024-05-20T10:00:00Z"
+      },
+      "modifiedAt": {
+        "type": "string",
+        "format": "date-time",
+        "example": "2024-05-20T10:00:00Z"
+      }
+    }
+  }
+}

@@ -1,0 +1,31 @@
+﻿{
+  "type": "object",
+  "required": [ "userName", "environment" ],
+  "properties": {
+    "isPrimary": {
+      "type": "boolean",
+      "default": false
+    },
+    "userName": {
+      "type": "string",
+      "example": "nokair_staff01"
+    },
+    "environment": {
+      "type": "string",
+      "enum": [ "PROD", "UAT" ],
+      "example": "UAT"
+    },
+    "isWorking": {
+      "type": "boolean",
+      "default": true
+    },
+    "note": {
+      "type": "string",
+      "example": "Main booking account"
+    },
+    "active": {
+      "type": "boolean",
+      "default": true
+    }
+  }
+}

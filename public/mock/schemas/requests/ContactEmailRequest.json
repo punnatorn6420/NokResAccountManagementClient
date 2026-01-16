@@ -1,0 +1,20 @@
+﻿{
+  "type": "object",
+  "required": [ "email" ],
+  "properties": {
+    "email": {
+      "type": "string",
+      "format": "email",
+      "example": "contact@agency.com"
+    },
+    "isPrimary": {
+      "type": "boolean",
+      "default": false,
+      "description": "กำหนดว่าเป็นอีเมลหลักสำหรับการติดต่อหรือไม่"
+    },
+    "active": {
+      "type": "boolean",
+      "default": true
+    }
+  }
+}

@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, firstValueFrom, Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { IResponse } from '../types/response.model';
 import { HttpService } from './http.service';
 import { IUserInfo } from '../types/auth.model';
+import { IApiResponse } from '../types/common/api-response.type';
+import { IResponse } from './agent.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -30,12 +31,12 @@ export class AuthService {
     this.currentUserSubject.next(null);
   }
 
-  verifyToken(token: string): Observable<IResponse<string>> {
+  verifyToken(token: string): Observable<IApiResponse<string>> {
     const headers = new HttpHeaders()
       .append('nok_client_id', environment.clientId)
       .append('nok_client_secret', environment.clientSecret)
       .append('Authorization', `Bearer ${token}`);
-    return this.http.get<IResponse<string>>(
+    return this.http.get<IApiResponse<string>>(
       `${environment.endpoint}v1/users/validate-token`,
       { headers }
     );
