@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "nok-ota-client": {
+    "NokResAccountManagementClient": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -24,7 +24,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/nok-ota-client",
+            "outputPath": "dist/NokResAccountManagement",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": ["zone.js"],
@@ -68,10 +68,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "nok-ota-client:build:production"
+              "buildTarget": "NokResAccountManagementClient:build:production"
             },
             "development": {
-              "buildTarget": "nok-ota-client:build:development"
+              "buildTarget": "NokResAccountManagementClient:build:development"
             }
           },
           "defaultConfiguration": "development"

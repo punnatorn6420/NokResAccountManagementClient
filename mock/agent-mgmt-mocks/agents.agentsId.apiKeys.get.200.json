@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "data": [
+    {
+      "id": 901,
+      "agentId": 101,
+      "apiKeyName": "BKK001 Primary Key",
+      "clientId": "bkk001_client",
+      "maskedSecret": "****-****-****-9a3f",
+      "status": "ACTIVE",
+      "createdAt": "2026-01-10T09:45:00Z",
+      "updatedAt": "2026-01-15T04:30:00Z"
+    }
+  ]
+}

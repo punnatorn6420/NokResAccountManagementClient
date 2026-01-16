@@ -30,11 +30,11 @@ export class AppMenu {
 
   ngOnInit() {
     this.model = [
-      {
-        label: 'Check Member Tier',
-        icon: 'pi pi-home',
-        routerLink: ['/admin/check-member-tier'],
-      },
+      // {
+      //   label: 'Check Member Tier',
+      //   icon: 'pi pi-home',
+      //   routerLink: ['/admin/check-member-tier'],
+      // },
     ];
   }
 }
