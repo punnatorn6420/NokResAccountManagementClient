@@ -1,0 +1,17 @@
+{
+  "companyName": "Nok Air Agency",
+  "agencyCode": "DD001",
+  "currency": "THB",
+  "type": "OTA",
+  "firstName": "Somchai",
+  "lastName": "Sabaidee",
+  "phone": "0812345678",
+  "address1": "123 Vibhavadi Rd",
+  "address2": "Don Mueang",
+  "city": "Bangkok",
+  "state": "Bangkok",
+  "postalCode": "10210",
+  "countryCode": "TH",
+  "region": "SEA",
+  "active": true
+}

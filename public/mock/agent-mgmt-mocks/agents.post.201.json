@@ -1,7 +1,30 @@
 {
   "status": "success",
   "data": {
-    "message": "Created successfully",
-    "id": 201
+    "id": 201,
+    "companyName": "บริษัท สยามทราเวล จำกัด",
+    "agencyCode": "OTASIM",
+    "currency": "THB",
+    "type": "OTA",
+    "firstName": "สมชาย",
+    "lastName": "ใจดี",
+    "emails": [
+      {
+        "id": 1,
+        "email": "agent@siamtravel.co.th",
+        "isprimary": true
+      }
+    ],
+    "phone": "0981234567",
+    "address1": "99/1 อาคารสยามทาวเวอร์ ชั้น 12",
+    "address2": "ถนนพระราม 1 แขวงปทุมวัน",
+    "city": "เขตปทุมวัน",
+    "state": "กรุงเทพมหานคร",
+    "postalCode": "10330",
+    "countryCode": "TH",
+    "region": "SEA",
+    "assignedBy": "SystemAdmin_01",
+    "createdAt": "2024-05-20T10:00:00Z",
+    "modifiedAt": "2024-05-21T08:00:00Z"
   }
 }
