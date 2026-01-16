@@ -1,0 +1,15 @@
+{
+  "code": "INVALID_REQUEST",
+  "userMessage": "Validation failed",
+  "errors": [
+    {
+      "field": "keyword",
+      "message": "Keyword must be a string"
+    },
+    {
+      "field": "pageNumber",
+      "message": "pageNumber must be >= 1"
+    }
+  ],
+  "traceId": "9d5a2581edb1875766b84c51a47e99df"
+}

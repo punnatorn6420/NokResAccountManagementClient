@@ -11,10 +11,7 @@ export class AuthService {
   private currentUserSubject = new BehaviorSubject<IUserInfo | null>(null);
   currentUser$ = this.currentUserSubject.asObservable();
 
-  constructor(
-    private http: HttpClient,
-    private https: HttpService,
-  ) {}
+  constructor(private http: HttpClient, private https: HttpService) {}
 
   setUser(user: IUserInfo): void {
     this.currentUserSubject.next(user);
@@ -40,24 +37,30 @@ export class AuthService {
       .append('Authorization', `Bearer ${token}`);
     return this.http.get<IResponse<string>>(
       `${environment.endpoint}v1/users/validate-token`,
-      { headers },
+      { headers }
     );
   }
 
+  // getUserProfile(): Observable<IResponse<IUserInfo>> {
+  //   const token =
+  //     typeof window !== 'undefined'
+  //       ? sessionStorage.getItem('bearerToken')
+  //       : null;
+
+  //   const headers = new HttpHeaders()
+  //     .append('nok_client_id', environment.clientId)
+  //     .append('nok_client_secret', environment.clientSecret)
+  //     .append('Authorization', `Bearer ${token}`);
+
+  //   return this.http.get<IResponse<IUserInfo>>(
+  //     `${environment.endpoint}v1/users/retrieve-from-token`,
+  //     { headers },
+  //   );
+  // }
+
   getUserProfile(): Observable<IResponse<IUserInfo>> {
-    const token =
-      typeof window !== 'undefined'
-        ? sessionStorage.getItem('bearerToken')
-        : null;
-
-    const headers = new HttpHeaders()
-      .append('nok_client_id', environment.clientId)
-      .append('nok_client_secret', environment.clientSecret)
-      .append('Authorization', `Bearer ${token}`);
-
     return this.http.get<IResponse<IUserInfo>>(
-      `${environment.endpoint}v1/users/retrieve-from-token`,
-      { headers },
+      'mock/user/get-user-profile.json'
     );
   }
 
@@ -78,7 +81,7 @@ export class AuthService {
         if (!location.href.startsWith(environment.portal_client)) {
           location.replace(environment.portal_client);
         }
-      },
+      }
     );
   }
 }

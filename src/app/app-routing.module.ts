@@ -5,12 +5,12 @@ import { AppLayout } from './shared/layout/components/app.layout';
 
 export const routes: Routes = [
   { path: 'notfound', component: Notfound },
-  { path: '', loadChildren: () => import('../app/pages/auth/auth.routes') },
+  { path: '', redirectTo: '/admin', pathMatch: 'full' },
   {
-    path: '',
+    path: 'admin',
     component: AppLayout,
     children: [
-      // { path: '', redirectTo: 'check-member-tier', pathMatch: 'full' },
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       {
         path: '',
         loadChildren: () =>

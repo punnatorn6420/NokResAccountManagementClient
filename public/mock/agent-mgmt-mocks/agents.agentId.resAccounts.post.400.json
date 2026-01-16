@@ -1,0 +1,11 @@
+{
+  "code": "INVALID_REQUEST",
+  "userMessage": "Validation failed",
+  "errors": [
+    {
+      "field": "accountCode",
+      "message": "accountCode is required"
+    }
+  ],
+  "traceId": "9d5a2581edb1875766b84c51a47e99df"
+}

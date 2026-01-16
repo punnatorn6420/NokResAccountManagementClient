@@ -1,0 +1,6 @@
+{
+  "code": "UNAUTHORIZED",
+  "userMessage": "Unauthorized request",
+  "details": "Missing or invalid token/client credentials",
+  "traceId": "0de4a1f3cfd48d02412839f9ac4af2d9"
+}
