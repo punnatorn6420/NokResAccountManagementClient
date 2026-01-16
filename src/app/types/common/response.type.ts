@@ -11,3 +11,9 @@ export interface IApiErrorResponse {
   errors?: IApiErrorDetail[];
   code?: string;
 }
+
+export interface IApiResponse<T> {
+  status: string;
+  data: T;
+  correlationId?: string;
+}

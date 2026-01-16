@@ -1,49 +1,24 @@
-export type Currency = 'THB' | 'USD' | 'INR' | 'CNY';
-export type AgentProfileType = 'Internal' | 'OTA';
-export type Environment = 'PROD' | 'UAT';
-export type ResetPasswordStatus = 'Success' | 'Failed';
-export type ResetPasswordCreatedBy = 'Service' | 'Staff';
+export type ICurrency = 'THB' | 'USD' | 'INR' | 'CNY';
+export type IAgentProfileType = 'Internal' | 'OTA';
+export type IEnvironment = 'PROD' | 'UAT';
+export type IResetPasswordStatus = 'Success' | 'Failed';
+export type IResetPasswordCreatedBy = 'Service' | 'Staff';
 
-export interface ApiSuccess<T> {
-  status: string;
-  data: T;
-}
-
-export interface InvalidRequestResponse {
-  message: string;
-}
-
-export interface UnauthorizedResponse {
-  message: string;
-}
-
-export interface InvalidTokenResponse {
-  message: string;
-}
-
-export interface InternalServerErrorResponse {
-  error: {
-    code: string;
-    userMessage: string;
-    developerMessage: string;
-  };
-}
-
-export interface AgentEmail {
+export interface IAgentEmail {
   id: number;
   email: string;
-  isprimary: boolean;
+  isPrimary: boolean;
 }
 
-export interface AgentProfileResponse {
+export interface IAgentProfileResponse {
   id: number;
   companyName: string;
   agencyCode: string;
-  currency: Currency;
-  type: AgentProfileType;
+  currency: ICurrency;
+  type: IAgentProfileType;
   firstName?: string;
   lastName?: string;
-  emails?: AgentEmail[];
+  emails?: IAgentEmail[];
   phone?: string;
   address1?: string;
   address2?: string;
@@ -57,17 +32,14 @@ export interface AgentProfileResponse {
   modifiedAt?: string;
 }
 
-export interface AgentProfileRequest {
+export interface IAgentProfileRequest {
   companyName: string;
   agencyCode: string;
-  currency: Currency;
-  type: AgentProfileType;
+  currency: ICurrency;
+  type: IAgentProfileType;
   firstName?: string;
   lastName?: string;
-  emails?: Array<{
-    email: string;
-    isprimary: boolean;
-  }>;
+  emails?: IAgentEmail;
   phone?: string;
   address1?: string;
   address2?: string;
@@ -78,11 +50,11 @@ export interface AgentProfileRequest {
   region?: string;
 }
 
-export interface AgentProfileUpdateRequest {
+export interface IAgentProfileUpdateRequest {
   companyName: string;
   agencyCode: string;
-  currency: Currency;
-  type: AgentProfileType;
+  currency: ICurrency;
+  type: IAgentProfileType;
   firstName?: string;
   lastName?: string;
   phone?: string;
@@ -96,13 +68,13 @@ export interface AgentProfileUpdateRequest {
   active?: boolean;
 }
 
-export interface ContactEmailRequest {
+export interface IContactEmailRequest {
   email: string;
   isPrimary?: boolean;
   active?: boolean;
 }
 
-export interface ContactEmailResponseItem {
+export interface IContactEmailResponseItem {
   id: number;
   profileId: number;
   email: string;
@@ -112,42 +84,42 @@ export interface ContactEmailResponseItem {
   modifiedAt: string;
 }
 
-export type ContactEmailResponse = ContactEmailResponseItem[];
+export type IContactEmailResponse = IContactEmailResponseItem[];
 
 export interface CredentialRequest {
   name: string;
-  environment: Environment;
+  environment: IEnvironment;
   active?: boolean;
 }
 
-export interface CredentialResponse {
+export interface ICredentialResponse {
   id: number;
   name: string;
   clientId: string;
   profileId: number;
   clientSecret: string;
-  environment: Environment;
+  environment: IEnvironment;
   dateGenerated: string;
   active: boolean;
   createdAt: string;
   modifiedAt: string;
 }
 
-export interface ResAccountRequest {
+export interface IResAccountRequest {
   isPrimary?: boolean;
   userName: string;
-  environment: Environment;
+  environment: IEnvironment;
   isWorking?: boolean;
   note?: string;
   active?: boolean;
 }
 
-export interface ResAccountResponse {
+export interface IResAccountResponse {
   id: number;
   profileId: number;
   isPrimary: boolean;
   userName: string;
-  environment: Environment;
+  environment: IEnvironment;
   dateGenerated: string;
   latestResetPasswordAI: string;
   isWorking: boolean;
@@ -157,11 +129,11 @@ export interface ResAccountResponse {
   modifiedAt: string;
 }
 
-export interface ResetPasswordLogResponse {
+export interface IResetPasswordLogResponse {
   id: number;
   accountId: number;
   message: string;
-  status: ResetPasswordStatus;
-  createdBy: ResetPasswordCreatedBy;
+  status: IResetPasswordStatus;
+  createdBy: IResetPasswordCreatedBy;
   createdAt: string;
 }
