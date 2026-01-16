@@ -78,9 +78,9 @@
       <tr class="bg-gray-100 !text-sm text-gray-700">
         <th class="!p-2 !text-center">Company Name</th>
         <th class="!p-2 !text-center">Agency Code</th>
-        <th class="!p-2 !text-center">Base Currency</th>
+        <th class="!p-2 !text-center">Currency</th>
         <th class="!p-2 !text-center">Agent Type</th>
-        <th class="!p-2 !text-center">Contact Email</th>
+        <th class="!p-2 !text-center">Primary Email</th>
         <th class="!p-2 !text-center">Actions</th>
       </tr>
     </ng-template>
@@ -91,15 +91,15 @@
           {{ row.companyName || '-' }}
         </td>
         <td class="!p-2 !text-center">{{ row.agencyCode || '-' }}</td>
-        <td class="!p-2 !text-center">{{ row.baseCurrency || '-' }}</td>
+        <td class="!p-2 !text-center">{{ row.currency || '-' }}</td>
         <td class="!p-2 !text-center">
           <span
             class="inline-flex items-center px-2 py-1 rounded-md text-xs font-semibold bg-gray-100 text-gray-700"
           >
-            {{ row.agentType || '-' }}
+            {{ row.type || '-' }}
           </span>
         </td>
-        <td class="!p-2 !text-center">{{ row.contactEmail || '-' }}</td>
+        <td class="!p-2 !text-center">{{ getPrimaryEmail(row) }}</td>
         <td class="!p-2 !text-center">
           <div class="flex items-center justify-center gap-2">
             <button
