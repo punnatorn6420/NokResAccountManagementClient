@@ -24,7 +24,9 @@ export class AgentsManagementComponent implements OnInit, OnDestroy {
   keyword = '';
   pageNumber = 1;
   pageSize = 25;
+  first = 0;
   ascending = true;
+  lastRefreshedAt: Date | null = null;
 
   // pagination (mock doesn’t return total; we’ll use agents.length for now)
   totalRecords = 0;
@@ -38,6 +40,7 @@ export class AgentsManagementComponent implements OnInit, OnDestroy {
       .subscribe((kw) => {
         this.keyword = kw;
         this.pageNumber = 1; // reset page on new search
+        this.first = 0;
         this.loadAgents();
       });
 
@@ -66,16 +69,14 @@ export class AgentsManagementComponent implements OnInit, OnDestroy {
           this.agents = res?.data ?? [];
           // for mock: total is just current length
           this.totalRecords = this.agents.length;
+          this.lastRefreshedAt = new Date();
           this.loading = false;
         },
         error: (err) => {
           this.loading = false;
           this.agents = [];
           this.totalRecords = 0;
-          this.errorMessage =
-            err?.error?.message ||
-            err?.message ||
-            'Unable to load agents. Please try again.';
+          this.errorMessage = this.resolveErrorMessage(err);
         },
       });
   }
@@ -87,6 +88,7 @@ export class AgentsManagementComponent implements OnInit, OnDestroy {
   onToggleSort(): void {
     this.ascending = !this.ascending;
     this.pageNumber = 1;
+    this.first = 0;
     this.loadAgents();
   }
 
@@ -94,10 +96,51 @@ export class AgentsManagementComponent implements OnInit, OnDestroy {
     const first = event.first ?? 0;
     const rows = event.rows ?? this.pageSize;
 
+    this.first = first;
     this.pageSize = rows;
     this.pageNumber = Math.floor(first / rows) + 1;
 
     this.loadAgents();
+  }
+
+  clearFilters(): void {
+    this.keyword = '';
+    this.pageNumber = 1;
+    this.first = 0;
+    this.onKeywordChange('');
+  }
+
+  getPrimaryEmail(row: IAgentProfileResponse): string {
+    const emails = row.emails ?? [];
+    const primaryEmail = emails.find(
+      (email) =>
+        email.isPrimary ||
+        (email as { isprimary?: boolean }).isprimary ||
+        (email as { isprimary?: boolean }).isprimary === true
+    );
+    return primaryEmail?.email || emails[0]?.email || '-';
+  }
+
+  private resolveErrorMessage(err: unknown): string {
+    const fallbackMessage = 'Unable to load agents. Please try again.';
+    if (!err || typeof err !== 'object') {
+      return fallbackMessage;
+    }
+    const error = err as {
+      message?: string;
+      error?: {
+        message?: string;
+        userMessage?: string;
+        error?: { userMessage?: string };
+      };
+    };
+    return (
+      error?.error?.message ||
+      error?.error?.userMessage ||
+      error?.error?.error?.userMessage ||
+      error?.message ||
+      fallbackMessage
+    );
   }
 
   viewAgent(row: IAgentProfileResponse): void {
