@@ -19,10 +19,7 @@ import { AppProfileSidebar } from './app.profilesidebar';
     AppConfigurator,
     AppProfileSidebar,
   ],
-  template: `<div
-    class="layout-container bg-tier-sky"
-    [ngClass]="containerClass"
-  >
+  template: `<div class="layout-container" [ngClass]="containerClass">
     <div app-sidebar></div>
     <div class="layout-content-wrapper">
       <div app-topbar></div>
@@ -52,7 +49,7 @@ export class AppLayout {
   constructor(
     public layoutService: LayoutService,
     public renderer: Renderer2,
-    public router: Router,
+    public router: Router
   ) {
     this.overlayMenuOpenSubscription =
       this.layoutService.overlayOpen$.subscribe(() => {
@@ -64,7 +61,7 @@ export class AppLayout {
               if (this.isOutsideClicked(event)) {
                 this.hideMenu();
               }
-            },
+            }
           );
         }
         if (
@@ -80,7 +77,7 @@ export class AppLayout {
               if (this.layoutService.isDesktop()) {
                 this.hideMenu();
               }
-            },
+            }
           );
         }
         if (this.layoutService.layoutState().staticMenuMobileActive) {
@@ -144,9 +141,9 @@ export class AppLayout {
       document.body.className = document.body.className.replace(
         new RegExp(
           '(^|\\b)' + 'blocked-scroll'.split(' ').join('|') + '(\\b|$)',
-          'gi',
+          'gi'
         ),
-        ' ',
+        ' '
       );
     }
   }

@@ -1,5 +1,5 @@
 {
-  "name": "nok-ota-client",
+  "name": "nok-res-account-management-client",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",

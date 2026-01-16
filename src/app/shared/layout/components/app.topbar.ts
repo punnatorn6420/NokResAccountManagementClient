@@ -39,7 +39,7 @@ import { TooltipModule } from 'primeng/tooltip';
 
     <div class="topbar-end">
       <ul class="topbar-menu">
-        <li>
+        <!-- <li>
           <p-button
             icon="pi pi-info-circle"
             rounded
@@ -47,7 +47,7 @@ import { TooltipModule } from 'primeng/tooltip';
             tooltipPosition="bottom"
             (onClick)="onMemberInfoButtonClick()"
           ></p-button>
-        </li>
+        </li> -->
         <li>
           <p-button
             icon="pi pi-palette"

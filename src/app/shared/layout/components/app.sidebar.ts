@@ -17,7 +17,7 @@ import { RouterModule } from '@angular/router';
         [routerLink]="['/admin']"
         class="app-logo text-2xl font-bold text-primary"
       >
-        NokFanClub
+        NokOTA
       </a>
 
       <button
@@ -36,10 +36,7 @@ export class AppSidebar {
   timeout: ReturnType<typeof setTimeout> | null = null;
 
   @ViewChild('menuContainer') menuContainer!: ElementRef;
-  constructor(
-    public layoutService: LayoutService,
-    public el: ElementRef,
-  ) {}
+  constructor(public layoutService: LayoutService, public el: ElementRef) {}
 
   onMouseEnter() {
     if (!this.layoutService.layoutState().anchored) {

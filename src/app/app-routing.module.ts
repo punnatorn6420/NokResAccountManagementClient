@@ -10,7 +10,7 @@ export const routes: Routes = [
     path: '',
     component: AppLayout,
     children: [
-      { path: '', redirectTo: 'check-member-tier', pathMatch: 'full' },
+      // { path: '', redirectTo: 'check-member-tier', pathMatch: 'full' },
       {
         path: '',
         loadChildren: () =>
