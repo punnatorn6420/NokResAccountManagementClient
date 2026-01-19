@@ -38,7 +38,7 @@ export class AppMenu {
       {
         label: 'Password Rotation Logs',
         icon: 'pi pi-fw pi-lock',
-        routerLink: ['/admin/password-rotation-logs'],
+        routerLink: ['/admin/log/password-rotation-logs'],
       },
     ];
   }

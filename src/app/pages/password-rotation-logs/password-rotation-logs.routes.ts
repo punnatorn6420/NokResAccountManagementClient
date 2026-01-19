@@ -4,7 +4,7 @@ import { RoleGuard } from '../../shared/core/guard/role.guard';
 
 export const passwordRotationLogsRoutes: Routes = [
   {
-    path: '',
+    path: 'password-rotation-logs',
     component: PasswordRotationLogsComponent,
     canActivate: [RoleGuard],
     data: { permission: 'canOnlyAdmin' },
