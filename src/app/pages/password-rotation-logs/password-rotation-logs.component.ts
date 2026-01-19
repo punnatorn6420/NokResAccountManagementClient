@@ -28,9 +28,11 @@ export class PasswordRotationLogsComponent implements OnInit, OnDestroy {
   errorMessage = '';
   keyword = '';
   lastRefreshedAt: Date | null = null;
-
   autoRefreshMs = 300000;
   private preload = false;
+  messageDialogVisible = false;
+  selectedLog: IPasswordRotationLog | null = null;
+  private readonly truncateThreshold = 80;
 
   constructor(private logService: PasswordRotationLogService) {}
 
@@ -41,6 +43,7 @@ export class PasswordRotationLogsComponent implements OnInit, OnDestroy {
         this.keyword = kw;
         this.loadLogs({ silent: true });
       });
+
     this.loadLogs({ silent: false });
     this.startAutoRefresh();
   }
@@ -101,6 +104,19 @@ export class PasswordRotationLogsComponent implements OnInit, OnDestroy {
         this.lastRefreshedAt = new Date();
         this.preload = false;
       });
+  }
+
+  openMessage(row: IPasswordRotationLog): void {
+    const msg = row?.message?.trim();
+    if (!msg) return;
+
+    this.selectedLog = row;
+    this.messageDialogVisible = true;
+  }
+
+  isMessageTruncated(row: IPasswordRotationLog): boolean {
+    const msg = row?.message ?? '';
+    return msg.trim().length > this.truncateThreshold;
   }
 
   getStatusClass(status?: string): string {
