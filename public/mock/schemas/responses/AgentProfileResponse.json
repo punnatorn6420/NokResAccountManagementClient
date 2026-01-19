@@ -1,0 +1,100 @@
+﻿{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "format": "int64"
+    },
+    "companyName": {
+      "type": "string",
+      "example": "บริษัท สยามทราเวล จำกัด"
+    },
+    "agencyCode": {
+      "type": "string",
+      "example": "OTASIM"
+    },
+    "currency": {
+      "type": "string",
+      "enum": [ "THB", "USD", "INR", "CNY" ]
+    },
+    "type": {
+      "type": "string",
+      "enum": [ "Internal", "OTA" ]
+    },
+    "firstName": {
+      "type": "string",
+      "example": "สมชาย"
+    },
+    "lastName": {
+      "type": "string",
+      "example": "ใจดี"
+    },
+    "emails": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": "1"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "example": "123@gmail.com"
+          },
+          "isprimary": {
+            "type": "boolean",
+            "example": true
+          }
+        }
+      }
+    },
+    "phone": {
+      "type": "string",
+      "example": "0981234567"
+    },
+    "address1": {
+      "type": "string",
+      "example": "99/1 อาคารสยามทาวเวอร์ ชั้น 12"
+    },
+    "address2": {
+      "type": "string",
+      "example": "ถนนพระราม 1 แขวงปทุมวัน"
+    },
+    "city": {
+      "type": "string",
+      "example": "เขตปทุมวัน"
+    },
+    "state": {
+      "type": "string",
+      "example": "กรุงเทพมหานคร"
+    },
+    "postalCode": {
+      "type": "string",
+      "example": "10330"
+    },
+    "countryCode": {
+      "type": "string",
+      "example": "TH"
+    },
+    "region": {
+      "type": "string",
+      "example": "SEA"
+    },
+    "assignedBy": {
+      "type": "string",
+      "example": "SystemAdmin_01"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "example": "2024-05-20T10:00:00Z"
+    },
+    "modifiedAt": {
+      "type": "string",
+      "format": "date-time",
+      "example": "2024-05-20T10:00:00Z"
+    }
+  }
+}

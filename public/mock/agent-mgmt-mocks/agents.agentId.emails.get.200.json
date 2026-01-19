@@ -1,0 +1,23 @@
+{
+  "status": "success",
+  "data": [
+    {
+      "id": 1,
+      "profileId": 101,
+      "email": "ops@siamtravel.co.th",
+      "isPrimary": true,
+      "active": true,
+      "createdAt": "2024-05-20T10:00:00Z",
+      "modifiedAt": "2024-05-21T08:00:00Z"
+    },
+    {
+      "id": 2,
+      "profileId": 101,
+      "email": "finance@siamtravel.co.th",
+      "isPrimary": false,
+      "active": true,
+      "createdAt": "2024-05-22T08:15:00Z",
+      "modifiedAt": "2024-05-22T08:15:00Z"
+    }
+  ]
+}

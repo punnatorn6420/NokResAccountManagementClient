@@ -1,0 +1,18 @@
+{
+  "correlationId": "mock-correlation-id",
+  "status": "Success",
+  "data": {
+    "id": 14,
+    "objectId": "93834fe2-c75b-4276-a7d7-6a1d9ba2e29c",
+    "firstName": "Punnatorn",
+    "lastName": "Yimpong",
+    "email": "Punnatorn.Yim@nokair.co.th",
+    "jobTitle": "Front-End Development",
+    "department": "HQ",
+    "active": true,
+    "roles": ["Admin"],
+    "team": "",
+    "createdAt": "2025-08-08T14:30:29",
+    "modifiedAt": "2025-08-08T14:30:29"
+  }
+}

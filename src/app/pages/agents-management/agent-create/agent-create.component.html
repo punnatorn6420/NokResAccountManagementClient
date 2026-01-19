@@ -1,0 +1,256 @@
+<div class="p-6 bg-white dark:bg-black rounded-xl shadow-md">
+  <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+    <div>
+      <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-300">
+        {{ pageTitle }}
+      </h2>
+      <p class="text-sm text-gray-500 dark:text-gray-400">
+        {{ pageDescription }}
+      </p>
+    </div>
+    <div class="flex items-center gap-2">
+      <button
+        pButton
+        type="button"
+        icon="pi pi-arrow-left"
+        class="p-button-text"
+        label="{{ backLabel }}"
+        (click)="onBack()"
+      ></button>
+    </div>
+  </div>
+
+  <div
+    *ngIf="apiErrorMessage"
+    class="mb-4 p-3 rounded-md bg-red-50 text-red-700 border border-red-200"
+  >
+    <p class="font-semibold">{{ apiErrorMessage }}</p>
+    <ul *ngIf="apiFieldErrors.length" class="mt-2 list-disc list-inside">
+      <li *ngFor="let error of apiFieldErrors">
+        {{ error.field ? error.field + ':' : '' }} {{ error.message }}
+      </li>
+    </ul>
+  </div>
+
+  <div *ngIf="loading" class="flex justify-center py-12">
+    <p-progressSpinner></p-progressSpinner>
+  </div>
+
+  <form *ngIf="!loading" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div class="space-y-4">
+        <h3 class="text-lg font-semibold text-gray-800">Profile</h3>
+        <div>
+          <label class="block text-sm font-medium mb-1"
+            >Company Name *</label
+          >
+          <input
+            pInputText
+            type="text"
+            formControlName="companyName"
+            class="w-full"
+          />
+          <small
+            *ngIf="getControl('companyName')?.touched && getControl('companyName')?.invalid"
+            class="text-red-500"
+            >Company name is required.</small
+          >
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1">Agency Code *</label>
+          <input
+            pInputText
+            type="text"
+            formControlName="agencyCode"
+            class="w-full"
+          />
+          <small
+            *ngIf="getControl('agencyCode')?.touched && getControl('agencyCode')?.invalid"
+            class="text-red-500"
+            >Agency code is required.</small
+          >
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-medium mb-1">Currency *</label>
+            <p-dropdown
+              [options]="currencyOptions"
+              optionLabel="label"
+              optionValue="value"
+              placeholder="Select currency"
+              formControlName="currency"
+              class="w-full"
+            ></p-dropdown>
+            <small
+              *ngIf="getControl('currency')?.touched && getControl('currency')?.invalid"
+              class="text-red-500"
+              >Currency is required.</small
+            >
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-1">Agent Type *</label>
+            <p-dropdown
+              [options]="typeOptions"
+              optionLabel="label"
+              optionValue="value"
+              placeholder="Select type"
+              formControlName="type"
+              class="w-full"
+            ></p-dropdown>
+            <small
+              *ngIf="getControl('type')?.touched && getControl('type')?.invalid"
+              class="text-red-500"
+              >Agent type is required.</small
+            >
+          </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-medium mb-1">First Name</label>
+            <input
+              pInputText
+              type="text"
+              formControlName="firstName"
+              class="w-full"
+            />
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-1">Last Name</label>
+            <input
+              pInputText
+              type="text"
+              formControlName="lastName"
+              class="w-full"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="space-y-4">
+        <h3 class="text-lg font-semibold text-gray-800">Contact</h3>
+        <div>
+          <label class="block text-sm font-medium mb-1"
+            >Primary Email *</label
+          >
+          <input
+            pInputText
+            type="email"
+            formControlName="primaryEmail"
+            class="w-full"
+            [readonly]="!allowEmailEdit"
+          />
+          <small
+            *ngIf="getControl('primaryEmail')?.touched && getControl('primaryEmail')?.invalid"
+            class="text-red-500"
+            >Valid email is required.</small
+          >
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1">Phone</label>
+          <input
+            pInputText
+            type="text"
+            formControlName="phone"
+            class="w-full"
+          />
+        </div>
+        <div *ngIf="showActiveToggle">
+          <label class="block text-sm font-medium mb-1">Active</label>
+          <p-toggleButton
+            formControlName="active"
+            onLabel="Active"
+            offLabel="Inactive"
+            class="w-full"
+          ></p-toggleButton>
+        </div>
+      </div>
+    </div>
+
+    <p-divider></p-divider>
+
+    <div class="space-y-4">
+      <h3 class="text-lg font-semibold text-gray-800">Address</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium mb-1">Address Line 1</label>
+          <input
+            pInputText
+            type="text"
+            formControlName="address1"
+            class="w-full"
+          />
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1">Address Line 2</label>
+          <input
+            pInputText
+            type="text"
+            formControlName="address2"
+            class="w-full"
+          />
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div>
+          <label class="block text-sm font-medium mb-1">City</label>
+          <input pInputText type="text" formControlName="city" class="w-full" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1">State</label>
+          <input
+            pInputText
+            type="text"
+            formControlName="state"
+            class="w-full"
+          />
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1">Postal Code</label>
+          <input
+            pInputText
+            type="text"
+            formControlName="postalCode"
+            class="w-full"
+          />
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium mb-1">Country Code</label>
+          <input
+            pInputText
+            type="text"
+            formControlName="countryCode"
+            class="w-full"
+          />
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1">Region</label>
+          <input
+            pInputText
+            type="text"
+            formControlName="region"
+            class="w-full"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="flex flex-wrap justify-end gap-3 mt-8">
+      <button
+        pButton
+        type="button"
+        class="p-button-outlined p-button-secondary"
+        label="{{ cancelLabel }}"
+        (click)="onCancel()"
+      ></button>
+      <button
+        pButton
+        type="submit"
+        class="p-button-primary"
+        [label]="submitLabel"
+        [disabled]="submitting"
+      ></button>
+    </div>
+  </form>
+</div>

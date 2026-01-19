@@ -4,6 +4,7 @@ import { routes } from './pages.routes';
 import { CommonModule } from '@angular/common';
 import { PrimeNgModule } from '../shared/prime-ng.module';
 import { FormsModule } from '@angular/forms';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   imports: [
@@ -13,6 +14,6 @@ import { FormsModule } from '@angular/forms';
     RouterModule.forChild(routes),
   ],
   exports: [RouterModule],
-  declarations: [],
+  declarations: [DashboardComponent],
 })
 export class PagesModule {}

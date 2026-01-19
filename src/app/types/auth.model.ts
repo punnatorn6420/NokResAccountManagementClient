@@ -1,8 +1,5 @@
 export enum IUserRole {
   Admin = 'Admin',
-  Director = 'Director',
-  Manager = 'Manager',
-  Officer = 'Officer',
 }
 
 export interface IUserInfo {

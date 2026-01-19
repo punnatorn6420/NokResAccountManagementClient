@@ -1,0 +1,81 @@
+{
+  "type": "object",
+  "required": [ "companyName", "agencyCode", "currency", "type" ],
+  "properties": {
+    "companyName": {
+      "type": "string",
+      "example": "Nok Air Agency"
+    },
+    "agencyCode": {
+      "type": "string",
+      "example": "DD001"
+    },
+    "currency": {
+      "type": "string",
+      "enum": [ "THB", "USD", "INR", "CNY" ],
+      "example": "THB"
+    },
+    "type": {
+      "type": "string",
+      "enum": [ "Internal", "OTA" ],
+      "example": "OTA"
+    },
+    "firstName": {
+      "type": "string",
+      "example": "Somchai"
+    },
+    "lastName": {
+      "type": "string",
+      "example": "Sabaidee"
+    },
+    "emails": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "example": "123@gmail.com"
+          },
+          "isprimary": {
+            "type": "boolean",
+            "example": true
+          }
+        }
+      }
+    },
+    "phone": {
+      "type": "string",
+      "example": "0812345678"
+    },
+    "address1": {
+      "type": "string",
+      "example": "123 Vibhavadi Rd"
+    },
+    "address2": {
+      "type": "string",
+      "example": "Don Mueang"
+    },
+    "city": {
+      "type": "string",
+      "example": "Bangkok"
+    },
+    "state": {
+      "type": "string",
+      "example": "Bangkok"
+    },
+    "postalCode": {
+      "type": "string",
+      "example": "10210"
+    },
+    "countryCode": {
+      "type": "string",
+      "example": "TH"
+    },
+    "region": {
+      "type": "string",
+      "example": "SEA"
+    }
+  }
+}

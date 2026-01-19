@@ -15,7 +15,7 @@ export class PermissionService {
     return this.authService.currentUser$.pipe(
       filter((u) => !!u),
       take(1),
-      map(() => true),
+      map(() => true)
     );
   }
 
@@ -32,13 +32,25 @@ export class PermissionService {
       : false;
   }
 
-  canGetTierCustomer(): boolean {
+  canAgentsManagement(): boolean {
     const currentUser = this.getCurrentUser();
-    const allowedRoles: IUserRole[] = [
-      IUserRole.Admin,
-      IUserRole.Director,
-      IUserRole.Manager,
-    ];
+    const allowedRoles: IUserRole[] = [IUserRole.Admin];
+    return currentUser
+      ? currentUser.roles.some((role) => allowedRoles.includes(role))
+      : false;
+  }
+
+  canAgentsCreation(): boolean {
+    const currentUser = this.getCurrentUser();
+    const allowedRoles: IUserRole[] = [IUserRole.Admin];
+    return currentUser
+      ? currentUser.roles.some((role) => allowedRoles.includes(role))
+      : false;
+  }
+
+  canAgentsEdit(): boolean {
+    const currentUser = this.getCurrentUser();
+    const allowedRoles: IUserRole[] = [IUserRole.Admin];
     return currentUser
       ? currentUser.roles.some((role) => allowedRoles.includes(role))
       : false;

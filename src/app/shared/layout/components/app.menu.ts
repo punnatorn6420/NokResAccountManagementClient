@@ -30,11 +30,16 @@ export class AppMenu {
 
   ngOnInit() {
     this.model = [
-      // {
-      //   label: 'Check Member Tier',
-      //   icon: 'pi pi-home',
-      //   routerLink: ['/admin/check-member-tier'],
-      // },
+      {
+        label: 'Agents Management',
+        icon: 'pi pi-fw pi-user-edit',
+        routerLink: ['/admin/agents'],
+      },
+      {
+        label: 'Password Rotation Logs',
+        icon: 'pi pi-fw pi-lock',
+        routerLink: ['/admin/password-rotation-logs'],
+      },
     ];
   }
 }

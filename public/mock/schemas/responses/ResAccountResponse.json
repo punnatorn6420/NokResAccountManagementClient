@@ -1,0 +1,58 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "example": 1
+    },
+    "profileId": {
+      "type": "integer",
+      "example": 12
+    },
+    "isPrimary": {
+      "type": "boolean",
+      "example": true
+    },
+    "userName": {
+      "type": "string",
+      "example": "Noppadol"
+    },
+    "environment": {
+      "type": "string",
+      "enum": [ "PROD", "UAT" ],
+      "example": "PROD"
+    },
+    "dateGenerated": {
+      "type": "string",
+      "format": "date-time",
+      "example": "2024-05-20T10:00:00Z"
+    },
+    "latestResetPasswordAI": {
+      "type": "string",
+      "format": "date-time",
+      "example": "2024-05-20T10:00:00Z"
+    },
+    "isWorking": {
+      "type": "boolean",
+      "example": false
+    },
+    "note": {
+      "type": "string",
+      "example": "for agent super hero"
+    },
+    "active": {
+      "type": "boolean",
+      "example": true
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "example": "2024-05-20T10:00:00Z"
+    },
+    "modifiedAt": {
+      "type": "string",
+      "format": "date-time",
+      "example": "2024-05-20T10:00:00Z"
+    }
+  }
+}
