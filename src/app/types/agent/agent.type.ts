@@ -81,6 +81,7 @@ export interface IContactEmailResponseItem {
   profileId: number;
   email: string;
   isPrimary: boolean;
+  isprimary?: boolean;
   active: boolean;
   createdAt: string;
   modifiedAt: string;
