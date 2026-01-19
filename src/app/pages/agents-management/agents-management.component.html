@@ -12,6 +12,13 @@
     <div class="flex items-center gap-2">
       <button
         pButton
+        icon="pi pi-plus"
+        class="p-button-sm"
+        label="Create Agent"
+        (click)="createAgent()"
+      ></button>
+      <button
+        pButton
         icon="pi pi-refresh"
         class="p-button-text p-button-sm"
         label="Refresh now"
@@ -80,7 +87,11 @@
         <th class="!p-2 !text-center">Agency Code</th>
         <th class="!p-2 !text-center">Currency</th>
         <th class="!p-2 !text-center">Agent Type</th>
+        <th class="!p-2 !text-center">Contact Name</th>
         <th class="!p-2 !text-center">Primary Email</th>
+        <th class="!p-2 !text-center">Phone</th>
+        <th class="!p-2 !text-center">Assigned By</th>
+        <th class="!p-2 !text-center">Created At</th>
         <th class="!p-2 !text-center">Actions</th>
       </tr>
     </ng-template>
@@ -99,7 +110,15 @@
             {{ row.type || '-' }}
           </span>
         </td>
+        <td class="!p-2 !text-center">
+          {{ row.firstName || '-' }} {{ row.lastName || '' }}
+        </td>
         <td class="!p-2 !text-center">{{ getPrimaryEmail(row) }}</td>
+        <td class="!p-2 !text-center">{{ row.phone || '-' }}</td>
+        <td class="!p-2 !text-center">{{ row.assignedBy || '-' }}</td>
+        <td class="!p-2 !text-center">
+          {{ row.createdAt ? (row.createdAt | date: 'short') : '-' }}
+        </td>
         <td class="!p-2 !text-center">
           <div class="flex items-center justify-center gap-2">
             <button
@@ -127,7 +146,7 @@
 
     <ng-template pTemplate="emptymessage">
       <tr>
-        <td colspan="6">
+        <td colspan="10">
           <div class="py-10 text-center text-gray-500">No agents found.</div>
         </td>
       </tr>

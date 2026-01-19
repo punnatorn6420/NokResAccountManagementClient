@@ -8,9 +8,17 @@ import { CoreModule } from '../../shared/core/core.module';
 import { SkeletonLoadingModule } from '../../shared/skeleton-loading/skeleton-loading.module';
 import { agentsManagementRoutes } from './agents-management.routes';
 import { AgentsManagementComponent } from './agents-management.component';
+import { AgentCreateComponent } from './agent-create/agent-create.component';
+import { AgentEditComponent } from './agent-edit/agent-edit.component.edit';
+import { AgentDetailComponent } from './agent-detail/agent-detail.component';
 
 @NgModule({
-  declarations: [AgentsManagementComponent],
+  declarations: [
+    AgentsManagementComponent,
+    AgentCreateComponent,
+    AgentEditComponent,
+    AgentDetailComponent,
+  ],
   imports: [
     CommonModule,
     FormsModule,

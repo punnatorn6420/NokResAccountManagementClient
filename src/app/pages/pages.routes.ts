@@ -8,7 +8,7 @@ export const routes: Routes = [
     component: DashboardComponent,
   },
   {
-    path: 'agents-management',
+    path: 'agents',
     canMatch: [RoleGuard],
     data: { permission: 'canAgentsManagement' },
     loadChildren: () =>
