@@ -33,7 +33,7 @@ export class AppMenu {
       {
         label: 'Agents Management',
         icon: 'pi pi-fw pi-user-edit',
-        routerLink: ['/admin/agents-management'],
+        routerLink: ['/admin/agents'],
       },
       {
         label: 'Password Rotation Logs',

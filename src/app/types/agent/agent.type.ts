@@ -5,9 +5,10 @@ export type IResetPasswordStatus = 'Success' | 'Failed';
 export type IResetPasswordCreatedBy = 'Service' | 'Staff';
 
 export interface IAgentEmail {
-  id: number;
+  id?: number;
   email: string;
-  isPrimary: boolean;
+  isPrimary?: boolean;
+  isprimary?: boolean;
 }
 
 export interface IAgentProfileResponse {
@@ -28,6 +29,7 @@ export interface IAgentProfileResponse {
   countryCode?: string;
   region?: string;
   assignedBy?: string;
+  active?: boolean;
   createdAt?: string;
   modifiedAt?: string;
 }
@@ -39,7 +41,7 @@ export interface IAgentProfileRequest {
   type: IAgentProfileType;
   firstName?: string;
   lastName?: string;
-  emails?: IAgentEmail;
+  emails?: IAgentEmail[];
   phone?: string;
   address1?: string;
   address2?: string;

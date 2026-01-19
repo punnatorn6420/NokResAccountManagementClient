@@ -1,6 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subject, debounceTime, distinctUntilChanged, takeUntil } from 'rxjs';
+import {
+  Subject,
+  debounceTime,
+  distinctUntilChanged,
+  interval,
+  takeUntil,
+} from 'rxjs';
 import { AgentService } from '../../service/agent.service';
 import { IAgentProfileResponse } from '../../types/agent/agent.type';
 import { PaginatorState } from 'primeng/paginator';
@@ -45,6 +51,10 @@ export class AgentsManagementComponent implements OnInit, OnDestroy {
       });
 
     this.loadAgents();
+
+    interval(300000)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => this.loadAgents());
   }
 
   ngOnDestroy(): void {
@@ -144,10 +154,14 @@ export class AgentsManagementComponent implements OnInit, OnDestroy {
   }
 
   viewAgent(row: IAgentProfileResponse): void {
-    this.router.navigate(['/agents', row.id]);
+    this.router.navigate(['/admin/agents', row.id]);
   }
 
   editAgent(row: IAgentProfileResponse): void {
-    this.router.navigate(['/agents', row.id, 'edit']);
+    this.router.navigate(['/admin/agents', row.id, 'edit']);
+  }
+
+  createAgent(): void {
+    this.router.navigate(['/admin/agents/create']);
   }
 }
