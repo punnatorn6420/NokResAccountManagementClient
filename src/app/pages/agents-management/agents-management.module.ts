@@ -11,6 +11,9 @@ import { AgentsManagementComponent } from './agents-management.component';
 import { AgentCreateComponent } from './agent-create/agent-create.component';
 import { AgentDetailComponent } from './agent-detail/agent-detail.component';
 import { AgentEditComponent } from './agent-create/agent-edit.component.edit';
+import { AgentContactEmailsComponent } from './agent-detail/agent-contact-emails.component';
+import { AgentResAccountsComponent } from './agent-detail/agent-res-accounts.component';
+import { AgentApiKeysComponent } from './agent-detail/agent-api-keys.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +21,9 @@ import { AgentEditComponent } from './agent-create/agent-edit.component.edit';
     AgentCreateComponent,
     AgentEditComponent,
     AgentDetailComponent,
+    AgentContactEmailsComponent,
+    AgentResAccountsComponent,
+    AgentApiKeysComponent,
   ],
   imports: [
     CommonModule,

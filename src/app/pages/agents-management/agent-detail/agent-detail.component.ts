@@ -1,12 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subject, forkJoin, takeUntil } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { AgentService } from '../../../service/agent.service';
 import {
+  IAgentEmail,
   IAgentProfileResponse,
-  IContactEmailResponse,
-  ICredentialResponse,
-  IResAccountResponse,
 } from '../../../types/agent/agent.type';
 
 @Component({
@@ -20,15 +18,10 @@ export class AgentDetailComponent implements OnInit, OnDestroy {
 
   agentId = 0;
   agent: IAgentProfileResponse | null = null;
-  resAccounts: IResAccountResponse[] = [];
-  contactEmails: IContactEmailResponse = [];
-  apiKeys: ICredentialResponse[] = [];
+  primaryEmail = '';
 
   loading = false;
   errorMessage = '';
-  resAccountsLoading = false;
-  contactEmailsLoading = false;
-  apiKeysLoading = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -45,7 +38,6 @@ export class AgentDetailComponent implements OnInit, OnDestroy {
     }
 
     this.loadAgent();
-    this.loadRelatedData();
   }
 
   ngOnDestroy(): void {
@@ -71,41 +63,12 @@ export class AgentDetailComponent implements OnInit, OnDestroy {
       });
   }
 
-  loadRelatedData(): void {
-    this.resAccountsLoading = true;
-    this.contactEmailsLoading = true;
-    this.apiKeysLoading = true;
-
-    forkJoin({
-      resAccounts: this.agentService.getResAccounts(this.agentId),
-      contactEmails: this.agentService.getContactEmails(this.agentId),
-      apiKeys: this.agentService.getApiKeys(this.agentId),
-    })
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: (res) => {
-          this.resAccounts = res.resAccounts?.data ?? [];
-          this.contactEmails = res.contactEmails?.data ?? [];
-          this.apiKeys = res.apiKeys?.data ?? [];
-          this.resAccountsLoading = false;
-          this.contactEmailsLoading = false;
-          this.apiKeysLoading = false;
-        },
-        error: (err) => {
-          this.resAccountsLoading = false;
-          this.contactEmailsLoading = false;
-          this.apiKeysLoading = false;
-          this.errorMessage = this.resolveErrorMessage(err);
-        },
-      });
-  }
-
   getPrimaryEmail(): string {
+    if (this.primaryEmail) {
+      return this.primaryEmail;
+    }
     const emails = this.agent?.emails ?? [];
-    const primaryEmail = emails.find(
-      (email) => email.isPrimary || email.isprimary
-    );
-    return primaryEmail?.email || emails[0]?.email || '-';
+    return this.resolvePrimaryEmail(emails);
   }
 
   navigateToEdit(): void {
@@ -114,6 +77,10 @@ export class AgentDetailComponent implements OnInit, OnDestroy {
 
   navigateToList(): void {
     this.router.navigate(['/admin/agents']);
+  }
+
+  onPrimaryEmailChange(email: string): void {
+    this.primaryEmail = email;
   }
 
   private resolveErrorMessage(err: unknown): string {
@@ -137,5 +104,12 @@ export class AgentDetailComponent implements OnInit, OnDestroy {
       error?.message ||
       fallbackMessage
     );
+  }
+
+  private resolvePrimaryEmail(emails: IAgentEmail[]): string {
+    const primaryEmail = emails.find(
+      (email) => email.isPrimary || email.isprimary
+    );
+    return primaryEmail?.email || emails[0]?.email || '-';
   }
 }
