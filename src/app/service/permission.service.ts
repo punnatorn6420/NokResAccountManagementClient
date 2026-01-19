@@ -39,4 +39,20 @@ export class PermissionService {
       ? currentUser.roles.some((role) => allowedRoles.includes(role))
       : false;
   }
+
+  canAgentsCreation(): boolean {
+    const currentUser = this.getCurrentUser();
+    const allowedRoles: IUserRole[] = [IUserRole.Admin];
+    return currentUser
+      ? currentUser.roles.some((role) => allowedRoles.includes(role))
+      : false;
+  }
+
+  canAgentsEdit(): boolean {
+    const currentUser = this.getCurrentUser();
+    const allowedRoles: IUserRole[] = [IUserRole.Admin];
+    return currentUser
+      ? currentUser.roles.some((role) => allowedRoles.includes(role))
+      : false;
+  }
 }
