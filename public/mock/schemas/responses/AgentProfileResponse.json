@@ -15,11 +15,11 @@
     },
     "currency": {
       "type": "string",
-      "enum": [ "THB", "USD", "INR", "CNY" ]
+      "enum": ["THB", "USD", "INR", "CNY"]
     },
     "type": {
       "type": "string",
-      "enum": [ "Internal", "OTA" ]
+      "enum": ["Internal", "OTA"]
     },
     "firstName": {
       "type": "string",

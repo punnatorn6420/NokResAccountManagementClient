@@ -11,7 +11,10 @@ export class AuthService {
   private currentUserSubject = new BehaviorSubject<IUserInfo | null>(null);
   currentUser$ = this.currentUserSubject.asObservable();
 
-  constructor(private http: HttpClient, private https: HttpService) {}
+  constructor(
+    private http: HttpClient,
+    private https: HttpService,
+  ) {}
 
   setUser(user: IUserInfo): void {
     this.currentUserSubject.next(user);
@@ -37,7 +40,7 @@ export class AuthService {
       .append('Authorization', `Bearer ${token}`);
     return this.http.get<IApiResponse<string>>(
       `${environment.endpoint}v1/users/validate-token`,
-      { headers }
+      { headers },
     );
   }
 
@@ -60,7 +63,7 @@ export class AuthService {
 
   getUserProfile(): Observable<IApiResponse<IUserInfo>> {
     return this.http.get<IApiResponse<IUserInfo>>(
-      'mock/user/get-user-profile.json'
+      'mock/user/get-user-profile.json',
     );
   }
 
@@ -81,7 +84,7 @@ export class AuthService {
         if (!location.href.startsWith(environment.portal_client)) {
           location.replace(environment.portal_client);
         }
-      }
+      },
     );
   }
 }

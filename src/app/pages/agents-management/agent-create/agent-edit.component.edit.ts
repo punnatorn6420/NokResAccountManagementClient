@@ -12,10 +12,7 @@ import { AgentCreateComponent } from '../agent-create/agent-create.component';
   styleUrls: ['../agent-create/agent-create.component.scss'],
   standalone: false,
 })
-export class AgentEditComponent
-  extends AgentCreateComponent
-  implements OnInit
-{
+export class AgentEditComponent extends AgentCreateComponent implements OnInit {
   private agentId = 0;
 
   constructor(
@@ -23,7 +20,7 @@ export class AgentEditComponent
     fb: FormBuilder,
     router: Router,
     messageService: MessageService,
-    route: ActivatedRoute
+    route: ActivatedRoute,
   ) {
     super(agentService, fb, router, messageService, route);
     this.pageTitle = 'Edit Agent';
@@ -61,7 +58,9 @@ export class AgentEditComponent
           }
           const primaryEmail =
             agent.emails?.find((email) => email.isPrimary || email.isprimary)
-              ?.email || agent.emails?.[0]?.email || '';
+              ?.email ||
+            agent.emails?.[0]?.email ||
+            '';
 
           this.form.patchValue({
             companyName: agent.companyName ?? '',

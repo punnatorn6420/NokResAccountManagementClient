@@ -26,7 +26,7 @@ export class AgentDetailComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private agentService: AgentService
+    private agentService: AgentService,
   ) {}
 
   ngOnInit(): void {
@@ -108,7 +108,7 @@ export class AgentDetailComponent implements OnInit, OnDestroy {
 
   private resolvePrimaryEmail(emails: IAgentEmail[]): string {
     const primaryEmail = emails.find(
-      (email) => email.isPrimary || email.isprimary
+      (email) => email.isPrimary || email.isprimary,
     );
     return primaryEmail?.email || emails[0]?.email || '-';
   }

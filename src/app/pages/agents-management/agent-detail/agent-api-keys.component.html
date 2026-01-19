@@ -134,7 +134,9 @@
         placeholder="API key name"
       />
       <div
-        *ngIf="apiKeyForm.get('name')?.invalid && apiKeyForm.get('name')?.touched"
+        *ngIf="
+          apiKeyForm.get('name')?.invalid && apiKeyForm.get('name')?.touched
+        "
         class="text-xs text-red-500"
       >
         Name is required.

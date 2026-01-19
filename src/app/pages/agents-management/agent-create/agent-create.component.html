@@ -27,7 +27,7 @@
     <p class="font-semibold">{{ apiErrorMessage }}</p>
     <ul *ngIf="apiFieldErrors.length" class="mt-2 list-disc list-inside">
       <li *ngFor="let error of apiFieldErrors">
-        {{ error.field ? error.field + ':' : '' }} {{ error.message }}
+        {{ error.field ? error.field + ":" : "" }} {{ error.message }}
       </li>
     </ul>
   </div>
@@ -41,9 +41,7 @@
       <div class="space-y-4">
         <h3 class="text-lg font-semibold text-gray-800">Profile</h3>
         <div>
-          <label class="block text-sm font-medium mb-1"
-            >Company Name *</label
-          >
+          <label class="block text-sm font-medium mb-1">Company Name *</label>
           <input
             pInputText
             type="text"
@@ -51,7 +49,10 @@
             class="w-full"
           />
           <small
-            *ngIf="getControl('companyName')?.touched && getControl('companyName')?.invalid"
+            *ngIf="
+              getControl('companyName')?.touched &&
+              getControl('companyName')?.invalid
+            "
             class="text-red-500"
             >Company name is required.</small
           >
@@ -65,7 +66,10 @@
             class="w-full"
           />
           <small
-            *ngIf="getControl('agencyCode')?.touched && getControl('agencyCode')?.invalid"
+            *ngIf="
+              getControl('agencyCode')?.touched &&
+              getControl('agencyCode')?.invalid
+            "
             class="text-red-500"
             >Agency code is required.</small
           >
@@ -82,7 +86,10 @@
               class="w-full"
             ></p-dropdown>
             <small
-              *ngIf="getControl('currency')?.touched && getControl('currency')?.invalid"
+              *ngIf="
+                getControl('currency')?.touched &&
+                getControl('currency')?.invalid
+              "
               class="text-red-500"
               >Currency is required.</small
             >
@@ -129,9 +136,7 @@
       <div class="space-y-4">
         <h3 class="text-lg font-semibold text-gray-800">Contact</h3>
         <div>
-          <label class="block text-sm font-medium mb-1"
-            >Primary Email *</label
-          >
+          <label class="block text-sm font-medium mb-1">Primary Email *</label>
           <input
             pInputText
             type="email"
@@ -140,7 +145,10 @@
             [readonly]="!allowEmailEdit"
           />
           <small
-            *ngIf="getControl('primaryEmail')?.touched && getControl('primaryEmail')?.invalid"
+            *ngIf="
+              getControl('primaryEmail')?.touched &&
+              getControl('primaryEmail')?.invalid
+            "
             class="text-red-500"
             >Valid email is required.</small
           >

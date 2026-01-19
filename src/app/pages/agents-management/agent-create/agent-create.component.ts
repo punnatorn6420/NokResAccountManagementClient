@@ -66,7 +66,7 @@ export class AgentCreateComponent implements OnInit, OnDestroy {
     protected fb: FormBuilder,
     protected router: Router,
     protected messageService: MessageService,
-    protected route: ActivatedRoute
+    protected route: ActivatedRoute,
   ) {}
 
   ngOnInit(): void {

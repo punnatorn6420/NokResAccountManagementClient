@@ -1,6 +1,6 @@
 ﻿{
   "type": "object",
-  "required": [ "email" ],
+  "required": ["email"],
   "properties": {
     "email": {
       "type": "string",

@@ -19,7 +19,7 @@
     },
     "environment": {
       "type": "string",
-      "enum": [ "PROD", "UAT" ],
+      "enum": ["PROD", "UAT"],
       "example": "PROD"
     },
     "dateGenerated": {

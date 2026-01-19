@@ -1,11 +1,6 @@
 ﻿{
   "type": "object",
-  "required": [
-    "companyName",
-    "agencyCode",
-    "currency",
-    "type"
-  ],
+  "required": ["companyName", "agencyCode", "currency", "type"],
   "properties": {
     "companyName": {
       "type": "string",
@@ -17,12 +12,12 @@
     },
     "currency": {
       "type": "string",
-      "enum": [ "THB", "USD", "INR", "CNY" ],
+      "enum": ["THB", "USD", "INR", "CNY"],
       "example": "THB"
     },
     "type": {
       "type": "string",
-      "enum": [ "Internal", "OTA" ],
+      "enum": ["Internal", "OTA"],
       "example": "OTA"
     },
     "firstName": {

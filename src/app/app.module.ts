@@ -53,7 +53,7 @@ function loadProfileInitializer(): Promise<void> {
         anchorScrolling: 'enabled',
         scrollPositionRestoration: 'enabled',
       }),
-      withEnabledBlockingInitialNavigation()
+      withEnabledBlockingInitialNavigation(),
     ),
     provideHttpClient(withFetch(), withInterceptorsFromDi()),
     provideAnimationsAsync(),

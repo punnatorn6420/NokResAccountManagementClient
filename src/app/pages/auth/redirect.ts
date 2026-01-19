@@ -33,7 +33,7 @@ export class Redirect extends SubscriptionDestroyer implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private auth: AuthService,
-    private messageService: MessageService
+    private messageService: MessageService,
   ) {
     super();
   }

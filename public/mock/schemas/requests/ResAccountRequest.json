@@ -1,6 +1,6 @@
 ﻿{
   "type": "object",
-  "required": [ "userName", "environment" ],
+  "required": ["userName", "environment"],
   "properties": {
     "isPrimary": {
       "type": "boolean",
@@ -12,7 +12,7 @@
     },
     "environment": {
       "type": "string",
-      "enum": [ "PROD", "UAT" ],
+      "enum": ["PROD", "UAT"],
       "example": "UAT"
     },
     "isWorking": {

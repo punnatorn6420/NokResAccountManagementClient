@@ -184,8 +184,7 @@ export class AgentContactEmailsComponent
   }
 
   private resolveErrorMessage(err: unknown): string {
-    const fallbackMessage =
-      'Unable to load contact emails. Please try again.';
+    const fallbackMessage = 'Unable to load contact emails. Please try again.';
     if (!err || typeof err !== 'object') {
       return fallbackMessage;
     }

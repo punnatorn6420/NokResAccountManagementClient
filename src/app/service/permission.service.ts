@@ -15,7 +15,7 @@ export class PermissionService {
     return this.authService.currentUser$.pipe(
       filter((u) => !!u),
       take(1),
-      map(() => true)
+      map(() => true),
     );
   }
 

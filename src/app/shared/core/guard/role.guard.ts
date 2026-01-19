@@ -16,7 +16,7 @@ export class RoleGuard implements CanMatch, CanActivate {
   constructor(
     private permissionService: PermissionService,
     private router: Router,
-    private messageService: MessageService
+    private messageService: MessageService,
   ) {}
 
   canMatch(route: Route): Observable<boolean | UrlTree> {
@@ -32,7 +32,7 @@ export class RoleGuard implements CanMatch, CanActivate {
   private waitAndEvaluate(fnName?: string): Observable<boolean | UrlTree> {
     return this.permissionService.userReady$().pipe(
       map(() => this.evaluateSync(fnName)),
-      catchError(() => of(this.router.parseUrl('/admin/dashboard')))
+      catchError(() => of(this.router.parseUrl('/admin/dashboard'))),
     );
   }
 

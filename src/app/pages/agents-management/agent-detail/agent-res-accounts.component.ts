@@ -21,9 +21,7 @@ import {
   styleUrls: ['./agent-res-accounts.component.scss'],
   standalone: false,
 })
-export class AgentResAccountsComponent
-  implements OnInit, OnChanges, OnDestroy
-{
+export class AgentResAccountsComponent implements OnInit, OnChanges, OnDestroy {
   @Input() agentId = 0;
 
   private destroy$ = new Subject<void>();
@@ -183,8 +181,7 @@ export class AgentResAccountsComponent
   }
 
   private resolveErrorMessage(err: unknown): string {
-    const fallbackMessage =
-      'Unable to load RES accounts. Please try again.';
+    const fallbackMessage = 'Unable to load RES accounts. Please try again.';
     if (!err || typeof err !== 'object') {
       return fallbackMessage;
     }
