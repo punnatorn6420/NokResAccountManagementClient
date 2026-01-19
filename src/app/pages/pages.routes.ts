@@ -16,4 +16,13 @@ export const routes: Routes = [
         (m) => m.AgentsManagementModule
       ),
   },
+  {
+    path: 'password-rotation-logs',
+    canMatch: [RoleGuard],
+    data: { permission: 'canOnlyAdmin' },
+    loadChildren: () =>
+      import('./password-rotation-logs/password-rotation-logs.module').then(
+        (m) => m.PasswordRotationLogsModule
+      ),
+  },
 ];
