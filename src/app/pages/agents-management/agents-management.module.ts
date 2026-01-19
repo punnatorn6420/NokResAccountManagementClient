@@ -9,8 +9,8 @@ import { SkeletonLoadingModule } from '../../shared/skeleton-loading/skeleton-lo
 import { agentsManagementRoutes } from './agents-management.routes';
 import { AgentsManagementComponent } from './agents-management.component';
 import { AgentCreateComponent } from './agent-create/agent-create.component';
-import { AgentEditComponent } from './agent-edit/agent-edit.component.edit';
 import { AgentDetailComponent } from './agent-detail/agent-detail.component';
+import { AgentEditComponent } from './agent-create/agent-edit.component.edit';
 
 @NgModule({
   declarations: [
