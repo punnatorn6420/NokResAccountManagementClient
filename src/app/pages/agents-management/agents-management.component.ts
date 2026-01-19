@@ -6,10 +6,22 @@ import {
   distinctUntilChanged,
   interval,
   takeUntil,
+  filter,
+  switchMap,
+  catchError,
+  EMPTY,
 } from 'rxjs';
 import { AgentService } from '../../service/agent.service';
-import { IAgentProfileResponse } from '../../types/agent/agent.type';
+import {
+  IAgentProfileResponse,
+  IAgentProfileType,
+  ICurrency,
+} from '../../types/agent/agent.type';
 import { PaginatorState } from 'primeng/paginator';
+import {
+  CurrencyUIMap,
+  AgentTypeUIMap,
+} from '../../shared/constant/agent-lookups';
 
 @Component({
   selector: 'app-agents-management',
@@ -20,41 +32,36 @@ import { PaginatorState } from 'primeng/paginator';
 export class AgentsManagementComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
   private keyword$ = new Subject<string>();
-
-  // table state
   agents: IAgentProfileResponse[] = [];
   loading = false;
   errorMessage = '';
-
-  // query state
   keyword = '';
   pageNumber = 1;
   pageSize = 25;
   first = 0;
   ascending = true;
   lastRefreshedAt: Date | null = null;
-
-  // pagination (mock doesn’t return total; we’ll use agents.length for now)
+  autoRefreshMs = 300000;
   totalRecords = 0;
+  CurrencyUIMap = CurrencyUIMap;
+  AgentTypeUIMap = AgentTypeUIMap;
 
-  constructor(private agentService: AgentService, private router: Router) {}
+  constructor(
+    private agentService: AgentService,
+    private router: Router,
+  ) {}
 
   ngOnInit(): void {
-    // debounce keyword search
     this.keyword$
       .pipe(debounceTime(350), distinctUntilChanged(), takeUntil(this.destroy$))
       .subscribe((kw) => {
         this.keyword = kw;
-        this.pageNumber = 1; // reset page on new search
+        this.pageNumber = 1;
         this.first = 0;
-        this.loadAgents();
+        this.loadAgents({ silent: true });
       });
-
-    this.loadAgents();
-
-    interval(300000)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(() => this.loadAgents());
+    this.loadAgents({ silent: false });
+    this.startAutoRefresh();
   }
 
   ngOnDestroy(): void {
@@ -62,8 +69,11 @@ export class AgentsManagementComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  loadAgents(): void {
-    this.loading = true;
+  loadAgents(opts?: { silent?: boolean }): void {
+    const silent = opts?.silent ?? false;
+    if (!silent) {
+      this.loading = true;
+    }
     this.errorMessage = '';
 
     this.agentService
@@ -77,7 +87,6 @@ export class AgentsManagementComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (res) => {
           this.agents = res?.data ?? [];
-          // for mock: total is just current length
           this.totalRecords = this.agents.length;
           this.lastRefreshedAt = new Date();
           this.loading = false;
@@ -91,6 +100,30 @@ export class AgentsManagementComponent implements OnInit, OnDestroy {
       });
   }
 
+  private startAutoRefresh(): void {
+    interval(this.autoRefreshMs)
+      .pipe(
+        takeUntil(this.destroy$),
+        filter(() => !document.hidden),
+        filter(() => !this.loading),
+        switchMap(() =>
+          this.agentService
+            .getAgents({
+              keyword: this.keyword,
+              pageNumber: this.pageNumber,
+              pageSize: this.pageSize,
+              ascending: this.ascending,
+            })
+            .pipe(catchError(() => EMPTY)),
+        ),
+      )
+      .subscribe((res) => {
+        this.agents = res?.data ?? [];
+        this.totalRecords = this.agents.length;
+        this.lastRefreshedAt = new Date();
+      });
+  }
+
   onKeywordChange(value: string): void {
     this.keyword$.next(value ?? '');
   }
@@ -99,7 +132,7 @@ export class AgentsManagementComponent implements OnInit, OnDestroy {
     this.ascending = !this.ascending;
     this.pageNumber = 1;
     this.first = 0;
-    this.loadAgents();
+    this.loadAgents({ silent: true });
   }
 
   onPageChange(event: PaginatorState): void {
@@ -110,7 +143,7 @@ export class AgentsManagementComponent implements OnInit, OnDestroy {
     this.pageSize = rows;
     this.pageNumber = Math.floor(first / rows) + 1;
 
-    this.loadAgents();
+    this.loadAgents({ silent: true });
   }
 
   clearFilters(): void {
@@ -120,22 +153,20 @@ export class AgentsManagementComponent implements OnInit, OnDestroy {
     this.onKeywordChange('');
   }
 
-  getPrimaryEmail(row: IAgentProfileResponse): string {
-    const emails = row.emails ?? [];
-    const primaryEmail = emails.find(
-      (email) =>
-        email.isPrimary ||
-        (email as { isprimary?: boolean }).isprimary ||
-        (email as { isprimary?: boolean }).isprimary === true
-    );
-    return primaryEmail?.email || emails[0]?.email || '-';
-  }
+  // getPrimaryEmail(row: IAgentProfileResponse): string {
+  //   const emails = row.emails ?? [];
+  //   const primaryEmail = emails.find(
+  //     (email) =>
+  //       email.isPrimary ||
+  //       (email as { isprimary?: boolean }).isprimary === true,
+  //   );
+  //   return primaryEmail?.email || emails[0]?.email || '-';
+  // }
 
   private resolveErrorMessage(err: unknown): string {
     const fallbackMessage = 'Unable to load agents. Please try again.';
-    if (!err || typeof err !== 'object') {
-      return fallbackMessage;
-    }
+    if (!err || typeof err !== 'object') return fallbackMessage;
+
     const error = err as {
       message?: string;
       error?: {
@@ -144,6 +175,7 @@ export class AgentsManagementComponent implements OnInit, OnDestroy {
         error?: { userMessage?: string };
       };
     };
+
     return (
       error?.error?.message ||
       error?.error?.userMessage ||
@@ -163,5 +195,13 @@ export class AgentsManagementComponent implements OnInit, OnDestroy {
 
   createAgent(): void {
     this.router.navigate(['/admin/agents/create']);
+  }
+
+  getCurrencyUI(currency?: ICurrency) {
+    return currency ? this.CurrencyUIMap[currency] : null;
+  }
+
+  getAgentTypeUI(type?: IAgentProfileType) {
+    return type ? this.AgentTypeUIMap[type] : null;
   }
 }

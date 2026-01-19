@@ -24,7 +24,7 @@ export class AgentService {
   }): Observable<IApiResponse<IAgentProfileResponse[]>> {
     if (environment.useMock) {
       return this.http.get<IApiResponse<IAgentProfileResponse[]>>(
-        'mock/agent-mgmt-mocks/agents.get.200.success.json'
+        'mock/agent-mgmt-mocks/agents.get.200.success.json',
       );
     }
 
@@ -38,92 +38,91 @@ export class AgentService {
 
     return this.http.get<IApiResponse<IAgentProfileResponse[]>>(
       `${environment.endpoint}agent-mgmt/v1/agents`,
-      { params: httpParams }
+      { params: httpParams },
     );
   }
 
   getAgent(id: number): Observable<IApiResponse<IAgentProfileResponse>> {
     if (environment.useMock) {
       return this.http.get<IApiResponse<IAgentProfileResponse>>(
-        'mock/agent-mgmt-mocks/agents.id.get.200.json'
+        'mock/agent-mgmt-mocks/agents.id.get.200.json',
       );
     }
 
     return this.http.get<IApiResponse<IAgentProfileResponse>>(
-      `${environment.endpoint}agent-mgmt/v1/agents/${id}`
+      `${environment.endpoint}agent-mgmt/v1/agents/${id}`,
     );
   }
 
   createAgent(
-    payload: IAgentProfileRequest
+    payload: IAgentProfileRequest,
   ): Observable<IApiResponse<IAgentProfileResponse>> {
+    console.log('Creating agent with payload:', payload); // Debug log
     if (environment.useMock) {
       return this.http.get<IApiResponse<IAgentProfileResponse>>(
-        'mock/agent-mgmt-mocks/agents.post.201.json'
+        'mock/agent-mgmt-mocks/agents.post.201.json',
       );
     }
 
     return this.http.post<IApiResponse<IAgentProfileResponse>>(
       `${environment.endpoint}agent-mgmt/v1/agents`,
-      payload
+      payload,
     );
   }
 
   updateAgent(
     id: number,
-    payload: IAgentProfileUpdateRequest
+    payload: IAgentProfileUpdateRequest,
   ): Observable<IApiResponse<IAgentProfileResponse>> {
     if (environment.useMock) {
       return this.http.get<IApiResponse<IAgentProfileResponse>>(
-        'mock/agent-mgmt-mocks/agents.id.put.200.json'
+        'mock/agent-mgmt-mocks/agents.id.put.200.json',
       );
     }
 
     return this.http.put<IApiResponse<IAgentProfileResponse>>(
       `${environment.endpoint}agent-mgmt/v1/agents/${id}`,
-      payload
+      payload,
     );
   }
 
   getResAccounts(
-    agentId: number
+    agentId: number,
   ): Observable<IApiResponse<IResAccountResponse[]>> {
     if (environment.useMock) {
       return this.http.get<IApiResponse<IResAccountResponse[]>>(
-        'mock/agent-mgmt-mocks/agents.agentId.resAccounts.get.200.json'
+        'mock/agent-mgmt-mocks/agents.agentId.resAccounts.get.200.json',
       );
     }
 
     return this.http.get<IApiResponse<IResAccountResponse[]>>(
-      `${environment.endpoint}agent-mgmt/v1/agents/${agentId}/resAccounts`
+      `${environment.endpoint}agent-mgmt/v1/agents/${agentId}/resAccounts`,
     );
   }
 
   getContactEmails(
-    agentId: number
+    agentId: number,
   ): Observable<IApiResponse<IContactEmailResponse>> {
     if (environment.useMock) {
       return this.http.get<IApiResponse<IContactEmailResponse>>(
-        'mock/agent-mgmt-mocks/agents.agentId.emails.get.200.json'
+        'mock/agent-mgmt-mocks/agents.agentId.emails.get.200.json',
       );
     }
 
     return this.http.get<IApiResponse<IContactEmailResponse>>(
-      `${environment.endpoint}agent-mgmt/v1/agents/${agentId}/emails`
+      `${environment.endpoint}agent-mgmt/v1/agents/${agentId}/emails`,
     );
   }
 
-  getApiKeys(
-    agentId: number
-  ): Observable<IApiResponse<ICredentialResponse[]>> {
+  getApiKeys(agentId: number): Observable<IApiResponse<ICredentialResponse[]>> {
     if (environment.useMock) {
       return this.http.get<IApiResponse<ICredentialResponse[]>>(
-        'mock/agent-mgmt-mocks/agents.agentsId.apiKeys.get.200.json'
+        'mock/agent-mgmt-mocks/agents.agentsId.apiKeys.get.200.json',
       );
     }
 
     return this.http.get<IApiResponse<ICredentialResponse[]>>(
-      `${environment.endpoint}agent-mgmt/v1/agents/${agentId}/apiKeys`
+      `${environment.endpoint}agent-mgmt/v1/agents/${agentId}/apiKeys`,
     );
   }
 }

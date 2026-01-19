@@ -1,238 +1,536 @@
-<div class="p-6 bg-white dark:bg-black rounded-xl shadow-md">
-  <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
-    <div>
-      <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-300">
+<div
+  class="p-6 bg-white dark:bg-black rounded-xl shadow-sm border border-gray-100 dark:border-zinc-800"
+>
+  <div
+    class="flex flex-wrap items-start justify-between gap-4 pb-4 border-b border-gray-100 dark:border-zinc-800"
+  >
+    <div class="space-y-1">
+      <h2
+        class="text-xl font-semibold text-gray-900 dark:text-gray-100 tracking-tight"
+      >
         Agent Detail
       </h2>
-      <p class="text-sm text-gray-500 dark:text-gray-400">
+      <div class="text-xs text-gray-500 dark:text-gray-400">
+        <span class="font-medium text-gray-700 dark:text-gray-300"
+          >Purpose:</span
+        >
         View agent profile information and related resources.
-      </p>
+      </div>
     </div>
+
     <div class="flex flex-wrap items-center gap-2">
       <button
         pButton
         type="button"
         icon="pi pi-arrow-left"
-        class="p-button-text"
+        class="p-button-text !text-sm"
         label="Back to list"
         (click)="navigateToList()"
       ></button>
+
       <button
         pButton
         type="button"
         icon="pi pi-pencil"
-        class="p-button-outlined"
+        class="p-button-outlined !text-sm"
         label="Edit Agent"
         (click)="navigateToEdit()"
       ></button>
     </div>
   </div>
 
+  <!-- Error -->
   <div
     *ngIf="errorMessage"
-    class="mb-4 p-3 rounded-md bg-red-50 text-red-700 border border-red-200"
+    class="mt-4 p-3 rounded-md bg-red-50 text-red-700 border border-red-200 text-sm"
   >
     {{ errorMessage }}
   </div>
 
+  <!-- Loading -->
   <div *ngIf="loading" class="flex justify-center py-12">
     <p-progressSpinner></p-progressSpinner>
   </div>
 
-  <div *ngIf="!loading && agent" class="space-y-6">
+  <!-- Content -->
+  <div *ngIf="!loading && agent" class="mt-5 space-y-6">
+    <!-- Summary header row (report style) -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-      <p-card>
-        <ng-template pTemplate="title">Company</ng-template>
-        <p class="text-lg font-semibold text-gray-700">
-          {{ agent.companyName || '-' }}
-        </p>
-        <p class="text-sm text-gray-500">Agency Code: {{ agent.agencyCode }}</p>
-      </p-card>
-      <p-card>
-        <ng-template pTemplate="title">Type & Currency</ng-template>
-        <p class="text-lg font-semibold text-gray-700">
-          {{ agent.type || '-' }}
-        </p>
-        <p class="text-sm text-gray-500">Currency: {{ agent.currency }}</p>
-      </p-card>
-      <p-card>
-        <ng-template pTemplate="title">Primary Contact</ng-template>
-        <p class="text-lg font-semibold text-gray-700">
+      <!-- Company -->
+      <div
+        class="rounded-lg border border-gray-100 dark:border-zinc-800 bg-white dark:bg-black p-4"
+      >
+        <div class="text-xs uppercase tracking-wide text-gray-400 mb-2">
+          Company
+        </div>
+        <div
+          class="text-sm font-semibold text-gray-900 dark:text-gray-100 leading-snug"
+        >
+          {{ agent.companyName || "-" }}
+        </div>
+        <div class="mt-1 text-xs text-gray-500 dark:text-gray-400">
+          <span class="font-medium text-gray-700 dark:text-gray-300"
+            >Agency Code:</span
+          >
+          {{ agent.agencyCode || "-" }}
+        </div>
+      </div>
+
+      <!-- Type & Currency -->
+      <div
+        class="rounded-lg border border-gray-100 dark:border-zinc-800 bg-white dark:bg-black p-4"
+      >
+        <div class="text-xs uppercase tracking-wide text-gray-400 mb-2">
+          Type & Currency
+        </div>
+
+        <div class="flex items-center gap-2">
+          <span class="text-sm font-semibold text-gray-900 dark:text-gray-100">
+            {{ agent.type || "-" }}
+          </span>
+
+          <span
+            class="inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-semibold bg-gray-100 text-gray-700 dark:bg-zinc-800 dark:text-gray-200"
+          >
+            {{ agent.currency || "-" }}
+          </span>
+        </div>
+
+        <div class="mt-2 text-xs text-gray-500 dark:text-gray-400">
+          <span class="font-medium text-gray-700 dark:text-gray-300"
+            >Region:</span
+          >
+          {{ agent.region || "-" }}
+          <span class="mx-2 text-gray-300 dark:text-zinc-700">|</span>
+          <span class="font-medium text-gray-700 dark:text-gray-300"
+            >Country:</span
+          >
+          {{ agent.countryCode || "-" }}
+        </div>
+      </div>
+
+      <!-- Primary Contact -->
+      <div
+        class="rounded-lg border border-gray-100 dark:border-zinc-800 bg-white dark:bg-black p-4"
+      >
+        <div class="text-xs uppercase tracking-wide text-gray-400 mb-2">
+          Primary Contact
+        </div>
+        <div class="text-sm font-semibold text-gray-900 dark:text-gray-100">
           {{ getPrimaryEmail() }}
-        </p>
-        <p class="text-sm text-gray-500">Phone: {{ agent.phone || '-' }}</p>
-      </p-card>
+        </div>
+        <div class="mt-1 text-xs text-gray-500 dark:text-gray-400">
+          <span class="font-medium text-gray-700 dark:text-gray-300"
+            >Phone:</span
+          >
+          {{ agent.phone || "-" }}
+        </div>
+      </div>
     </div>
 
-    <p-tabView>
+    <!-- Tabs -->
+    <p-tabView styleClass="text-sm">
+      <!-- Profile -->
       <p-tabPanel header="Profile">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div class="space-y-2">
-            <div class="flex justify-between border-b pb-2">
-              <span class="text-sm text-gray-500">Contact Name</span>
-              <span class="text-sm font-medium"
-                >{{ agent.firstName || '-' }} {{ agent.lastName || '' }}</span
+        <div
+          class="rounded-lg border border-gray-100 dark:border-zinc-800 bg-white dark:bg-black"
+        >
+          <div class="px-4 py-3 border-b border-gray-100 dark:border-zinc-800">
+            <div class="text-sm font-semibold text-gray-900 dark:text-gray-100">
+              Profile Summary
+            </div>
+            <div class="text-xs text-gray-500 dark:text-gray-400">
+              Standardized information for audit/reference.
+            </div>
+          </div>
+
+          <div class="p-4 grid grid-cols-1 md:grid-cols-2 gap-6 text-[13px]">
+            <!-- Left column -->
+            <div class="space-y-3">
+              <div
+                class="flex justify-between gap-6 border-b border-gray-100 dark:border-zinc-800 pb-2"
               >
+                <span class="text-gray-500 dark:text-gray-400"
+                  >Contact Name</span
+                >
+                <span
+                  class="font-medium text-gray-900 dark:text-gray-100 text-right"
+                >
+                  {{ agent.firstName || "-" }} {{ agent.lastName || "" }}
+                </span>
+              </div>
+
+              <div
+                class="flex justify-between gap-6 border-b border-gray-100 dark:border-zinc-800 pb-2"
+              >
+                <span class="text-gray-500 dark:text-gray-400"
+                  >Assigned By</span
+                >
+                <span
+                  class="font-medium text-gray-900 dark:text-gray-100 text-right"
+                >
+                  {{ agent.assignedBy || "-" }}
+                </span>
+              </div>
+
+              <div
+                class="flex justify-between gap-6 border-b border-gray-100 dark:border-zinc-800 pb-2"
+              >
+                <span class="text-gray-500 dark:text-gray-400">Created At</span>
+                <span
+                  class="font-medium text-gray-900 dark:text-gray-100 text-right"
+                >
+                  {{
+                    agent.createdAt
+                      ? (agent.createdAt | date: "MMM d, yyyy, HH:mm")
+                      : "-"
+                  }}
+                </span>
+              </div>
+
+              <div
+                class="flex justify-between gap-6 border-b border-gray-100 dark:border-zinc-800 pb-2"
+              >
+                <span class="text-gray-500 dark:text-gray-400"
+                  >Last Modified</span
+                >
+                <span
+                  class="font-medium text-gray-900 dark:text-gray-100 text-right"
+                >
+                  {{
+                    agent.modifiedAt
+                      ? (agent.modifiedAt | date: "MMM d, yyyy, HH:mm")
+                      : "-"
+                  }}
+                </span>
+              </div>
             </div>
-            <div class="flex justify-between border-b pb-2">
-              <span class="text-sm text-gray-500">Assigned By</span>
-              <span class="text-sm font-medium">{{ agent.assignedBy || '-' }}</span>
-            </div>
-            <div class="flex justify-between border-b pb-2">
-              <span class="text-sm text-gray-500">Created At</span>
-              <span class="text-sm font-medium">
-                {{ agent.createdAt ? (agent.createdAt | date: 'medium') : '-' }}
-              </span>
-            </div>
-            <div class="flex justify-between border-b pb-2">
-              <span class="text-sm text-gray-500">Last Modified</span>
-              <span class="text-sm font-medium">
-                {{ agent.modifiedAt ? (agent.modifiedAt | date: 'medium') : '-' }}
-              </span>
-            </div>
-          </div>
-          <div class="space-y-2">
-            <div class="flex justify-between border-b pb-2">
-              <span class="text-sm text-gray-500">Address</span>
-              <span class="text-sm font-medium text-right">
-                {{ agent.address1 || '-' }}<br />
-                {{ agent.address2 || '' }}<br />
-                {{ agent.city || '' }} {{ agent.state || '' }}
-                {{ agent.postalCode || '' }}<br />
-                {{ agent.countryCode || '' }} {{ agent.region || '' }}
-              </span>
+
+            <!-- Right column -->
+            <div class="space-y-3">
+              <div class="border-b border-gray-100 dark:border-zinc-800 pb-2">
+                <div class="text-gray-500 dark:text-gray-400 mb-1">Address</div>
+                <div
+                  class="font-medium text-gray-900 dark:text-gray-100 text-right leading-relaxed"
+                >
+                  <div>{{ agent.address1 || "-" }}</div>
+                  <div *ngIf="agent.address2">{{ agent.address2 }}</div>
+                  <div>
+                    {{ agent.city || "" }} {{ agent.state || "" }}
+                    {{ agent.postalCode || "" }}
+                  </div>
+                  <div>
+                    {{ agent.countryCode || "" }} {{ agent.region || "" }}
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </p-tabPanel>
 
+      <!-- RES Accounts -->
       <p-tabPanel header="RES Accounts">
-        <div *ngIf="resAccountsLoading" class="flex justify-center py-6">
-          <p-progressSpinner></p-progressSpinner>
-        </div>
-        <p-table
-          *ngIf="!resAccountsLoading"
-          [value]="resAccounts"
-          responsiveLayout="scroll"
-          styleClass="p-datatable-sm"
-          [tableStyle]="{ 'min-width': '700px' }"
+        <div
+          class="rounded-lg border border-gray-100 dark:border-zinc-800 bg-white dark:bg-black"
         >
-          <ng-template pTemplate="header">
-            <tr class="bg-gray-100 !text-sm text-gray-700">
-              <th class="!p-2">Username</th>
-              <th class="!p-2">Environment</th>
-              <th class="!p-2">Primary</th>
-              <th class="!p-2">Working</th>
-              <th class="!p-2">Active</th>
-              <th class="!p-2">Note</th>
-            </tr>
-          </ng-template>
-          <ng-template pTemplate="body" let-row>
-            <tr class="!text-xs">
-              <td class="!p-2">{{ row.userName }}</td>
-              <td class="!p-2">{{ row.environment }}</td>
-              <td class="!p-2">{{ row.isPrimary ? 'Yes' : 'No' }}</td>
-              <td class="!p-2">{{ row.isWorking ? 'Yes' : 'No' }}</td>
-              <td class="!p-2">{{ row.active ? 'Active' : 'Inactive' }}</td>
-              <td class="!p-2">{{ row.note || '-' }}</td>
-            </tr>
-          </ng-template>
-          <ng-template pTemplate="emptymessage">
-            <tr>
-              <td colspan="6" class="text-center text-gray-500 py-6">
-                No RES Accounts found.
-              </td>
-            </tr>
-          </ng-template>
-        </p-table>
+          <div
+            class="px-4 py-3 border-b border-gray-100 dark:border-zinc-800 flex items-center justify-between"
+          >
+            <div>
+              <div
+                class="text-sm font-semibold text-gray-900 dark:text-gray-100"
+              >
+                RES Accounts
+              </div>
+              <div class="text-xs text-gray-500 dark:text-gray-400">
+                Accounts linked to this agent.
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="resAccountsLoading" class="flex justify-center py-8">
+            <p-progressSpinner></p-progressSpinner>
+          </div>
+
+          <p-table
+            *ngIf="!resAccountsLoading"
+            [value]="resAccounts"
+            responsiveLayout="scroll"
+            styleClass="p-datatable-sm"
+            [tableStyle]="{ 'min-width': '760px' }"
+          >
+            <ng-template pTemplate="header">
+              <tr
+                class="bg-gray-50 dark:bg-zinc-900 !text-xs text-gray-700 dark:text-gray-200"
+              >
+                <th class="!p-3">Username</th>
+                <th class="!p-3">Environment</th>
+                <th class="!p-3 text-center">Primary</th>
+                <th class="!p-3 text-center">Working</th>
+                <th class="!p-3 text-center">Status</th>
+                <th class="!p-3">Note</th>
+              </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-row>
+              <tr class="!text-[13px]">
+                <td class="!p-3 font-medium text-gray-900 dark:text-gray-100">
+                  {{ row.userName }}
+                </td>
+                <td class="!p-3 text-gray-700 dark:text-gray-200">
+                  {{ row.environment }}
+                </td>
+
+                <td class="!p-3 text-center">
+                  <span
+                    class="inline-flex px-2 py-0.5 rounded-md text-[11px] font-semibold"
+                    [ngClass]="
+                      row.isPrimary
+                        ? 'bg-amber-100 text-amber-800'
+                        : 'bg-gray-100 text-gray-700 dark:bg-zinc-800 dark:text-gray-200'
+                    "
+                  >
+                    {{ row.isPrimary ? "Primary" : "—" }}
+                  </span>
+                </td>
+
+                <td class="!p-3 text-center">
+                  <span
+                    class="text-xs"
+                    [ngClass]="
+                      row.isWorking
+                        ? 'text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-md font-semibold'
+                        : 'text-gray-500 dark:text-gray-400'
+                    "
+                  >
+                    {{ row.isWorking ? "Yes" : "No" }}
+                  </span>
+                </td>
+
+                <td class="!p-3 text-center">
+                  <span
+                    class="inline-flex px-2 py-0.5 rounded-md text-[11px] font-semibold"
+                    [ngClass]="
+                      row.active
+                        ? 'bg-emerald-100 text-emerald-700'
+                        : 'bg-red-100 text-red-700'
+                    "
+                  >
+                    {{ row.active ? "Active" : "Inactive" }}
+                  </span>
+                </td>
+
+                <td class="!p-3 text-gray-700 dark:text-gray-200">
+                  {{ row.note || "-" }}
+                </td>
+              </tr>
+            </ng-template>
+
+            <ng-template pTemplate="emptymessage">
+              <tr>
+                <td
+                  colspan="6"
+                  class="text-center text-gray-500 dark:text-gray-400 py-8 text-sm"
+                >
+                  No RES Accounts found.
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
       </p-tabPanel>
 
+      <!-- Contact Emails -->
       <p-tabPanel header="Contact Emails">
-        <div *ngIf="contactEmailsLoading" class="flex justify-center py-6">
-          <p-progressSpinner></p-progressSpinner>
-        </div>
-        <p-table
-          *ngIf="!contactEmailsLoading"
-          [value]="contactEmails"
-          responsiveLayout="scroll"
-          styleClass="p-datatable-sm"
+        <div
+          class="rounded-lg border border-gray-100 dark:border-zinc-800 bg-white dark:bg-black"
         >
-          <ng-template pTemplate="header">
-            <tr class="bg-gray-100 !text-sm text-gray-700">
-              <th class="!p-2">Email</th>
-              <th class="!p-2">Primary</th>
-              <th class="!p-2">Active</th>
-              <th class="!p-2">Created</th>
-              <th class="!p-2">Modified</th>
-            </tr>
-          </ng-template>
-          <ng-template pTemplate="body" let-row>
-            <tr class="!text-xs">
-              <td class="!p-2">{{ row.email }}</td>
-              <td class="!p-2">{{ row.isPrimary ? 'Yes' : 'No' }}</td>
-              <td class="!p-2">{{ row.active ? 'Active' : 'Inactive' }}</td>
-              <td class="!p-2">
-                {{ row.createdAt ? (row.createdAt | date: 'short') : '-' }}
-              </td>
-              <td class="!p-2">
-                {{ row.modifiedAt ? (row.modifiedAt | date: 'short') : '-' }}
-              </td>
-            </tr>
-          </ng-template>
-          <ng-template pTemplate="emptymessage">
-            <tr>
-              <td colspan="5" class="text-center text-gray-500 py-6">
-                No contact emails found.
-              </td>
-            </tr>
-          </ng-template>
-        </p-table>
+          <div class="px-4 py-3 border-b border-gray-100 dark:border-zinc-800">
+            <div class="text-sm font-semibold text-gray-900 dark:text-gray-100">
+              Contact Emails
+            </div>
+            <div class="text-xs text-gray-500 dark:text-gray-400">
+              Email records for this agent.
+            </div>
+          </div>
+
+          <div *ngIf="contactEmailsLoading" class="flex justify-center py-8">
+            <p-progressSpinner></p-progressSpinner>
+          </div>
+
+          <p-table
+            *ngIf="!contactEmailsLoading"
+            [value]="contactEmails"
+            responsiveLayout="scroll"
+            styleClass="p-datatable-sm"
+            [tableStyle]="{ 'min-width': '760px' }"
+          >
+            <ng-template pTemplate="header">
+              <tr
+                class="bg-gray-50 dark:bg-zinc-900 !text-xs text-gray-700 dark:text-gray-200"
+              >
+                <th class="!p-3">Email</th>
+                <th class="!p-3 text-center">Primary</th>
+                <th class="!p-3 text-center">Status</th>
+                <th class="!p-3">Created</th>
+                <th class="!p-3">Modified</th>
+              </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-row>
+              <tr class="!text-[13px]">
+                <td class="!p-3 font-medium text-gray-900 dark:text-gray-100">
+                  {{ row.email }}
+                </td>
+
+                <td class="!p-3 text-center">
+                  <span
+                    class="inline-flex px-2 py-0.5 rounded-md text-[11px] font-semibold"
+                    [ngClass]="
+                      row.isPrimary ? 'bg-amber-100 text-amber-800' : ''
+                    "
+                  >
+                    {{ row.isPrimary ? "Primary" : "" }}
+                  </span>
+                </td>
+
+                <td class="!p-3 text-center">
+                  <span
+                    class="inline-flex px-2 py-0.5 rounded-md text-[11px] font-semibold"
+                    [ngClass]="
+                      row.active
+                        ? 'bg-emerald-100 text-emerald-700'
+                        : 'bg-red-100 text-red-700'
+                    "
+                  >
+                    {{ row.active ? "Active" : "Inactive" }}
+                  </span>
+                </td>
+
+                <td class="!p-3 text-gray-700 dark:text-gray-200">
+                  {{
+                    row.createdAt
+                      ? (row.createdAt | date: "MMM d, yyyy, HH:mm")
+                      : "-"
+                  }}
+                </td>
+                <td class="!p-3 text-gray-700 dark:text-gray-200">
+                  {{
+                    row.modifiedAt
+                      ? (row.modifiedAt | date: "MMM d, yyyy, HH:mm")
+                      : "-"
+                  }}
+                </td>
+              </tr>
+            </ng-template>
+
+            <ng-template pTemplate="emptymessage">
+              <tr>
+                <td
+                  colspan="5"
+                  class="text-center text-gray-500 dark:text-gray-400 py-8 text-sm"
+                >
+                  No contact emails found.
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
       </p-tabPanel>
 
+      <!-- API Keys -->
       <p-tabPanel header="API Keys">
-        <div *ngIf="apiKeysLoading" class="flex justify-center py-6">
-          <p-progressSpinner></p-progressSpinner>
-        </div>
-        <p-table
-          *ngIf="!apiKeysLoading"
-          [value]="apiKeys"
-          responsiveLayout="scroll"
-          styleClass="p-datatable-sm"
-          [tableStyle]="{ 'min-width': '700px' }"
+        <div
+          class="rounded-lg border border-gray-100 dark:border-zinc-800 bg-white dark:bg-black"
         >
-          <ng-template pTemplate="header">
-            <tr class="bg-gray-100 !text-sm text-gray-700">
-              <th class="!p-2">Name</th>
-              <th class="!p-2">Client ID</th>
-              <th class="!p-2">Environment</th>
-              <th class="!p-2">Active</th>
-              <th class="!p-2">Generated</th>
-            </tr>
-          </ng-template>
-          <ng-template pTemplate="body" let-row>
-            <tr class="!text-xs">
-              <td class="!p-2">{{ row.name }}</td>
-              <td class="!p-2">{{ row.clientId }}</td>
-              <td class="!p-2">{{ row.environment }}</td>
-              <td class="!p-2">{{ row.active ? 'Active' : 'Inactive' }}</td>
-              <td class="!p-2">
-                {{ row.dateGenerated ? (row.dateGenerated | date: 'short') : '-' }}
-              </td>
-            </tr>
-          </ng-template>
-          <ng-template pTemplate="emptymessage">
-            <tr>
-              <td colspan="5" class="text-center text-gray-500 py-6">
-                No API keys found.
-              </td>
-            </tr>
-          </ng-template>
-        </p-table>
+          <div class="px-4 py-3 border-b border-gray-100 dark:border-zinc-800">
+            <div class="text-sm font-semibold text-gray-900 dark:text-gray-100">
+              API Keys
+            </div>
+            <div class="text-xs text-gray-500 dark:text-gray-400">
+              Issued credentials for this agent.
+            </div>
+          </div>
+
+          <div *ngIf="apiKeysLoading" class="flex justify-center py-8">
+            <p-progressSpinner></p-progressSpinner>
+          </div>
+
+          <p-table
+            *ngIf="!apiKeysLoading"
+            [value]="apiKeys"
+            responsiveLayout="scroll"
+            styleClass="p-datatable-sm"
+            [tableStyle]="{ 'min-width': '760px' }"
+          >
+            <ng-template pTemplate="header">
+              <tr
+                class="bg-gray-50 dark:bg-zinc-900 !text-xs text-gray-700 dark:text-gray-200"
+              >
+                <th class="!p-3">Name</th>
+                <th class="!p-3">Client ID</th>
+                <th class="!p-3">Environment</th>
+                <th class="!p-3 text-center">Status</th>
+                <th class="!p-3">Generated</th>
+              </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-row>
+              <tr class="!text-[13px]">
+                <td class="!p-3 font-medium text-gray-900 dark:text-gray-100">
+                  {{ row.name }}
+                </td>
+                <td class="!p-3 text-gray-700 dark:text-gray-200">
+                  {{ row.clientId }}
+                </td>
+                <td class="!p-3 text-gray-700 dark:text-gray-200">
+                  {{ row.environment }}
+                </td>
+
+                <td class="!p-3 text-center">
+                  <span
+                    class="inline-flex px-2 py-0.5 rounded-md text-[11px] font-semibold"
+                    [ngClass]="
+                      row.active
+                        ? 'bg-emerald-100 text-emerald-700'
+                        : 'bg-red-100 text-red-700'
+                    "
+                  >
+                    {{ row.active ? "Active" : "Inactive" }}
+                  </span>
+                </td>
+
+                <td class="!p-3 text-gray-700 dark:text-gray-200">
+                  {{
+                    row.dateGenerated
+                      ? (row.dateGenerated | date: "MMM d, yyyy, HH:mm")
+                      : "-"
+                  }}
+                </td>
+              </tr>
+            </ng-template>
+
+            <ng-template pTemplate="emptymessage">
+              <tr>
+                <td
+                  colspan="5"
+                  class="text-center text-gray-500 dark:text-gray-400 py-8 text-sm"
+                >
+                  No API keys found.
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
       </p-tabPanel>
     </p-tabView>
   </div>
 
-  <div *ngIf="!loading && !agent && !errorMessage" class="py-10 text-center">
-    <p class="text-gray-500">No agent information available.</p>
+  <!-- Empty -->
+  <div *ngIf="!loading && !agent && !errorMessage" class="py-12 text-center">
+    <p class="text-sm text-gray-500 dark:text-gray-400">
+      No agent information available.
+    </p>
   </div>
 </div>
