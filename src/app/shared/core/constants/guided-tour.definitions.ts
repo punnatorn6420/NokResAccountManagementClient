@@ -29,10 +29,7 @@ export type TourKey =
   // | 'operationList'
   // | 'operationApproved'
   // | 'operationForm'
-  'dashboard'
-  | 'passwordRotationLogs'
-  | 'agentsManagement'
-  | 'agentDetail';
+  'dashboard' | 'passwordRotationLogs' | 'agentsManagement' | 'agentDetail';
 
 export const GUIDED_TOUR_DEFINITIONS: Record<
   TourKey,
