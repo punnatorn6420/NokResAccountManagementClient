@@ -1,5 +1,8 @@
 <p-confirmDialog></p-confirmDialog>
-<div class="p-6 bg-white dark:bg-black rounded-xl shadow-md">
+<div
+  id="agents-management-tour-container"
+  class="p-6 bg-white dark:bg-black rounded-xl shadow-md"
+>
   <div class="flex justify-between items-center mb-6">
     <div>
       <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-300">
@@ -9,12 +12,23 @@
     <div class="flex items-center gap-2">
       <button
         pButton
+        icon="pi pi-compass"
+        class="p-button-text p-button-sm p-button-help"
+        label="Start tour"
+        pTooltip="Start a quick guided tour of this page."
+        tooltipPosition="bottom"
+        (click)="startGuidedTour()"
+      ></button>
+      <button
+        id="agents-management-tour-refresh"
+        pButton
         icon="pi pi-refresh"
         class="p-button-text p-button-sm"
         label="Refresh now"
         (click)="loadAgents()"
       ></button>
       <button
+        id="agents-management-tour-create"
         pButton
         icon="pi pi-plus"
         class="p-button-sm"
@@ -24,6 +38,7 @@
     </div>
   </div>
   <p-table
+    id="agents-management-tour-table"
     stripedRows
     [value]="agents"
     [loading]="loading"
@@ -46,6 +61,7 @@
           (click)="clearFilters()"
         ></button>
         <button
+          id="agents-management-tour-sort"
           pButton
           type="button"
           class="p-button-outlined p-button-secondary mx-2"
@@ -58,6 +74,7 @@
             <i class="pi pi-search"></i>
           </p-inputicon>
           <input
+            id="agents-management-tour-search"
             pInputText
             type="text"
             [(ngModel)]="keyword"
@@ -79,7 +96,7 @@
         <th>Phone</th>
         <th>Assigned By</th>
         <th>Created At</th>
-        <th>Actions</th>
+        <th id="agents-management-tour-actions">Actions</th>
       </tr>
     </ng-template>
 
@@ -154,6 +171,7 @@
 
   <div class="flex justify-center mt-2">
     <p-paginator
+      id="agents-management-tour-paginator"
       [first]="first"
       [rows]="pageSize"
       [totalRecords]="totalRecords"
@@ -161,7 +179,10 @@
       (onPageChange)="onPageChange($event)"
     ></p-paginator>
   </div>
-  <div class="flex justify-end items-center gap-2">
+  <div
+    id="agents-management-tour-last-refreshed"
+    class="flex justify-end items-center gap-2"
+  >
     <small class="text-gray-500"
       >Last refreshed:
       {{ lastRefreshedAt ? (lastRefreshedAt | date: "short") : "-" }}</small

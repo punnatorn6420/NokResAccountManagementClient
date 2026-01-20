@@ -8,7 +8,6 @@ import {
   TourPlacement,
   TourStep,
 } from '../constants/guided-tour.definitions';
-import { LayoutService } from '../../layout/service/layout.service';
 
 @Injectable({
   providedIn: 'root',
@@ -34,27 +33,26 @@ export class GuidedTourService {
 
   constructor(
     rendererFactory: RendererFactory2,
-    private layoutService: LayoutService,
   ) {
     this.renderer = rendererFactory.createRenderer(null, null);
     this.activeLabels = this.defaultLabels;
   }
 
-  // startFlightDisruptionTour(): void {
-  //   this.startTour('flightDisruption');
-  // }
+  startDashboardTour(): void {
+    this.startTour('dashboard', this.getActiveLanguage());
+  }
 
-  // startFlightDisruptionEventTour(): void {
-  //   this.startTour('flightDisruptionEvent');
-  // }
+  startPasswordRotationLogsTour(): void {
+    this.startTour('passwordRotationLogs', this.getActiveLanguage());
+  }
 
-  // startFlightDisruptionBookingTour(): void {
-  //   this.startTour('flightDisruptionBooking');
-  // }
+  startAgentsManagementTour(): void {
+    this.startTour('agentsManagement', this.getActiveLanguage());
+  }
 
-  // startOperationListTour(): void {
-  //   this.startTour('operationList');
-  // }
+  startAgentDetailTour(): void {
+    this.startTour('agentDetail', this.getActiveLanguage());
+  }
 
   // startOperationApprovedTour(): void {
   //   this.startTour('operationApproved');
@@ -62,10 +60,6 @@ export class GuidedTourService {
 
   // startOperationFormTour(): void {
   //   this.startTour('operationForm');
-  // }
-
-  // startDashboardTour(): void {
-  //   this.startTour('dashboard');
   // }
 
   startTour(page: TourKey, lang?: SupportedLanguage): void {
@@ -100,10 +94,15 @@ export class GuidedTourService {
     this.finishTour();
   }
 
-  // private getActiveLanguage(): SupportedLanguage {
-  //   const lang = this.layoutService.layoutConfig().lang;
-  //   return lang === 'en' ? 'en' : 'th';
-  // }
+  private getActiveLanguage(): SupportedLanguage {
+    if (!this.canUseDom()) return 'en';
+    const docLang = document.documentElement.lang?.toLowerCase() ?? '';
+    if (docLang.startsWith('th')) return 'th';
+    if (docLang.startsWith('en')) return 'en';
+
+    const browserLang = navigator.language?.toLowerCase() ?? '';
+    return browserLang.startsWith('en') ? 'en' : 'th';
+  }
 
   private nextStep(): void {
     this.showStep(this.currentIndex + 1);

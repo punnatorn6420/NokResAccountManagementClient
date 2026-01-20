@@ -12,6 +12,7 @@ import {
 } from 'rxjs';
 import { PasswordRotationLogService } from '../../service/password-rotation-log.service';
 import { IPasswordRotationLog } from '../../types/password-rotation-log.type';
+import { GuidedTourService } from '../../shared/core/services/guided-tour.service';
 
 @Component({
   selector: 'app-password-rotation-logs',
@@ -34,7 +35,10 @@ export class PasswordRotationLogsComponent implements OnInit, OnDestroy {
   selectedLog: IPasswordRotationLog | null = null;
   private readonly truncateThreshold = 80;
 
-  constructor(private logService: PasswordRotationLogService) {}
+  constructor(
+    private logService: PasswordRotationLogService,
+    private guidedTourService: GuidedTourService,
+  ) {}
 
   ngOnInit(): void {
     this.keyword$
@@ -60,6 +64,10 @@ export class PasswordRotationLogsComponent implements OnInit, OnDestroy {
   clearFilters(): void {
     this.keyword = '';
     this.keyword$.next('');
+  }
+
+  startGuidedTour(): void {
+    this.guidedTourService.startPasswordRotationLogsTour();
   }
 
   loadLogs(opts?: { silent?: boolean }): void {

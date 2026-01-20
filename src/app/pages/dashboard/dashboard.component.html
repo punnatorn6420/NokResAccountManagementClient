@@ -18,10 +18,23 @@
         <strong>Agent profiles</strong>, <strong>RES accounts</strong>, and
         related access information within the Nok Air ecosystem.
       </p>
+      <button
+        id="dashboard-tour-start"
+        pButton
+        icon="pi pi-compass"
+        class="p-button-text p-button-sm p-button-help"
+        label="Start tour"
+        pTooltip="Start a quick guided tour of this page."
+        tooltipPosition="bottom"
+        (click)="startGuidedTour()"
+      ></button>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div class="p-6 rounded-xl bg-white dark:bg-zinc-900 shadow-sm">
+      <div
+        id="dashboard-tour-agents"
+        class="p-6 rounded-xl bg-white dark:bg-zinc-900 shadow-sm"
+      >
         <h3 class="font-semibold text-gray-800 dark:text-white mb-2">
           Agent Management
         </h3>
@@ -31,7 +44,10 @@
         </p>
       </div>
 
-      <div class="p-6 rounded-xl bg-white dark:bg-zinc-900 shadow-sm">
+      <div
+        id="dashboard-tour-res-accounts"
+        class="p-6 rounded-xl bg-white dark:bg-zinc-900 shadow-sm"
+      >
         <h3 class="font-semibold text-gray-800 dark:text-white mb-2">
           RES Account Control
         </h3>
@@ -41,7 +57,10 @@
         </p>
       </div>
 
-      <div class="p-6 rounded-xl bg-white dark:bg-zinc-900 shadow-sm">
+      <div
+        id="dashboard-tour-audit"
+        class="p-6 rounded-xl bg-white dark:bg-zinc-900 shadow-sm"
+      >
         <h3 class="font-semibold text-gray-800 dark:text-white mb-2">
           Audit & Traceability
         </h3>

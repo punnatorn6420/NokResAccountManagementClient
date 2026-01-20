@@ -6,6 +6,7 @@ import {
   IAgentEmail,
   IAgentProfileResponse,
 } from '../../../types/agent/agent.type';
+import { GuidedTourService } from '../../../shared/core/services/guided-tour.service';
 
 @Component({
   selector: 'app-agent-detail',
@@ -29,6 +30,7 @@ export class AgentDetailComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private agentService: AgentService,
+    private guidedTourService: GuidedTourService,
   ) {}
 
   ngOnInit(): void {
@@ -109,6 +111,10 @@ export class AgentDetailComponent implements OnInit, OnDestroy {
 
   onPrimaryEmailChange(email: string): void {
     this.primaryEmail = email;
+  }
+
+  startGuidedTour(): void {
+    this.guidedTourService.startAgentDetailTour();
   }
 
   private resolveErrorMessage(err: unknown): string {
