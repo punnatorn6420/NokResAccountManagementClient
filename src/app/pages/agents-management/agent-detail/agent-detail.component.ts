@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subject, takeUntil } from 'rxjs';
+import { interval, Subject, switchMap, startWith, takeUntil } from 'rxjs';
 import { AgentService } from '../../../service/agent.service';
 import {
   IAgentEmail,
@@ -22,6 +22,8 @@ export class AgentDetailComponent implements OnInit, OnDestroy {
 
   loading = false;
   errorMessage = '';
+  autoRefreshMs = 30000;
+  lastRefreshedAt: Date | null = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -37,7 +39,34 @@ export class AgentDetailComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.loadAgent();
+    this.startAutoRefresh();
+  }
+
+  reloadAgent() {
+    this.loadAgent({ silent: false });
+  }
+
+  private startAutoRefresh(): void {
+    this.loading = true;
+    this.errorMessage = '';
+
+    interval(this.autoRefreshMs)
+      .pipe(
+        startWith(0),
+        switchMap(() => this.agentService.getAgent(this.agentId)),
+        takeUntil(this.destroy$),
+      )
+      .subscribe({
+        next: (res) => {
+          this.agent = res?.data ?? null;
+          this.loading = false;
+          this.lastRefreshedAt = new Date();
+        },
+        error: (err) => {
+          this.loading = false;
+          this.errorMessage = this.resolveErrorMessage(err);
+        },
+      });
   }
 
   ngOnDestroy(): void {
@@ -45,9 +74,8 @@ export class AgentDetailComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  loadAgent(): void {
+  loadAgent(_opts?: { silent?: boolean }): void {
     this.loading = true;
-    this.errorMessage = '';
     this.agentService
       .getAgent(this.agentId)
       .pipe(takeUntil(this.destroy$))

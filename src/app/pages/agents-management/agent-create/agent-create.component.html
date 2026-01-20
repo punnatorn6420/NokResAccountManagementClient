@@ -77,14 +77,14 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label class="block text-sm font-medium mb-1">Currency *</label>
-            <p-dropdown
+            <p-select
               [options]="currencyOptions"
               optionLabel="label"
               optionValue="value"
               placeholder="Select currency"
               formControlName="currency"
               class="w-full"
-            ></p-dropdown>
+            ></p-select>
             <small
               *ngIf="
                 getControl('currency')?.touched &&
@@ -96,14 +96,14 @@
           </div>
           <div>
             <label class="block text-sm font-medium mb-1">Agent Type *</label>
-            <p-dropdown
+            <p-select
               [options]="typeOptions"
               optionLabel="label"
               optionValue="value"
               placeholder="Select type"
               formControlName="type"
               class="w-full"
-            ></p-dropdown>
+            ></p-select>
             <small
               *ngIf="getControl('type')?.touched && getControl('type')?.invalid"
               class="text-red-500"

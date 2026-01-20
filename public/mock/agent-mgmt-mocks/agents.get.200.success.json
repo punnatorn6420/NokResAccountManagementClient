@@ -54,6 +54,60 @@
       "assignedBy": "SystemAdmin_02",
       "createdAt": "2024-06-01T09:00:00Z",
       "modifiedAt": "2024-06-02T10:30:00Z"
+    },
+    {
+      "id": 103,
+      "companyName": "Global Travels Inc.",
+      "agencyCode": "GLB123",
+      "currency": "USD",
+      "type": "OTA",
+      "firstName": "John",
+      "lastName": "Doe",
+      "emails": [
+        {
+          "id": 3,
+          "email": "john.doe@globaltravels.com",
+          "isprimary": true
+        }
+      ],
+      "phone": "+1-202-555-0143",
+      "address1": "123 International Blvd",
+      "address2": "Suite 400",
+      "city": "Washington",
+      "state": "DC",
+      "postalCode": "20001",
+      "countryCode": "US",
+      "region": "NA",
+      "assignedBy": "SystemAdmin_03",
+      "createdAt": "2024-04-15T14:00:00Z",
+      "modifiedAt": "2024-04-16T15:30:00Z"
+    },
+    {
+      "id": 104,
+      "companyName": "Euro Travel GmbH",
+      "agencyCode": "EUR456",
+      "currency": "USD",
+      "type": "Internal",
+      "firstName": "Anna",
+      "lastName": "Schmidt",
+      "emails": [
+        {
+          "id": 4,
+          "email": "anna.schmidt@eurotravel.de",
+          "isprimary": true
+        }
+      ],
+      "phone": "+49-30-123456",
+      "address1": "Musterstraße 1",
+      "address2": "10115 Berlin",
+      "city": "Berlin",
+      "state": "Berlin",
+      "postalCode": "10115",
+      "countryCode": "DE",
+      "region": "EU",
+      "assignedBy": "SystemAdmin_04",
+      "createdAt": "2024-03-10T11:00:00Z",
+      "modifiedAt": "2024-03-11T12:15:00Z"
     }
   ]
 }

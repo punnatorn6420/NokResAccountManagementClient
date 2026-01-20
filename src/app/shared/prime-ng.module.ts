@@ -3,7 +3,6 @@ import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
-import { DropdownModule } from 'primeng/dropdown';
 import { CalendarModule } from 'primeng/calendar';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
@@ -36,6 +35,7 @@ import { ProgressBarModule } from 'primeng/progressbar';
 import { TooltipModule } from 'primeng/tooltip';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { PanelModule } from 'primeng/panel';
+import { FieldsetModule } from 'primeng/fieldset';
 
 @NgModule({
   exports: [
@@ -43,7 +43,6 @@ import { PanelModule } from 'primeng/panel';
     TableModule,
     DialogModule,
     InputTextModule,
-    DropdownModule,
     CalendarModule,
     ToastModule,
     TagModule,
@@ -76,6 +75,8 @@ import { PanelModule } from 'primeng/panel';
     TooltipModule,
     ToggleButtonModule,
     PanelModule,
+    TableModule,
+    FieldsetModule,
   ],
 })
 export class PrimeNgModule {}
