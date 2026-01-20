@@ -12,7 +12,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { AgentService } from '../../../service/agent.service';
 import {
   CredentialRequest,
-  ICredentialResponse,
+  ICredentialItem,
 } from '../../../types/agent/agent.type';
 
 @Component({
@@ -26,14 +26,14 @@ export class AgentApiKeysComponent implements OnInit, OnChanges, OnDestroy {
 
   private destroy$ = new Subject<void>();
 
-  apiKeys: ICredentialResponse[] = [];
+  apiKeys: ICredentialItem[] = [];
   apiKeysLoading = false;
   apiKeysError = '';
 
   apiKeyDialogVisible = false;
   apiKeySubmitting = false;
   apiKeyForm!: FormGroup;
-  editingApiKey: ICredentialResponse | null = null;
+  editingApiKey: ICredentialItem | null = null;
 
   environmentOptions = [
     { label: 'PROD', value: 'PROD' },
@@ -77,7 +77,7 @@ export class AgentApiKeysComponent implements OnInit, OnChanges, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (res) => {
-          this.apiKeys = res?.data ?? [];
+          this.apiKeys = res?.data.items ?? [];
           this.apiKeysLoading = false;
         },
         error: (err) => {
@@ -98,7 +98,7 @@ export class AgentApiKeysComponent implements OnInit, OnChanges, OnDestroy {
     this.apiKeyDialogVisible = true;
   }
 
-  openEditApiKey(row: ICredentialResponse): void {
+  openEditApiKey(row: ICredentialItem): void {
     this.editingApiKey = row;
     this.apiKeyForm.reset({
       name: row.name,

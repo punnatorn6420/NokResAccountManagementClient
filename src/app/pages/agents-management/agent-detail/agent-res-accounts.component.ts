@@ -11,8 +11,8 @@ import { MessageService } from 'primeng/api';
 import { Subject, takeUntil } from 'rxjs';
 import { AgentService } from '../../../service/agent.service';
 import {
+  IResAccountItem,
   IResAccountRequest,
-  IResAccountResponse,
 } from '../../../types/agent/agent.type';
 
 @Component({
@@ -26,14 +26,14 @@ export class AgentResAccountsComponent implements OnInit, OnChanges, OnDestroy {
 
   private destroy$ = new Subject<void>();
 
-  resAccounts: IResAccountResponse[] = [];
+  resAccounts: IResAccountItem[] = [];
   resAccountsLoading = false;
   resAccountsError = '';
 
   resAccountDialogVisible = false;
   resAccountSubmitting = false;
   resAccountForm!: FormGroup;
-  editingResAccount: IResAccountResponse | null = null;
+  editingResAccount: IResAccountItem | null = null;
 
   environmentOptions = [
     { label: 'PROD', value: 'PROD' },
@@ -77,7 +77,7 @@ export class AgentResAccountsComponent implements OnInit, OnChanges, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (res) => {
-          this.resAccounts = res?.data ?? [];
+          this.resAccounts = res?.data.items ?? [];
           this.resAccountsLoading = false;
         },
         error: (err) => {
@@ -101,7 +101,7 @@ export class AgentResAccountsComponent implements OnInit, OnChanges, OnDestroy {
     this.resAccountDialogVisible = true;
   }
 
-  openEditResAccount(row: IResAccountResponse): void {
+  openEditResAccount(row: IResAccountItem): void {
     this.editingResAccount = row;
     this.resAccountForm.reset({
       userName: row.userName,

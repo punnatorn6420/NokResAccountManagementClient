@@ -40,6 +40,7 @@ export class Redirect extends SubscriptionDestroyer implements OnInit {
 
   ngOnInit(): void {
     const token = this.route.snapshot.queryParamMap.get('token');
+    console.log('Redirect token:', token);
     if (!token) return this.fail('Missing token');
 
     history.replaceState({}, '', `${location.origin}/redirect`);

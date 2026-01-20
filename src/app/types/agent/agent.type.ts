@@ -12,6 +12,10 @@ export interface IAgentEmail {
 }
 
 export interface IAgentProfileResponse {
+  items: IAgentProfileItem[];
+  totalRecords: number;
+}
+export interface IAgentProfileItem {
   id: number;
   companyName: string;
   agencyCode: string;
@@ -76,7 +80,7 @@ export interface IContactEmailRequest {
   active?: boolean;
 }
 
-export interface IContactEmailResponseItem {
+export interface IContactEmailItem {
   id: number;
   profileId: number;
   email: string;
@@ -87,7 +91,10 @@ export interface IContactEmailResponseItem {
   modifiedAt: string;
 }
 
-export type IContactEmailResponse = IContactEmailResponseItem[];
+export interface IContactEmailResponse {
+  items: IContactEmailItem[];
+  totalRecords: number;
+}
 
 export interface CredentialRequest {
   name: string;
@@ -96,6 +103,11 @@ export interface CredentialRequest {
 }
 
 export interface ICredentialResponse {
+  items: ICredentialItem[];
+  totalRecords: number;
+}
+
+export interface ICredentialItem {
   id: number;
   name: string;
   clientId: string;
@@ -118,6 +130,10 @@ export interface IResAccountRequest {
 }
 
 export interface IResAccountResponse {
+  items: IResAccountItem[];
+  totalRecords: number;
+}
+export interface IResAccountItem {
   id: number;
   profileId: number;
   isPrimary: boolean;

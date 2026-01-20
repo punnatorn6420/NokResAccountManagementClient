@@ -1,4 +1,5 @@
 <div class="p-6 bg-white dark:bg-black rounded-xl shadow-md">
+  <!-- Header -->
   <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
     <div>
       <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-300">
@@ -8,6 +9,7 @@
         {{ pageDescription }}
       </p>
     </div>
+
     <div class="flex items-center gap-2">
       <button
         pButton
@@ -20,6 +22,7 @@
     </div>
   </div>
 
+  <!-- API Error -->
   <div
     *ngIf="apiErrorMessage"
     class="mb-4 p-3 rounded-md bg-red-50 text-red-700 border border-red-200"
@@ -36,53 +39,91 @@
     <p-progressSpinner></p-progressSpinner>
   </div>
 
-  <form *ngIf="!loading" [formGroup]="form" (ngSubmit)="onSubmit()">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-      <div class="space-y-4">
-        <h3 class="text-lg font-semibold text-gray-800">Profile</h3>
-        <div>
-          <label class="block text-sm font-medium mb-1">Company Name *</label>
-          <input
-            pInputText
-            type="text"
-            formControlName="companyName"
-            class="w-full"
-          />
-          <small
-            *ngIf="
-              getControl('companyName')?.touched &&
-              getControl('companyName')?.invalid
-            "
-            class="text-red-500"
-            >Company name is required.</small
-          >
+  <form
+    *ngIf="!loading"
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()"
+    class="space-y-4"
+  >
+    <!-- ===================== Profile + Contact ===================== -->
+    <p-fieldset legend="Profile & Contact" [toggleable]="false">
+      <div class="space-y-3">
+        <!-- ROW 1: Company Name | Agency Code -->
+        <div class="grid grid-cols-12 gap-3 items-start">
+          <!-- Label -->
+          <div class="col-span-12 md:col-span-2">
+            <div
+              class="flex items-center justify-between min-h-[38px] px-2 rounded-md text-[12px] font-semibold text-slate-700 dark:text-zinc-200 bg-slate-50 dark:bg-zinc-900/60 border border-slate-100 dark:border-zinc-800"
+            >
+              Company Name<span class="text-slate-400 dark:text-zinc-500"
+                >:</span
+              >
+            </div>
+          </div>
+          <!-- Field -->
+          <div class="col-span-12 md:col-span-4">
+            <input
+              pInputText
+              type="text"
+              formControlName="companyName"
+              class="w-full min-h-[38px]"
+            />
+            <small
+              *ngIf="
+                getControl('companyName')?.touched &&
+                getControl('companyName')?.invalid
+              "
+              class="text-red-500 text-[11px] block mt-1"
+            >
+              Company name is required.
+            </small>
+          </div>
+
+          <div class="col-span-12 md:col-span-2">
+            <div
+              class="flex items-center justify-between min-h-[38px] px-2 rounded-md text-[12px] font-semibold text-slate-700 dark:text-zinc-200 bg-slate-50 dark:bg-zinc-900/60 border border-slate-100 dark:border-zinc-800"
+            >
+              Agency Code<span class="text-slate-400 dark:text-zinc-500"
+                >:</span
+              >
+            </div>
+          </div>
+          <div class="col-span-12 md:col-span-4">
+            <input
+              pInputText
+              type="text"
+              formControlName="agencyCode"
+              class="w-full min-h-[38px]"
+            />
+            <small
+              *ngIf="
+                getControl('agencyCode')?.touched &&
+                getControl('agencyCode')?.invalid
+              "
+              class="text-red-500 text-[11px] block mt-1"
+            >
+              Agency code is required.
+            </small>
+          </div>
         </div>
-        <div>
-          <label class="block text-sm font-medium mb-1">Agency Code *</label>
-          <input
-            pInputText
-            type="text"
-            formControlName="agencyCode"
-            class="w-full"
-          />
-          <small
-            *ngIf="
-              getControl('agencyCode')?.touched &&
-              getControl('agencyCode')?.invalid
-            "
-            class="text-red-500"
-            >Agency code is required.</small
-          >
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <label class="block text-sm font-medium mb-1">Currency *</label>
+
+        <!-- ROW 2: Currency | Agent Type -->
+        <div class="grid grid-cols-12 gap-3 items-start">
+          <div class="col-span-12 md:col-span-2">
+            <div
+              class="flex items-center justify-between min-h-[38px] px-2 rounded-md text-[12px] font-semibold text-slate-700 dark:text-zinc-200 bg-slate-50 dark:bg-zinc-900/60 border border-slate-100 dark:border-zinc-800"
+            >
+              Currency<span class="text-slate-400 dark:text-zinc-500">:</span>
+            </div>
+          </div>
+          <div class="col-span-12 md:col-span-4">
             <p-select
               [options]="currencyOptions"
               optionLabel="label"
               optionValue="value"
               placeholder="Select currency"
               formControlName="currency"
+              appendTo="body"
               class="w-full"
             ></p-select>
             <small
@@ -90,161 +131,277 @@
                 getControl('currency')?.touched &&
                 getControl('currency')?.invalid
               "
-              class="text-red-500"
-              >Currency is required.</small
+              class="text-red-500 text-[11px] block mt-1"
             >
+              Currency is required.
+            </small>
           </div>
-          <div>
-            <label class="block text-sm font-medium mb-1">Agent Type *</label>
+
+          <div class="col-span-12 md:col-span-2">
+            <div
+              class="flex items-center justify-between min-h-[38px] px-2 rounded-md text-[12px] font-semibold text-slate-700 dark:text-zinc-200 bg-slate-50 dark:bg-zinc-900/60 border border-slate-100 dark:border-zinc-800"
+            >
+              Agent Type<span class="text-slate-400 dark:text-zinc-500">:</span>
+            </div>
+          </div>
+          <div class="col-span-12 md:col-span-4">
             <p-select
               [options]="typeOptions"
               optionLabel="label"
               optionValue="value"
               placeholder="Select type"
               formControlName="type"
+              appendTo="body"
               class="w-full"
             ></p-select>
             <small
               *ngIf="getControl('type')?.touched && getControl('type')?.invalid"
-              class="text-red-500"
-              >Agent type is required.</small
+              class="text-red-500 text-[11px] block mt-1"
             >
+              Agent type is required.
+            </small>
           </div>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <label class="block text-sm font-medium mb-1">First Name</label>
+
+        <!-- ROW 3: Full Name | Phone -->
+        <div class="grid grid-cols-12 gap-3 items-start">
+          <div class="col-span-12 md:col-span-2">
+            <div
+              class="flex items-center justify-between min-h-[38px] px-2 rounded-md text-[12px] font-semibold text-slate-700 dark:text-zinc-200 bg-slate-50 dark:bg-zinc-900/60 border border-slate-100 dark:border-zinc-800"
+            >
+              Full Name<span class="text-slate-400 dark:text-zinc-500">:</span>
+            </div>
+          </div>
+          <div class="col-span-12 md:col-span-4">
+            <div class="grid grid-cols-2 gap-2">
+              <input
+                pInputText
+                type="text"
+                formControlName="firstName"
+                class="w-full min-h-[38px]"
+                placeholder="First Name"
+              />
+              <input
+                pInputText
+                type="text"
+                formControlName="lastName"
+                class="w-full min-h-[38px]"
+                placeholder="Last Name"
+              />
+            </div>
+          </div>
+
+          <div class="col-span-12 md:col-span-2">
+            <div
+              class="flex items-center justify-between min-h-[38px] px-2 rounded-md text-[12px] font-semibold text-slate-700 dark:text-zinc-200 bg-slate-50 dark:bg-zinc-900/60 border border-slate-100 dark:border-zinc-800"
+            >
+              Phone<span class="text-slate-400 dark:text-zinc-500">:</span>
+            </div>
+          </div>
+          <div class="col-span-12 md:col-span-4">
             <input
               pInputText
               type="text"
-              formControlName="firstName"
-              class="w-full"
+              formControlName="phone"
+              class="w-full min-h-[38px]"
+              NumberInputDirective
             />
           </div>
-          <div>
-            <label class="block text-sm font-medium mb-1">Last Name</label>
+        </div>
+
+        <!-- ROW 4: Primary Email (ยาวฝั่งเดียว) -->
+        <div class="grid grid-cols-12 gap-3 items-start">
+          <div class="col-span-12 md:col-span-2">
+            <div
+              class="flex items-center justify-between min-h-[38px] px-2 rounded-md text-[12px] font-semibold text-slate-700 dark:text-zinc-200 bg-slate-50 dark:bg-zinc-900/60 border border-slate-100 dark:border-zinc-800"
+            >
+              Primary Email<span class="text-slate-400 dark:text-zinc-500"
+                >:</span
+              >
+            </div>
+          </div>
+          <div class="col-span-12 md:col-span-10">
+            <input
+              pInputText
+              type="email"
+              formControlName="primaryEmail"
+              class="w-full min-h-[38px]"
+              [readonly]="!allowEmailEdit"
+            />
+            <small
+              *ngIf="
+                getControl('primaryEmail')?.touched &&
+                getControl('primaryEmail')?.invalid
+              "
+              class="text-red-500 text-[11px] block mt-1"
+            >
+              Valid email is required.
+            </small>
+          </div>
+        </div>
+
+        <!-- Active toggle (ถ้าใช้ใน edit ก็ยังคง pattern เดิม) -->
+        <div
+          *ngIf="showActiveToggle"
+          class="grid grid-cols-12 gap-3 items-start"
+        >
+          <div class="col-span-12 md:col-span-2">
+            <div
+              class="flex items-center justify-between min-h-[38px] px-2 rounded-md text-[12px] font-semibold text-slate-700 dark:text-zinc-200 bg-slate-50 dark:bg-zinc-900/60 border border-slate-100 dark:border-zinc-800"
+            >
+              Active<span class="text-slate-400 dark:text-zinc-500">:</span>
+            </div>
+          </div>
+          <div class="col-span-12 md:col-span-4">
+            <p-toggleButton
+              formControlName="active"
+              onLabel="Active"
+              offLabel="Inactive"
+              class="w-full"
+            ></p-toggleButton>
+          </div>
+        </div>
+      </div>
+    </p-fieldset>
+
+    <!-- ===================== Address ===================== -->
+    <p-fieldset legend="Address" [toggleable]="false">
+      <div class="space-y-3">
+        <!-- ROW 1 -->
+        <div class="grid grid-cols-12 gap-3 items-start">
+          <div class="col-span-12 md:col-span-2">
+            <div
+              class="flex items-center justify-between min-h-[38px] px-2 rounded-md text-[12px] font-semibold text-slate-700 dark:text-zinc-200 bg-slate-50 dark:bg-zinc-900/60 border border-slate-100 dark:border-zinc-800"
+            >
+              Address Line 1<span class="text-slate-400 dark:text-zinc-500"
+                >:</span
+              >
+            </div>
+          </div>
+          <div class="col-span-12 md:col-span-4">
             <input
               pInputText
               type="text"
-              formControlName="lastName"
-              class="w-full"
+              formControlName="address1"
+              class="w-full min-h-[38px]"
+            />
+          </div>
+
+          <div class="col-span-12 md:col-span-2">
+            <div
+              class="flex items-center justify-between min-h-[38px] px-2 rounded-md text-[12px] font-semibold text-slate-700 dark:text-zinc-200 bg-slate-50 dark:bg-zinc-900/60 border border-slate-100 dark:border-zinc-800"
+            >
+              Address Line 2<span class="text-slate-400 dark:text-zinc-500"
+                >:</span
+              >
+            </div>
+          </div>
+          <div class="col-span-12 md:col-span-4">
+            <input
+              pInputText
+              type="text"
+              formControlName="address2"
+              class="w-full min-h-[38px]"
+            />
+          </div>
+        </div>
+
+        <!-- ROW 2 -->
+        <div class="grid grid-cols-12 gap-3 items-start">
+          <div class="col-span-12 md:col-span-2">
+            <div
+              class="flex items-center justify-between min-h-[38px] px-2 rounded-md text-[12px] font-semibold text-slate-700 dark:text-zinc-200 bg-slate-50 dark:bg-zinc-900/60 border border-slate-100 dark:border-zinc-800"
+            >
+              City<span class="text-slate-400 dark:text-zinc-500">:</span>
+            </div>
+          </div>
+          <div class="col-span-12 md:col-span-4">
+            <input
+              pInputText
+              type="text"
+              formControlName="city"
+              class="w-full min-h-[38px]"
+            />
+          </div>
+
+          <div class="col-span-12 md:col-span-2">
+            <div
+              class="flex items-center justify-between min-h-[38px] px-2 rounded-md text-[12px] font-semibold text-slate-700 dark:text-zinc-200 bg-slate-50 dark:bg-zinc-900/60 border border-slate-100 dark:border-zinc-800"
+            >
+              State / Province<span class="text-slate-400 dark:text-zinc-500"
+                >:</span
+              >
+            </div>
+          </div>
+          <div class="col-span-12 md:col-span-4">
+            <input
+              pInputText
+              type="text"
+              formControlName="state"
+              class="w-full min-h-[38px]"
+            />
+          </div>
+        </div>
+
+        <!-- ROW 3: 3 คู่ (เหมือนรายงาน) -->
+        <div class="grid grid-cols-12 gap-3 items-start">
+          <div class="col-span-12 md:col-span-2">
+            <div
+              class="flex items-center justify-between min-h-[38px] px-2 rounded-md text-[12px] font-semibold text-slate-700 dark:text-zinc-200 bg-slate-50 dark:bg-zinc-900/60 border border-slate-100 dark:border-zinc-800"
+            >
+              Postal Code<span class="text-slate-400 dark:text-zinc-500"
+                >:</span
+              >
+            </div>
+          </div>
+          <div class="col-span-12 md:col-span-2">
+            <input
+              pInputText
+              type="text"
+              formControlName="postalCode"
+              class="w-full min-h-[38px]"
+            />
+          </div>
+
+          <div class="col-span-12 md:col-span-2">
+            <div
+              class="flex items-center justify-between min-h-[38px] px-2 rounded-md text-[12px] font-semibold text-slate-700 dark:text-zinc-200 bg-slate-50 dark:bg-zinc-900/60 border border-slate-100 dark:border-zinc-800"
+            >
+              Country Code<span class="text-slate-400 dark:text-zinc-500"
+                >:</span
+              >
+            </div>
+          </div>
+          <div class="col-span-12 md:col-span-2">
+            <input
+              pInputText
+              type="text"
+              formControlName="countryCode"
+              class="w-full min-h-[38px]"
+            />
+          </div>
+
+          <div class="col-span-12 md:col-span-2">
+            <div
+              class="flex items-center justify-between min-h-[38px] px-2 rounded-md text-[12px] font-semibold text-slate-700 dark:text-zinc-200 bg-slate-50 dark:bg-zinc-900/60 border border-slate-100 dark:border-zinc-800"
+            >
+              Region<span class="text-slate-400 dark:text-zinc-500">:</span>
+            </div>
+          </div>
+          <div class="col-span-12 md:col-span-2">
+            <input
+              pInputText
+              type="text"
+              formControlName="region"
+              class="w-full min-h-[38px]"
             />
           </div>
         </div>
       </div>
+    </p-fieldset>
 
-      <div class="space-y-4">
-        <h3 class="text-lg font-semibold text-gray-800">Contact</h3>
-        <div>
-          <label class="block text-sm font-medium mb-1">Primary Email *</label>
-          <input
-            pInputText
-            type="email"
-            formControlName="primaryEmail"
-            class="w-full"
-            [readonly]="!allowEmailEdit"
-          />
-          <small
-            *ngIf="
-              getControl('primaryEmail')?.touched &&
-              getControl('primaryEmail')?.invalid
-            "
-            class="text-red-500"
-            >Valid email is required.</small
-          >
-        </div>
-        <div>
-          <label class="block text-sm font-medium mb-1">Phone</label>
-          <input
-            pInputText
-            type="text"
-            formControlName="phone"
-            class="w-full"
-          />
-        </div>
-        <div *ngIf="showActiveToggle">
-          <label class="block text-sm font-medium mb-1">Active</label>
-          <p-toggleButton
-            formControlName="active"
-            onLabel="Active"
-            offLabel="Inactive"
-            class="w-full"
-          ></p-toggleButton>
-        </div>
-      </div>
-    </div>
-
-    <p-divider></p-divider>
-
-    <div class="space-y-4">
-      <h3 class="text-lg font-semibold text-gray-800">Address</h3>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <label class="block text-sm font-medium mb-1">Address Line 1</label>
-          <input
-            pInputText
-            type="text"
-            formControlName="address1"
-            class="w-full"
-          />
-        </div>
-        <div>
-          <label class="block text-sm font-medium mb-1">Address Line 2</label>
-          <input
-            pInputText
-            type="text"
-            formControlName="address2"
-            class="w-full"
-          />
-        </div>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div>
-          <label class="block text-sm font-medium mb-1">City</label>
-          <input pInputText type="text" formControlName="city" class="w-full" />
-        </div>
-        <div>
-          <label class="block text-sm font-medium mb-1">State</label>
-          <input
-            pInputText
-            type="text"
-            formControlName="state"
-            class="w-full"
-          />
-        </div>
-        <div>
-          <label class="block text-sm font-medium mb-1">Postal Code</label>
-          <input
-            pInputText
-            type="text"
-            formControlName="postalCode"
-            class="w-full"
-          />
-        </div>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <label class="block text-sm font-medium mb-1">Country Code</label>
-          <input
-            pInputText
-            type="text"
-            formControlName="countryCode"
-            class="w-full"
-          />
-        </div>
-        <div>
-          <label class="block text-sm font-medium mb-1">Region</label>
-          <input
-            pInputText
-            type="text"
-            formControlName="region"
-            class="w-full"
-          />
-        </div>
-      </div>
-    </div>
-
-    <div class="flex flex-wrap justify-end gap-3 mt-8">
+    <!-- Footer buttons -->
+    <div class="flex flex-wrap justify-end gap-3 pt-2">
       <button
         pButton
         type="button"

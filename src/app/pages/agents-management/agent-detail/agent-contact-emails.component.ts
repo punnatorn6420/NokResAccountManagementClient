@@ -13,9 +13,8 @@ import { MessageService } from 'primeng/api';
 import { Subject, takeUntil } from 'rxjs';
 import { AgentService } from '../../../service/agent.service';
 import {
+  IContactEmailItem,
   IContactEmailRequest,
-  IContactEmailResponse,
-  IContactEmailResponseItem,
 } from '../../../types/agent/agent.type';
 
 @Component({
@@ -32,14 +31,14 @@ export class AgentContactEmailsComponent
 
   private destroy$ = new Subject<void>();
 
-  contactEmails: IContactEmailResponse = [];
+  contactEmails: IContactEmailItem[] = [];
   contactEmailsLoading = false;
   contactEmailsError = '';
 
   contactEmailDialogVisible = false;
   contactEmailSubmitting = false;
   contactEmailForm!: FormGroup;
-  editingContactEmail: IContactEmailResponseItem | null = null;
+  editingContactEmail: IContactEmailItem | null = null;
 
   constructor(
     private agentService: AgentService,
@@ -78,7 +77,7 @@ export class AgentContactEmailsComponent
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (res) => {
-          this.contactEmails = res?.data ?? [];
+          this.contactEmails = res?.data.items ?? [];
           this.contactEmailsLoading = false;
           this.primaryEmailChange.emit(
             this.resolvePrimaryEmail(this.contactEmails),
@@ -92,7 +91,7 @@ export class AgentContactEmailsComponent
       });
   }
 
-  isContactEmailPrimary(email: IContactEmailResponseItem): boolean {
+  isContactEmailPrimary(email: IContactEmailItem): boolean {
     return Boolean(email.isPrimary || email.isprimary);
   }
 
@@ -106,7 +105,7 @@ export class AgentContactEmailsComponent
     this.contactEmailDialogVisible = true;
   }
 
-  openEditContactEmail(row: IContactEmailResponseItem): void {
+  openEditContactEmail(row: IContactEmailItem): void {
     this.editingContactEmail = row;
     this.contactEmailForm.reset({
       email: row.email,
@@ -176,7 +175,7 @@ export class AgentContactEmailsComponent
     };
   }
 
-  private resolvePrimaryEmail(emails: IContactEmailResponse): string {
+  private resolvePrimaryEmail(emails: IContactEmailItem[]): string {
     const primaryEmail = emails.find(
       (email) => email.isPrimary || email.isprimary,
     );

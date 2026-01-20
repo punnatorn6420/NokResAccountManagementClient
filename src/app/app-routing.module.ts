@@ -5,23 +5,10 @@ import { AppLayout } from './shared/layout/components/app.layout';
 
 export const routes: Routes = [
   { path: 'notfound', component: Notfound },
-  { path: 'agents', redirectTo: '/admin/agents', pathMatch: 'full' },
   {
-    path: 'agents/create',
-    redirectTo: '/admin/agents/create',
-    pathMatch: 'full',
+    path: '',
+    loadChildren: () => import('../app/pages/auth/auth.routes'),
   },
-  {
-    path: 'agents/:id',
-    redirectTo: '/admin/agents/:id',
-    pathMatch: 'full',
-  },
-  {
-    path: 'agents/:id/edit',
-    redirectTo: '/admin/agents/:id/edit',
-    pathMatch: 'full',
-  },
-  { path: '', redirectTo: '/admin', pathMatch: 'full' },
   {
     path: 'admin',
     component: AppLayout,

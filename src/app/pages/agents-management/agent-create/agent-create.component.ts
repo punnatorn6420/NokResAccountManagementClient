@@ -207,4 +207,9 @@ export class AgentCreateComponent implements OnInit, OnDestroy {
       fallbackMessage;
     this.apiFieldErrors = error?.error?.errors ?? [];
   }
+
+  isInvalid(name: string): boolean {
+    const c = this.getControl(name);
+    return !!(c && c.touched && c.invalid);
+  }
 }

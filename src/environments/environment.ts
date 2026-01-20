@@ -4,17 +4,11 @@
 
 export const environment = {
   production: false,
-  useMock: true,
   environment: 'UAT',
-  endpoint: 'http://10.94.23.31:9015/',
+  endpoint: 'http://10.94.23.31:9016/',
   portal_client: 'https://uat-portal.nokair.com/',
-  clientId: '35260a08c1924df79d74ee014dde6f72',
-  clientSecret: '36C5533AB9b34526A7021CBeadd56CE2',
-  // environment: 'Prod',
-  // loyalty: 'https://ddservices.nokair.com/loyalty/',
-  // portal_client: 'https://portal.nokair.com/',
-  // clientId: 'c1146f73d6e04870a72a2d31bc5adea5',
-  // clientSecret: 'C2D9ABb2D5554239aDe25F5e76FF7E2f',
+  clientId: 'Vu4EKnUGLj50UuoAE04TSj2tVv90zjBBV',
+  clientSecret: '7ymiHNW6dl5nImyXsVM74PZdHUniMKN1r',
 };
 
 /*

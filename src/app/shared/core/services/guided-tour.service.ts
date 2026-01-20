@@ -31,9 +31,7 @@ export class GuidedTourService {
 
   private tourDefinitions = GUIDED_TOUR_DEFINITIONS;
 
-  constructor(
-    rendererFactory: RendererFactory2,
-  ) {
+  constructor(rendererFactory: RendererFactory2) {
     this.renderer = rendererFactory.createRenderer(null, null);
     this.activeLabels = this.defaultLabels;
   }
@@ -53,14 +51,6 @@ export class GuidedTourService {
   startAgentDetailTour(): void {
     this.startTour('agentDetail', this.getActiveLanguage());
   }
-
-  // startOperationApprovedTour(): void {
-  //   this.startTour('operationApproved');
-  // }
-
-  // startOperationFormTour(): void {
-  //   this.startTour('operationForm');
-  // }
 
   startTour(page: TourKey, lang?: SupportedLanguage): void {
     if (!this.canUseDom()) return;

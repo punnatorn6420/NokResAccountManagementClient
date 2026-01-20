@@ -4,7 +4,7 @@ import { interval, Subject, switchMap, startWith, takeUntil } from 'rxjs';
 import { AgentService } from '../../../service/agent.service';
 import {
   IAgentEmail,
-  IAgentProfileResponse,
+  IAgentProfileItem,
 } from '../../../types/agent/agent.type';
 import { GuidedTourService } from '../../../shared/core/services/guided-tour.service';
 
@@ -18,7 +18,7 @@ export class AgentDetailComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
 
   agentId = 0;
-  agent: IAgentProfileResponse | null = null;
+  agent: IAgentProfileItem | null = null;
   primaryEmail = '';
 
   loading = false;

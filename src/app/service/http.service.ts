@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { SessionStorage } from '../shared/core/helper/session.helper';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +16,6 @@ export class HttpService {
   ) {}
 
   private getHeaders(includeAuth = true): HttpHeaders {
-    console.log('Getting Headers');
     let headers = this.baseHeaders;
     if (includeAuth) {
       const token =
@@ -23,15 +23,16 @@ export class HttpService {
           ? sessionStorage.getItem('bearerToken')
           : null;
       if (token) {
-        console.log('Adding Auth Header');
-        headers = headers.append('Authorization', `Bearer ${token}`);
+        headers = headers
+          .append('Authorization', `Bearer ${token}`)
+          .append('nok_client_id', environment.clientId)
+          .append('nok_client_secret', environment.clientSecret);
       }
     }
     return headers;
   }
 
   get<T>(url: string, includeAuth: boolean = true): Observable<T> {
-    console.log('HTTP GET:', url, 'Include Auth:', includeAuth);
     return this.http.get<T>(url, { headers: this.getHeaders(includeAuth) });
   }
 

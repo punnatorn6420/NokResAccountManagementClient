@@ -13,7 +13,7 @@ import {
 } from 'rxjs';
 import { AgentService } from '../../service/agent.service';
 import {
-  IAgentProfileResponse,
+  IAgentProfileItem,
   IAgentProfileType,
   ICurrency,
 } from '../../types/agent/agent.type';
@@ -33,7 +33,7 @@ import { GuidedTourService } from '../../shared/core/services/guided-tour.servic
 export class AgentsManagementComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
   private keyword$ = new Subject<string>();
-  agents: IAgentProfileResponse[] = [];
+  agents: IAgentProfileItem[] = [];
   loading = false;
   errorMessage = '';
   keyword = '';
@@ -88,7 +88,7 @@ export class AgentsManagementComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (res) => {
-          this.agents = res?.data ?? [];
+          this.agents = res?.data.items ?? [];
           this.totalRecords = this.agents.length;
           this.lastRefreshedAt = new Date();
           this.loading = false;
@@ -120,7 +120,7 @@ export class AgentsManagementComponent implements OnInit, OnDestroy {
         ),
       )
       .subscribe((res) => {
-        this.agents = res?.data ?? [];
+        this.agents = res?.data.items ?? [];
         this.totalRecords = this.agents.length;
         this.lastRefreshedAt = new Date();
       });
@@ -191,11 +191,11 @@ export class AgentsManagementComponent implements OnInit, OnDestroy {
     );
   }
 
-  viewAgent(row: IAgentProfileResponse): void {
+  viewAgent(row: IAgentProfileItem): void {
     this.router.navigate(['/admin/agents', row.id]);
   }
 
-  editAgent(row: IAgentProfileResponse): void {
+  editAgent(row: IAgentProfileItem): void {
     this.router.navigate(['/admin/agents', row.id, 'edit']);
   }
 

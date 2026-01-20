@@ -39,33 +39,33 @@ export class AuthService {
       .append('nok_client_secret', environment.clientSecret)
       .append('Authorization', `Bearer ${token}`);
     return this.http.get<IApiResponse<string>>(
-      `${environment.endpoint}v1/users/validate-token`,
+      `${environment.endpoint}v1/auth/validate-token`,
       { headers },
     );
   }
 
-  // getUserProfile(): Observable<IResponse<IUserInfo>> {
-  //   const token =
-  //     typeof window !== 'undefined'
-  //       ? sessionStorage.getItem('bearerToken')
-  //       : null;
-
-  //   const headers = new HttpHeaders()
-  //     .append('nok_client_id', environment.clientId)
-  //     .append('nok_client_secret', environment.clientSecret)
-  //     .append('Authorization', `Bearer ${token}`);
-
-  //   return this.http.get<IResponse<IUserInfo>>(
-  //     `${environment.endpoint}v1/users/retrieve-from-token`,
-  //     { headers },
-  //   );
-  // }
-
   getUserProfile(): Observable<IApiResponse<IUserInfo>> {
+    const token =
+      typeof window !== 'undefined'
+        ? sessionStorage.getItem('bearerToken')
+        : null;
+
+    const headers = new HttpHeaders()
+      .append('nok_client_id', environment.clientId)
+      .append('nok_client_secret', environment.clientSecret)
+      .append('Authorization', `Bearer ${token}`);
+
     return this.http.get<IApiResponse<IUserInfo>>(
-      'mock/user/get-user-profile.json',
+      `${environment.endpoint}v1/auth/get-profile-user`,
+      { headers },
     );
   }
+
+  // getUserProfile(): Observable<IApiResponse<IUserInfo>> {
+  //   return this.http.get<IApiResponse<IUserInfo>>(
+  //     'mock/user/get-user-profile.json',
+  //   );
+  // }
 
   loadProfile(): Promise<void> {
     const token = sessionStorage.getItem('bearerToken');
