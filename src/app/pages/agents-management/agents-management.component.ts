@@ -22,6 +22,7 @@ import {
   CurrencyUIMap,
   AgentTypeUIMap,
 } from '../../shared/constant/agent-lookups';
+import { GuidedTourService } from '../../shared/core/services/guided-tour.service';
 
 @Component({
   selector: 'app-agents-management',
@@ -49,6 +50,7 @@ export class AgentsManagementComponent implements OnInit, OnDestroy {
   constructor(
     private agentService: AgentService,
     private router: Router,
+    private guidedTourService: GuidedTourService,
   ) {}
 
   ngOnInit(): void {
@@ -151,6 +153,10 @@ export class AgentsManagementComponent implements OnInit, OnDestroy {
     this.pageNumber = 1;
     this.first = 0;
     this.onKeywordChange('');
+  }
+
+  startGuidedTour(): void {
+    this.guidedTourService.startAgentsManagementTour();
   }
 
   // getPrimaryEmail(row: IAgentProfileResponse): string {
