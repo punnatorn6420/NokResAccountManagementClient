@@ -53,3 +53,80 @@
 .p-tabpanels {
   padding: 0px !important;
 }
+
+.app-tour-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 5000;
+  pointer-events: auto;
+}
+
+.app-tour-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+}
+
+.app-tour-highlight-box {
+  position: fixed;
+  z-index: 5001;
+  border-radius: 10px;
+  box-shadow:
+    0 0 0 3px var(--color-primary),
+    0 10px 25px rgba(0, 0, 0, 0.25);
+  pointer-events: none;
+}
+
+.app-tour-tooltip {
+  position: fixed;
+  z-index: 5002;
+  max-width: 380px;
+  background: var(--color-white);
+  color: var(--color-grey-900);
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 10px 40px rgba(15, 23, 42, 0.24);
+  font-size: 14px;
+}
+
+.dark .app-tour-tooltip {
+  background: var(--color-grey-900);
+  color: var(--color-grey-300);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.app-tour-title {
+  font-weight: 700;
+  font-size: 16px;
+  margin-bottom: 0.25rem;
+}
+
+.app-tour-body p {
+  margin: 0 0 0.35rem 0;
+  line-height: 1.5;
+}
+
+.app-tour-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.app-tour-btn {
+  border: none;
+  border-radius: 8px;
+  padding: 0.35rem 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.app-tour-btn.primary {
+  background: var(--color-primary);
+  color: var(--p-primary-900);
+}
+
+.app-tour-btn.secondary {
+  background: var(--color-grey-300);
+  color: var(--color-grey-900);
+}
