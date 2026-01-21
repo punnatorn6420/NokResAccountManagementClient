@@ -1,5 +1,4 @@
 <div class="p-6 bg-white dark:bg-black rounded-xl shadow-md">
-  <!-- Header -->
   <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
     <div>
       <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-300">
@@ -9,7 +8,6 @@
         {{ pageDescription }}
       </p>
     </div>
-
     <div class="flex items-center gap-2">
       <button
         pButton
@@ -21,8 +19,6 @@
       ></button>
     </div>
   </div>
-
-  <!-- API Error -->
   <div
     *ngIf="apiErrorMessage"
     class="mb-4 p-3 rounded-md bg-red-50 text-red-700 border border-red-200"
@@ -34,33 +30,27 @@
       </li>
     </ul>
   </div>
-
   <div *ngIf="loading" class="flex justify-center py-12">
     <p-progressSpinner></p-progressSpinner>
   </div>
-
   <form
     *ngIf="!loading"
     [formGroup]="form"
     (ngSubmit)="onSubmit()"
     class="space-y-4"
   >
-    <!-- ===================== Profile + Contact ===================== -->
     <p-fieldset legend="Profile & Contact" [toggleable]="false">
       <div class="space-y-3">
-        <!-- ROW 1: Company Name | Agency Code -->
         <div class="grid grid-cols-12 gap-3 items-start">
-          <!-- Label -->
           <div class="col-span-12 md:col-span-2">
             <div
               class="flex items-center justify-between min-h-[38px] px-2 rounded-md text-[12px] font-semibold text-slate-700 dark:text-zinc-200 bg-slate-50 dark:bg-zinc-900/60 border border-slate-100 dark:border-zinc-800"
             >
-              Company Name<span class="text-slate-400 dark:text-zinc-500"
+              Company Name*<span class="text-slate-400 dark:text-zinc-500"
                 >:</span
               >
             </div>
           </div>
-          <!-- Field -->
           <div class="col-span-12 md:col-span-4">
             <input
               pInputText
@@ -78,12 +68,11 @@
               Company name is required.
             </small>
           </div>
-
           <div class="col-span-12 md:col-span-2">
             <div
               class="flex items-center justify-between min-h-[38px] px-2 rounded-md text-[12px] font-semibold text-slate-700 dark:text-zinc-200 bg-slate-50 dark:bg-zinc-900/60 border border-slate-100 dark:border-zinc-800"
             >
-              Agency Code<span class="text-slate-400 dark:text-zinc-500"
+              Agency Code*<span class="text-slate-400 dark:text-zinc-500"
                 >:</span
               >
             </div>
@@ -106,14 +95,12 @@
             </small>
           </div>
         </div>
-
-        <!-- ROW 2: Currency | Agent Type -->
         <div class="grid grid-cols-12 gap-3 items-start">
           <div class="col-span-12 md:col-span-2">
             <div
               class="flex items-center justify-between min-h-[38px] px-2 rounded-md text-[12px] font-semibold text-slate-700 dark:text-zinc-200 bg-slate-50 dark:bg-zinc-900/60 border border-slate-100 dark:border-zinc-800"
             >
-              Currency<span class="text-slate-400 dark:text-zinc-500">:</span>
+              Currency*<span class="text-slate-400 dark:text-zinc-500">:</span>
             </div>
           </div>
           <div class="col-span-12 md:col-span-4">
@@ -136,12 +123,13 @@
               Currency is required.
             </small>
           </div>
-
           <div class="col-span-12 md:col-span-2">
             <div
               class="flex items-center justify-between min-h-[38px] px-2 rounded-md text-[12px] font-semibold text-slate-700 dark:text-zinc-200 bg-slate-50 dark:bg-zinc-900/60 border border-slate-100 dark:border-zinc-800"
             >
-              Agent Type<span class="text-slate-400 dark:text-zinc-500">:</span>
+              Agent Type*<span class="text-slate-400 dark:text-zinc-500"
+                >:</span
+              >
             </div>
           </div>
           <div class="col-span-12 md:col-span-4">
@@ -162,14 +150,12 @@
             </small>
           </div>
         </div>
-
-        <!-- ROW 3: Full Name | Phone -->
         <div class="grid grid-cols-12 gap-3 items-start">
           <div class="col-span-12 md:col-span-2">
             <div
               class="flex items-center justify-between min-h-[38px] px-2 rounded-md text-[12px] font-semibold text-slate-700 dark:text-zinc-200 bg-slate-50 dark:bg-zinc-900/60 border border-slate-100 dark:border-zinc-800"
             >
-              Full Name<span class="text-slate-400 dark:text-zinc-500">:</span>
+              Full Name*<span class="text-slate-400 dark:text-zinc-500">:</span>
             </div>
           </div>
           <div class="col-span-12 md:col-span-4">
@@ -190,12 +176,11 @@
               />
             </div>
           </div>
-
           <div class="col-span-12 md:col-span-2">
             <div
               class="flex items-center justify-between min-h-[38px] px-2 rounded-md text-[12px] font-semibold text-slate-700 dark:text-zinc-200 bg-slate-50 dark:bg-zinc-900/60 border border-slate-100 dark:border-zinc-800"
             >
-              Phone<span class="text-slate-400 dark:text-zinc-500">:</span>
+              Phone*<span class="text-slate-400 dark:text-zinc-500">:</span>
             </div>
           </div>
           <div class="col-span-12 md:col-span-4">
@@ -208,14 +193,12 @@
             />
           </div>
         </div>
-
-        <!-- ROW 4: Primary Email (ยาวฝั่งเดียว) -->
         <div class="grid grid-cols-12 gap-3 items-start">
           <div class="col-span-12 md:col-span-2">
             <div
               class="flex items-center justify-between min-h-[38px] px-2 rounded-md text-[12px] font-semibold text-slate-700 dark:text-zinc-200 bg-slate-50 dark:bg-zinc-900/60 border border-slate-100 dark:border-zinc-800"
             >
-              Primary Email<span class="text-slate-400 dark:text-zinc-500"
+              Primary Email*<span class="text-slate-400 dark:text-zinc-500"
                 >:</span
               >
             </div>
@@ -239,35 +222,10 @@
             </small>
           </div>
         </div>
-
-        <!-- Active toggle (ถ้าใช้ใน edit ก็ยังคง pattern เดิม) -->
-        <div
-          *ngIf="showActiveToggle"
-          class="grid grid-cols-12 gap-3 items-start"
-        >
-          <div class="col-span-12 md:col-span-2">
-            <div
-              class="flex items-center justify-between min-h-[38px] px-2 rounded-md text-[12px] font-semibold text-slate-700 dark:text-zinc-200 bg-slate-50 dark:bg-zinc-900/60 border border-slate-100 dark:border-zinc-800"
-            >
-              Active<span class="text-slate-400 dark:text-zinc-500">:</span>
-            </div>
-          </div>
-          <div class="col-span-12 md:col-span-4">
-            <p-toggleButton
-              formControlName="active"
-              onLabel="Active"
-              offLabel="Inactive"
-              class="w-full"
-            ></p-toggleButton>
-          </div>
-        </div>
       </div>
     </p-fieldset>
-
-    <!-- ===================== Address ===================== -->
     <p-fieldset legend="Address" [toggleable]="false">
       <div class="space-y-3">
-        <!-- ROW 1 -->
         <div class="grid grid-cols-12 gap-3 items-start">
           <div class="col-span-12 md:col-span-2">
             <div
@@ -305,8 +263,6 @@
             />
           </div>
         </div>
-
-        <!-- ROW 2 -->
         <div class="grid grid-cols-12 gap-3 items-start">
           <div class="col-span-12 md:col-span-2">
             <div
@@ -342,8 +298,6 @@
             />
           </div>
         </div>
-
-        <!-- ROW 3: 3 คู่ (เหมือนรายงาน) -->
         <div class="grid grid-cols-12 gap-3 items-start">
           <div class="col-span-12 md:col-span-2">
             <div
@@ -399,8 +353,6 @@
         </div>
       </div>
     </p-fieldset>
-
-    <!-- Footer buttons -->
     <div class="flex flex-wrap justify-end gap-3 pt-2">
       <button
         pButton

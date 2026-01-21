@@ -95,6 +95,15 @@ export class AgentService {
     );
   }
 
+  getCredentialApiKeys(
+    keyword: string,
+  ): Observable<IApiResponse<ICredentialResponse>> {
+    return this.https.get(
+      `${environment.endpoint}v1/api-keys?keyword=${keyword}`,
+      true,
+    );
+  }
+
   createContactEmail(
     agentId: number,
     payload: IContactEmailRequest,

@@ -47,7 +47,6 @@ export class AgentCreateComponent implements OnInit, OnDestroy {
   backLabel = 'Back to list';
 
   allowEmailEdit = true;
-  showActiveToggle = false;
 
   currencyOptions: SelectOption<string>[] = [
     { label: 'THB', value: 'THB' },
@@ -88,10 +87,10 @@ export class AgentCreateComponent implements OnInit, OnDestroy {
       agencyCode: ['', Validators.required],
       currency: [null, Validators.required],
       type: [null, Validators.required],
-      firstName: [''],
-      lastName: [''],
+      firstName: ['', [Validators.required]],
+      lastName: ['', [Validators.required]],
       primaryEmail: ['', [Validators.required, Validators.email]],
-      phone: [''],
+      phone: ['', [Validators.required]],
       address1: [''],
       address2: [''],
       city: [''],

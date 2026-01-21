@@ -89,14 +89,16 @@
       <tr class="bg-gray-100 !text-sm text-gray-700">
         <th>Company Name</th>
         <th>Agency Code</th>
-        <th>Currency</th>
-        <th>Agent Type</th>
+        <th class="!text-center">Currency</th>
+        <th class="!text-center">Agent Type</th>
         <!-- <th >Contact Name</th> -->
         <!-- <th >Primary Email</th> -->
         <th>Phone</th>
         <th>Assigned By</th>
         <th>Created At</th>
-        <th id="agents-management-tour-actions">Actions</th>
+        <th class="!text-center" id="agents-management-tour-actions">
+          Actions
+        </th>
       </tr>
     </ng-template>
 
@@ -106,7 +108,7 @@
           {{ row.companyName || "-" }}
         </td>
         <td>{{ row.agencyCode || "-" }}</td>
-        <td class="text-center">
+        <td class="!text-center">
           <ng-container *ngIf="getCurrencyUI(row.currency); else empty">
             <span
               class="inline-flex items-center px-2 py-1 rounded-md text-xs font-semibold"
@@ -116,7 +118,7 @@
             </span>
           </ng-container>
         </td>
-        <td class="text-center">
+        <td class="!text-center">
           <ng-container *ngIf="getAgentTypeUI(row.type); else empty">
             <span
               class="inline-flex items-center px-2 py-1 rounded-md text-xs font-semibold"
@@ -135,27 +137,25 @@
         <td class="tracking-tight">
           {{ row.createdAt ? (row.createdAt | date: "dd/MM/yy HH:mm") : "-" }}
         </td>
-        <td>
-          <div class="flex gap-2">
-            <button
-              pButton
-              type="button"
-              icon="pi pi-eye"
-              class="p-button-rounded p-button-primary"
-              pTooltip="View agent profile"
-              tooltipPosition="bottom"
-              (click)="viewAgent(row)"
-            ></button>
-            <button
-              pButton
-              type="button"
-              icon="pi pi-pencil"
-              class="p-button-rounded p-button-help"
-              pTooltip="Edit agent profile"
-              tooltipPosition="bottom"
-              (click)="editAgent(row)"
-            ></button>
-          </div>
+        <td class="gap-2 !text-center">
+          <button
+            pButton
+            type="button"
+            icon="pi pi-eye"
+            class="p-button-rounded p-button-primary mr-2"
+            pTooltip="View agent profile"
+            tooltipPosition="bottom"
+            (click)="viewAgent(row)"
+          ></button>
+          <button
+            pButton
+            type="button"
+            icon="pi pi-pencil"
+            class="p-button-rounded p-button-help"
+            pTooltip="Edit agent profile"
+            tooltipPosition="bottom"
+            (click)="editAgent(row)"
+          ></button>
         </td>
       </tr>
     </ng-template>

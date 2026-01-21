@@ -30,7 +30,6 @@ export class AgentEditComponent extends AgentCreateComponent implements OnInit {
     this.cancelLabel = 'Cancel';
     this.backLabel = 'Back to details';
     this.allowEmailEdit = false;
-    this.showActiveToggle = true;
   }
 
   override ngOnInit(): void {
@@ -78,7 +77,7 @@ export class AgentEditComponent extends AgentCreateComponent implements OnInit {
             postalCode: agent.postalCode ?? '',
             countryCode: agent.countryCode ?? '',
             region: agent.region ?? '',
-            active: agent.active ?? true,
+            active: true,
           });
           this.loading = false;
         },
