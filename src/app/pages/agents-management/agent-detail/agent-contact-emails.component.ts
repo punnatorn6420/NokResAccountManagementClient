@@ -101,6 +101,7 @@ export class AgentContactEmailsComponent
       email: '',
       firstName: '',
       lastName: '',
+      contactPhone: '',
       isPrimary: false,
       active: true,
     });
@@ -180,6 +181,7 @@ export class AgentContactEmailsComponent
       email: raw.email?.trim(),
       firstName: raw.firstName?.trim() || undefined,
       lastName: raw.lastName?.trim() || undefined,
+      contactPhone: raw.contactPhone?.trim() || undefined,
       isPrimary: Boolean(raw.isPrimary),
       active: Boolean(raw.active),
     };
