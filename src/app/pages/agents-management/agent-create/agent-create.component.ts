@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   AbstractControl,
+  FormArray,
   FormBuilder,
   FormControl,
   FormGroup,
@@ -81,15 +82,20 @@ export class AgentCreateComponent implements OnInit, OnDestroy {
     return this.form.get(name);
   }
 
+  get contacts(): FormArray {
+    return this.form.get('contacts') as FormArray;
+  }
+
   buildForm(): void {
     this.form = this.fb.group({
       companyName: ['', Validators.required],
       agencyCode: ['', Validators.required],
       currency: [null, Validators.required],
       type: [null, Validators.required],
-      primaryEmail: ['', [Validators.required, Validators.email]],
-      firstName: ['', [Validators.required]],
-      lastName: ['', [Validators.required]],
+      contacts: this.fb.array(
+        this.allowEmailEdit ? [this.buildContactGroup({ isPrimary: true })] : [],
+        this.allowEmailEdit ? [this.primaryContactValidator] : [],
+      ),
       agentPhone: ['', [Validators.required]],
       address1: [''],
       address2: [''],
@@ -147,9 +153,19 @@ export class AgentCreateComponent implements OnInit, OnDestroy {
       agencyCode: raw.agencyCode?.trim(),
       currency: raw.currency,
       type: raw.type,
-      emails: raw.primaryEmail
-        ? [{ email: raw.primaryEmail.trim(), isprimary: true }]
-        : [],
+      contacts: (raw.contacts ?? []).map(
+        (contact: {
+          email?: string;
+          firstName?: string;
+          lastName?: string;
+          isPrimary?: boolean;
+        }) => ({
+          email: contact.email?.trim(),
+          firstName: contact.firstName?.trim() || undefined,
+          lastName: contact.lastName?.trim() || undefined,
+          isPrimary: Boolean(contact.isPrimary),
+        }),
+      ),
       agentPhone: raw.agentPhone?.trim() || undefined,
 
       address1: raw.address1?.trim() || undefined,
@@ -208,4 +224,88 @@ export class AgentCreateComponent implements OnInit, OnDestroy {
     const c = this.getControl(name);
     return !!(c && c.touched && c.invalid);
   }
+
+  addContact(): void {
+    const shouldBePrimary = !this.hasPrimaryContact();
+    this.contacts.push(this.buildContactGroup({ isPrimary: shouldBePrimary }));
+  }
+
+  removeContact(index: number): void {
+    if (this.contacts.length <= 1) {
+      return;
+    }
+    const removedPrimary = Boolean(
+      this.contacts.at(index).get('isPrimary')?.value,
+    );
+    this.contacts.removeAt(index);
+    if (removedPrimary && !this.hasPrimaryContact() && this.contacts.length) {
+      this.contacts.at(0).get('isPrimary')?.setValue(true);
+    }
+    this.contacts.updateValueAndValidity();
+  }
+
+  setPrimaryContact(index: number): void {
+    const isSelected = Boolean(
+      this.contacts.at(index).get('isPrimary')?.value,
+    );
+    if (!isSelected) {
+      if (!this.hasPrimaryContact()) {
+        this.contacts.at(index).get('isPrimary')?.setValue(true, {
+          emitEvent: false,
+        });
+      }
+      return;
+    }
+
+    this.contacts.controls.forEach((control, idx) => {
+      if (idx !== index) {
+        control.get('isPrimary')?.setValue(false, { emitEvent: false });
+      }
+    });
+    this.contacts.updateValueAndValidity();
+  }
+
+  trackContact(index: number): number {
+    return index;
+  }
+
+  private hasPrimaryContact(): boolean {
+    return this.contacts.controls.some(
+      (control) => control.get('isPrimary')?.value,
+    );
+  }
+
+  private buildContactGroup(values?: {
+    email?: string;
+    firstName?: string;
+    lastName?: string;
+    isPrimary?: boolean;
+  }): FormGroup {
+    return this.fb.group({
+      email: [
+        values?.email ?? '',
+        this.allowEmailEdit ? [Validators.required, Validators.email] : [],
+      ],
+      firstName: [
+        values?.firstName ?? '',
+        this.allowEmailEdit ? [Validators.required] : [],
+      ],
+      lastName: [
+        values?.lastName ?? '',
+        this.allowEmailEdit ? [Validators.required] : [],
+      ],
+      isPrimary: [values?.isPrimary ?? false],
+    });
+  }
+
+  private primaryContactValidator = (control: AbstractControl) => {
+    const contacts = control as FormArray;
+    if (!contacts.controls.length) {
+      return { required: true };
+    }
+    const primaryCount = contacts.controls.filter(
+      (contact) => contact.get('isPrimary')?.value,
+    ).length;
+    return primaryCount === 1 ? null : { primaryRequired: true };
+  };
 }

@@ -99,6 +99,8 @@ export class AgentContactEmailsComponent
     this.editingContactEmail = null;
     this.contactEmailForm.reset({
       email: '',
+      firstName: '',
+      lastName: '',
       isPrimary: false,
       active: true,
     });
@@ -109,6 +111,8 @@ export class AgentContactEmailsComponent
     this.editingContactEmail = row;
     this.contactEmailForm.reset({
       email: row.email,
+      firstName: row.firstName ?? '',
+      lastName: row.lastName ?? '',
       isPrimary: this.isContactEmailPrimary(row),
       active: row.active,
     });
@@ -161,6 +165,8 @@ export class AgentContactEmailsComponent
   private buildForms(): void {
     this.contactEmailForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
+      firstName: [''],
+      lastName: [''],
       isPrimary: [false],
       active: [true],
     });
@@ -170,6 +176,8 @@ export class AgentContactEmailsComponent
     const raw = this.contactEmailForm.getRawValue();
     return {
       email: raw.email?.trim(),
+      firstName: raw.firstName?.trim() || undefined,
+      lastName: raw.lastName?.trim() || undefined,
       isPrimary: Boolean(raw.isPrimary),
       active: Boolean(raw.active),
     };

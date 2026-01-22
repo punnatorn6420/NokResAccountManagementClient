@@ -8,7 +8,8 @@ export interface IAgentEmail {
   id?: number;
   email: string;
   isPrimary?: boolean;
-  isprimary?: boolean;
+  firstName?: string;
+  lastName?: string;
 }
 
 export interface IAgentProfileResponse {
@@ -21,7 +22,7 @@ export interface IAgentProfileItem {
   agencyCode: string;
   currency: ICurrency;
   type: IAgentProfileType;
-  emails?: IAgentEmail[];
+  contacts?: IAgentEmail[];
   agentPhone?: string;
   address1?: string;
   address2?: string;
@@ -41,7 +42,7 @@ export interface IAgentProfileRequest {
   agencyCode: string;
   currency: ICurrency;
   type: IAgentProfileType;
-  emails?: IAgentEmail[];
+  contacts?: IAgentEmail[];
   agentPhone?: string;
   address1?: string;
   address2?: string;
@@ -70,6 +71,8 @@ export interface IAgentProfileUpdateRequest {
 
 export interface IContactEmailRequest {
   email: string;
+  firstName?: string;
+  lastName?: string;
   isPrimary?: boolean;
   active?: boolean;
 }
@@ -78,6 +81,8 @@ export interface IContactEmailItem {
   id: number;
   profileId: number;
   email: string;
+  firstName?: string;
+  lastName?: string;
   isPrimary: boolean;
   isprimary?: boolean;
   active: boolean;

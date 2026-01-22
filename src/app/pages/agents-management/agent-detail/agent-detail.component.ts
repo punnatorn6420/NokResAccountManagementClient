@@ -97,7 +97,7 @@ export class AgentDetailComponent implements OnInit, OnDestroy {
     if (this.primaryEmail) {
       return this.primaryEmail;
     }
-    const emails = this.agent?.emails ?? [];
+    const emails = this.agent?.contacts ?? [];
     return this.resolvePrimaryEmail(emails);
   }
 
@@ -141,9 +141,7 @@ export class AgentDetailComponent implements OnInit, OnDestroy {
   }
 
   private resolvePrimaryEmail(emails: IAgentEmail[]): string {
-    const primaryEmail = emails.find(
-      (email) => email.isPrimary || email.isprimary,
-    );
+    const primaryEmail = emails.find((email) => email.isPrimary);
     return primaryEmail?.email || emails[0]?.email || '-';
   }
 }
