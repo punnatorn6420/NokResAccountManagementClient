@@ -42,7 +42,6 @@ export class AgentEditComponent extends AgentCreateComponent implements OnInit {
     }
 
     this.addActiveControl();
-    this.form.get('primaryEmail')?.disable();
 
     this.loading = true;
     this.agentService
@@ -55,18 +54,11 @@ export class AgentEditComponent extends AgentCreateComponent implements OnInit {
             this.loading = false;
             return;
           }
-          const primaryEmail =
-            agent.emails?.find((email) => email.isPrimary || email.isprimary)
-              ?.email ||
-            agent.emails?.[0]?.email ||
-            '';
-
           this.form.patchValue({
             companyName: agent.companyName ?? '',
             agencyCode: agent.agencyCode ?? '',
             currency: agent.currency ?? null,
             type: agent.type ?? null,
-            primaryEmail,
             agentPhone: agent.agentPhone ?? '',
             address1: agent.address1 ?? '',
             address2: agent.address2 ?? '',
