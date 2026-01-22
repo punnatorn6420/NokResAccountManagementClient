@@ -92,7 +92,7 @@ export class AgentContactEmailsComponent
   }
 
   isContactEmailPrimary(email: IContactEmailItem): boolean {
-    return Boolean(email.isPrimary || email.isprimary);
+    return Boolean(email.isPrimary || email.isPrimary);
   }
 
   openCreateContactEmail(): void {
@@ -113,6 +113,7 @@ export class AgentContactEmailsComponent
       email: row.email,
       firstName: row.firstName ?? '',
       lastName: row.lastName ?? '',
+      contactPhone: row.contactPhone ?? '',
       isPrimary: this.isContactEmailPrimary(row),
       active: row.active,
     });
@@ -167,6 +168,7 @@ export class AgentContactEmailsComponent
       email: ['', [Validators.required, Validators.email]],
       firstName: [''],
       lastName: [''],
+      contactPhone: [''],
       isPrimary: [false],
       active: [true],
     });
@@ -185,7 +187,7 @@ export class AgentContactEmailsComponent
 
   private resolvePrimaryEmail(emails: IContactEmailItem[]): string {
     const primaryEmail = emails.find(
-      (email) => email.isPrimary || email.isprimary,
+      (email) => email.isPrimary || email.isPrimary,
     );
     return primaryEmail?.email || emails[0]?.email || '';
   }

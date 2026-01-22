@@ -10,6 +10,7 @@ export interface IAgentEmail {
   isPrimary?: boolean;
   firstName?: string;
   lastName?: string;
+  contactPhone?: string;
 }
 
 export interface IAgentProfileResponse {
@@ -83,8 +84,8 @@ export interface IContactEmailItem {
   email: string;
   firstName?: string;
   lastName?: string;
+  contactPhone?: string;
   isPrimary: boolean;
-  isprimary?: boolean;
   active: boolean;
   createdAt: string;
   modifiedAt: string;

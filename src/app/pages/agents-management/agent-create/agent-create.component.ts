@@ -93,7 +93,9 @@ export class AgentCreateComponent implements OnInit, OnDestroy {
       currency: [null, Validators.required],
       type: [null, Validators.required],
       contacts: this.fb.array(
-        this.allowEmailEdit ? [this.buildContactGroup({ isPrimary: true })] : [],
+        this.allowEmailEdit
+          ? [this.buildContactGroup({ isPrimary: true })]
+          : [],
         this.allowEmailEdit ? [this.primaryContactValidator] : [],
       ),
       agentPhone: ['', [Validators.required]],
@@ -158,11 +160,13 @@ export class AgentCreateComponent implements OnInit, OnDestroy {
           email?: string;
           firstName?: string;
           lastName?: string;
+          contactPhone?: string;
           isPrimary?: boolean;
         }) => ({
           email: contact.email?.trim(),
           firstName: contact.firstName?.trim() || undefined,
           lastName: contact.lastName?.trim() || undefined,
+          contactPhone: contact.contactPhone?.trim() || undefined,
           isPrimary: Boolean(contact.isPrimary),
         }),
       ),
@@ -245,9 +249,7 @@ export class AgentCreateComponent implements OnInit, OnDestroy {
   }
 
   setPrimaryContact(index: number): void {
-    const isSelected = Boolean(
-      this.contacts.at(index).get('isPrimary')?.value,
-    );
+    const isSelected = Boolean(this.contacts.at(index).get('isPrimary')?.value);
     if (!isSelected) {
       if (!this.hasPrimaryContact()) {
         this.contacts.at(index).get('isPrimary')?.setValue(true, {

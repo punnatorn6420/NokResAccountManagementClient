@@ -170,7 +170,6 @@
             />
           </div>
         </div>
-
         <div class="grid grid-cols-12 gap-3 items-start"></div>
       </div>
     </p-fieldset>
@@ -193,7 +192,11 @@
 
         <div formArrayName="contacts" class="space-y-4">
           <div
-            *ngFor="let contact of contacts.controls; let i = index; trackBy: trackContact"
+            *ngFor="
+              let contact of contacts.controls;
+              let i = index;
+              trackBy: trackContact
+            "
             [formGroupName]="i"
             class="border border-slate-100 dark:border-zinc-800 rounded-lg p-4 space-y-3"
           >
@@ -281,10 +284,41 @@
                 <div
                   class="flex items-center justify-between min-h-[38px] px-2 rounded-md text-[12px] font-semibold text-slate-700 dark:text-zinc-200 bg-slate-50 dark:bg-zinc-900/60 border border-slate-100 dark:border-zinc-800"
                 >
-                  Primary<span class="text-slate-400 dark:text-zinc-500">:</span>
+                  Contact Phone*<span class="text-slate-400 dark:text-zinc-500"
+                    >:</span
+                  >
                 </div>
               </div>
-              <div class="col-span-12 md:col-span-4 flex items-center gap-3">
+              <div class="col-span-12 md:col-span-4">
+                <input
+                  pInputText
+                  type="text"
+                  formControlName="contactPhone"
+                  class="w-full min-h-[38px]"
+                  NumberInputDirective
+                />
+                <small
+                  *ngIf="
+                    contact.get('contactPhone')?.touched &&
+                    contact.get('contactPhone')?.invalid
+                  "
+                  class="text-red-500 text-[11px] block mt-1"
+                >
+                  Contact phone is required.
+                </small>
+              </div>
+            </div>
+            <div class="grid grid-cols-12 gap-3 items-start">
+              <div class="col-span-12 md:col-span-2">
+                <div
+                  class="flex items-center justify-between min-h-[38px] px-2 rounded-md text-[12px] font-semibold text-slate-700 dark:text-zinc-200 bg-slate-50 dark:bg-zinc-900/60 border border-slate-100 dark:border-zinc-800"
+                >
+                  Primary<span class="text-slate-400 dark:text-zinc-500"
+                    >:</span
+                  >
+                </div>
+              </div>
+              <div class="col-span-12 md:col-span-4">
                 <p-checkbox
                   formControlName="isPrimary"
                   binary="true"
@@ -293,14 +327,20 @@
                 <span class="text-sm text-gray-700 dark:text-gray-200">
                   Set as primary email
                 </span>
-                <button
-                  *ngIf="contacts.length > 1"
-                  pButton
-                  type="button"
-                  icon="pi pi-trash"
-                  class="p-button-text p-button-danger ml-auto"
-                  (click)="removeContact(i)"
-                ></button>
+              </div>
+              <div class="col-span-12 md:col-span-6">
+                <div
+                  class="flex items-center justify-between min-h-[38px] px-2 rounded-md text-[12px] font-semibold text-slate-700 dark:text-zinc-200 bg-slate-50 dark:bg-zinc-900/60 border border-slate-100 dark:border-zinc-800"
+                >
+                  <button
+                    *ngIf="contacts.length > 1"
+                    pButton
+                    type="button"
+                    icon="pi pi-trash"
+                    class="p-button-text p-button-danger ml-auto"
+                    (click)="removeContact(i)"
+                  ></button>
+                </div>
               </div>
             </div>
           </div>
@@ -308,7 +348,8 @@
 
         <small
           *ngIf="
-            contacts.invalid && (contacts.touched || contacts.dirty || submitting)
+            contacts.invalid &&
+            (contacts.touched || contacts.dirty || submitting)
           "
           class="text-red-500 text-[11px] block"
         >
