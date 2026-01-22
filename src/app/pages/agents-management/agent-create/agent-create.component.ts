@@ -281,6 +281,7 @@ export class AgentCreateComponent implements OnInit, OnDestroy {
     email?: string;
     firstName?: string;
     lastName?: string;
+    contactPhone?: string;
     isPrimary?: boolean;
   }): FormGroup {
     return this.fb.group({
@@ -294,6 +295,10 @@ export class AgentCreateComponent implements OnInit, OnDestroy {
       ],
       lastName: [
         values?.lastName ?? '',
+        this.allowEmailEdit ? [Validators.required] : [],
+      ],
+      contactPhone: [
+        values?.contactPhone ?? '',
         this.allowEmailEdit ? [Validators.required] : [],
       ],
       isPrimary: [values?.isPrimary ?? false],

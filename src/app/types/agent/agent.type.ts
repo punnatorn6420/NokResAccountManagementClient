@@ -74,6 +74,7 @@ export interface IContactEmailRequest {
   email: string;
   firstName?: string;
   lastName?: string;
+  contactPhone?: string;
   isPrimary?: boolean;
   active?: boolean;
 }
