@@ -22,7 +22,7 @@ import { environment } from '../../../../environments/environment';
         <div class="text-center mb-6">
           <h2 class="text-lg font-semibold mb-1">Welcome</h2>
           <p class="text-primary font-bold text-xl">
-            <!-- {{ currentUser?.firstName }} {{ currentUser?.lastName }} -->
+            {{ currentUser?.firstName }} {{ currentUser?.lastName }}
           </p>
         </div>
 

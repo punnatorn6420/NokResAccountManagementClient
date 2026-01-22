@@ -144,28 +144,28 @@
                 <div
                   class="justify-between min-h-[30px] flex items-center px-2 text-[12px] font-semibold text-primary dark:text-zinc-300 bg-slate-50 dark:bg-zinc-900 border border-transparent"
                 >
-                  Full Name<span class="text-slate-400 ml-1">:</span>
+                  Agent Phone Number<span class="text-slate-400 ml-1">:</span>
                 </div>
               </div>
               <div class="col-span-12 md:col-span-4">
                 <div
                   class="content-center justify-between min-h-[30px] w-full rounded-md border border-gray-200 dark:border-zinc-700 bg-gray-100 dark:bg-zinc-900 px-3 py-2 text-[13px] text-slate-900 dark:text-zinc-100"
                 >
-                  {{ (agent.firstName || "-") + " " + (agent.lastName || "") }}
+                  {{ agent.agentPhone || "-" }}
                 </div>
               </div>
               <div class="col-span-12 md:col-span-2">
                 <div
                   class="justify-between min-h-[30px] flex items-center px-2 text-[12px] font-semibold text-primary dark:text-zinc-300 bg-slate-50 dark:bg-zinc-900 border border-transparent"
                 >
-                  Phone Number<span class="text-slate-400 ml-1">:</span>
+                  Assigned By<span class="text-slate-400 ml-1">:</span>
                 </div>
               </div>
               <div class="col-span-12 md:col-span-4">
                 <div
                   class="content-center justify-between min-h-[30px] w-full rounded-md border border-gray-200 dark:border-zinc-700 bg-gray-100 dark:bg-zinc-900 px-3 py-2 text-[13px] text-slate-900 dark:text-zinc-100"
                 >
-                  {{ agent.phone || "-" }}
+                  {{ agent.assignedBy || "-" }}
                 </div>
               </div>
             </div>
@@ -174,25 +174,10 @@
                 <div
                   class="justify-between min-h-[30px] flex items-center px-2 text-[12px] font-semibold text-primary dark:text-zinc-300 bg-slate-50 dark:bg-zinc-900 border border-transparent"
                 >
-                  Assigned By<span class="text-slate-400 ml-1">:</span>
-                </div>
-              </div>
-              <div class="col-span-12 md:col-span-2">
-                <div
-                  class="content-center justify-between min-h-[30px] w-full rounded-md border border-gray-200 dark:border-zinc-700 bg-gray-100 dark:bg-zinc-900 px-3 py-2 text-[13px] text-slate-900 dark:text-zinc-100"
-                >
-                  {{ agent.assignedBy || "-" }}
-                </div>
-              </div>
-
-              <div class="col-span-12 md:col-span-2">
-                <div
-                  class="justify-between min-h-[30px] flex items-center px-2 text-[12px] font-semibold text-primary dark:text-zinc-300 bg-slate-50 dark:bg-zinc-900 border border-transparent"
-                >
                   Created At<span class="text-slate-400 ml-1">:</span>
                 </div>
               </div>
-              <div class="col-span-12 md:col-span-2">
+              <div class="col-span-12 md:col-span-4">
                 <div
                   class="content-center justify-between min-h-[30px] w-full rounded-md border border-gray-200 dark:border-zinc-700 bg-gray-100 dark:bg-zinc-900 px-3 py-2 text-[13px] text-slate-900 dark:text-zinc-100"
                 >
@@ -210,7 +195,7 @@
                   Last Modified At<span class="text-slate-400 ml-1">:</span>
                 </div>
               </div>
-              <div class="col-span-12 md:col-span-2">
+              <div class="col-span-12 md:col-span-4">
                 <div
                   class="content-center justify-between min-h-[30px] w-full rounded-md border border-gray-200 dark:border-zinc-700 bg-gray-100 dark:bg-zinc-900 px-3 py-2 text-[13px] text-slate-900 dark:text-zinc-100"
                 >

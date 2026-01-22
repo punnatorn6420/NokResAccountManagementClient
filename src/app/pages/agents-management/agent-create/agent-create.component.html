@@ -155,45 +155,20 @@
             <div
               class="flex items-center justify-between min-h-[38px] px-2 rounded-md text-[12px] font-semibold text-slate-700 dark:text-zinc-200 bg-slate-50 dark:bg-zinc-900/60 border border-slate-100 dark:border-zinc-800"
             >
-              Full Name*<span class="text-slate-400 dark:text-zinc-500">:</span>
-            </div>
-          </div>
-          <div class="col-span-12 md:col-span-4">
-            <div class="grid grid-cols-2 gap-2">
-              <input
-                pInputText
-                type="text"
-                formControlName="firstName"
-                class="w-full min-h-[38px]"
-                placeholder="First Name"
-              />
-              <input
-                pInputText
-                type="text"
-                formControlName="lastName"
-                class="w-full min-h-[38px]"
-                placeholder="Last Name"
-              />
-            </div>
-          </div>
-          <div class="col-span-12 md:col-span-2">
-            <div
-              class="flex items-center justify-between min-h-[38px] px-2 rounded-md text-[12px] font-semibold text-slate-700 dark:text-zinc-200 bg-slate-50 dark:bg-zinc-900/60 border border-slate-100 dark:border-zinc-800"
-            >
-              Phone*<span class="text-slate-400 dark:text-zinc-500">:</span>
+              Agent Phone*<span class="text-slate-400 dark:text-zinc-500"
+                >:</span
+              >
             </div>
           </div>
           <div class="col-span-12 md:col-span-4">
             <input
               pInputText
               type="text"
-              formControlName="phone"
+              formControlName="agentPhone"
               class="w-full min-h-[38px]"
               NumberInputDirective
             />
           </div>
-        </div>
-        <div class="grid grid-cols-12 gap-3 items-start">
           <div class="col-span-12 md:col-span-2">
             <div
               class="flex items-center justify-between min-h-[38px] px-2 rounded-md text-[12px] font-semibold text-slate-700 dark:text-zinc-200 bg-slate-50 dark:bg-zinc-900/60 border border-slate-100 dark:border-zinc-800"
@@ -203,7 +178,7 @@
               >
             </div>
           </div>
-          <div class="col-span-12 md:col-span-10">
+          <div class="col-span-12 md:col-span-4">
             <input
               pInputText
               type="email"
@@ -222,6 +197,8 @@
             </small>
           </div>
         </div>
+
+        <div class="grid grid-cols-12 gap-3 items-start"></div>
       </div>
     </p-fieldset>
     <p-fieldset legend="Address" [toggleable]="false">
@@ -353,6 +330,7 @@
         </div>
       </div>
     </p-fieldset>
+    <!-- Footer buttons -->
     <div class="flex flex-wrap justify-end gap-3 pt-2">
       <button
         pButton

@@ -21,10 +21,8 @@ export interface IAgentProfileItem {
   agencyCode: string;
   currency: ICurrency;
   type: IAgentProfileType;
-  firstName?: string;
-  lastName?: string;
   emails?: IAgentEmail[];
-  phone?: string;
+  agentPhone?: string;
   address1?: string;
   address2?: string;
   city?: string;
@@ -43,10 +41,8 @@ export interface IAgentProfileRequest {
   agencyCode: string;
   currency: ICurrency;
   type: IAgentProfileType;
-  firstName?: string;
-  lastName?: string;
   emails?: IAgentEmail[];
-  phone?: string;
+  agentPhone?: string;
   address1?: string;
   address2?: string;
   city?: string;
@@ -61,9 +57,7 @@ export interface IAgentProfileUpdateRequest {
   agencyCode: string;
   currency: ICurrency;
   type: IAgentProfileType;
-  firstName?: string;
-  lastName?: string;
-  phone?: string;
+  agentPhone?: string;
   address1?: string;
   address2?: string;
   city?: string;
